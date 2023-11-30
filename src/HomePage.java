@@ -44,42 +44,93 @@ public class HomePage extends javax.swing.JFrame {
 
         sidebarPanel.setBackground(new java.awt.Color(52, 68, 77));
 
+        dashboardButton.setBackground(new java.awt.Color(52, 68, 77));
+        dashboardButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        dashboardButton.setForeground(new java.awt.Color(175, 190, 203));
+        dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/dashboard_icon.png"))); // NOI18N
         dashboardButton.setText("Dashboard");
+        dashboardButton.setBorderPainted(false);
+        dashboardButton.setFocusable(false);
+        dashboardButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        dashboardButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        dashboardButton.setIconTextGap(10);
+        dashboardButton.setInheritsPopupMenu(true);
         dashboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dashboardButtonActionPerformed(evt);
             }
         });
 
+        transactionHistoryButton.setBackground(new java.awt.Color(52, 68, 77));
+        transactionHistoryButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        transactionHistoryButton.setForeground(new java.awt.Color(175, 190, 203));
+        transactionHistoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/transaction_history_icon.png"))); // NOI18N
         transactionHistoryButton.setText("Transaction History");
+        transactionHistoryButton.setBorderPainted(false);
+        transactionHistoryButton.setFocusable(false);
+        transactionHistoryButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        transactionHistoryButton.setIconTextGap(10);
         transactionHistoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transactionHistoryButtonActionPerformed(evt);
             }
         });
 
+        viewTenantButton.setBackground(new java.awt.Color(52, 68, 77));
+        viewTenantButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        viewTenantButton.setForeground(new java.awt.Color(175, 190, 203));
+        viewTenantButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/view_tenants_icon.png"))); // NOI18N
         viewTenantButton.setText("View Registered Tenants");
+        viewTenantButton.setToolTipText("");
+        viewTenantButton.setBorderPainted(false);
+        viewTenantButton.setFocusable(false);
+        viewTenantButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        viewTenantButton.setIconTextGap(10);
         viewTenantButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewTenantButtonActionPerformed(evt);
             }
         });
 
+        viewRoomButton.setBackground(new java.awt.Color(52, 68, 77));
+        viewRoomButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        viewRoomButton.setForeground(new java.awt.Color(175, 190, 203));
+        viewRoomButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/view_rooms_icon.png"))); // NOI18N
         viewRoomButton.setText("View Registered Rooms");
+        viewRoomButton.setBorderPainted(false);
+        viewRoomButton.setFocusable(false);
+        viewRoomButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        viewRoomButton.setIconTextGap(10);
         viewRoomButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewRoomButtonActionPerformed(evt);
             }
         });
 
+        incomeReportButton.setBackground(new java.awt.Color(52, 68, 77));
+        incomeReportButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        incomeReportButton.setForeground(new java.awt.Color(175, 190, 203));
+        incomeReportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/money_icon.png"))); // NOI18N
         incomeReportButton.setText("Income Report");
+        incomeReportButton.setBorderPainted(false);
+        incomeReportButton.setFocusable(false);
+        incomeReportButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        incomeReportButton.setIconTextGap(10);
         incomeReportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 incomeReportButtonActionPerformed(evt);
             }
         });
 
+        pendingPaymentButton.setBackground(new java.awt.Color(52, 68, 77));
+        pendingPaymentButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        pendingPaymentButton.setForeground(new java.awt.Color(175, 190, 203));
+        pendingPaymentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/pending_payment_icon.png"))); // NOI18N
         pendingPaymentButton.setText("Pending Payment");
+        pendingPaymentButton.setBorderPainted(false);
+        pendingPaymentButton.setFocusable(false);
+        pendingPaymentButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        pendingPaymentButton.setIconTextGap(10);
         pendingPaymentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pendingPaymentButtonActionPerformed(evt);
@@ -93,16 +144,16 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(sidebarPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewTenantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(transactionHistoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(viewRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(incomeReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                    .addComponent(pendingPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
+                    .addComponent(viewTenantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addComponent(transactionHistoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(incomeReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pendingPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
                     .addGap(0, 0, 0)
-                    .addComponent(dashboardButton, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                    .addComponent(dashboardButton, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addGap(0, 0, 0)))
         );
         sidebarPanelLayout.setVerticalGroup(
@@ -118,12 +169,12 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(pendingPaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(transactionHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
                     .addGap(0, 0, 0)
                     .addComponent(dashboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 515, Short.MAX_VALUE)))
         );
 
         titlebarPanel.setBackground(new java.awt.Color(239, 134, 128));
@@ -136,7 +187,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         titlebarPanelLayout.setVerticalGroup(
             titlebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 127, Short.MAX_VALUE)
+            .addGap(0, 97, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(184, 208, 201));
@@ -145,7 +196,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1029, Short.MAX_VALUE)
+            .addGap(0, 982, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +207,7 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titlebarPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(titlebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sidebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -166,11 +217,10 @@ public class HomePage extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titlebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sidebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sidebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
