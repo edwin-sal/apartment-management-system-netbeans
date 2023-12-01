@@ -1,6 +1,10 @@
 
+import java.awt.Component;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -20,7 +24,25 @@ public class HomePage extends javax.swing.JFrame {
 	initComponents();
 	setLocationRelativeTo(null);
 //	dashboardPanel.setVisible(false);
+//	jPanel1.setVisible(false);
     }
+    
+    public void resizeColumnWidth(JTable table) {
+    final TableColumnModel columnModel = table.getColumnModel();
+    for (int column = 0; column < table.getColumnCount(); column++) {
+        // Account for header size
+        double width = table.getTableHeader().getHeaderRect(column).getWidth();
+        for (int row = 0; row < table.getRowCount(); row++) {
+            TableCellRenderer renderer = table.getCellRenderer(row, column);
+            Component comp = table.prepareRenderer(renderer, row, column);
+            width = Math.max(comp.getPreferredSize().width + 1, width);
+        }
+        if (width > 300)
+            width = 300;
+        columnModel.getColumn(column).setPreferredWidth((int) width);
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +80,18 @@ public class HomePage extends javax.swing.JFrame {
         overdueSubLabel = new javax.swing.JLabel();
         overdueCount = new javax.swing.JLabel();
         overdueIcon = new javax.swing.JLabel();
+        tablesPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        latestTenantTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        latestTransactionTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        businessReportPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        clearExpenseButton = new javax.swing.JButton();
+        addExpenseButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,13 +326,86 @@ public class HomePage extends javax.swing.JFrame {
 
         cardsPanel.add(overdueCard);
 
+        tablesPanel.setBackground(new java.awt.Color(255, 255, 255));
+        tablesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        latestTenantTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Tenant ID", "Room ID", "First Name", "Last Name", "Registration Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(latestTenantTable);
+
+        tablesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 67, 500, 380));
+
+        latestTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Payment ID", "Tenant ID", "Payment Date", "Ammount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(latestTransactionTable);
+
+        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 67, 500, 380));
+
+        jLabel1.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
+        jLabel1.setText("Latest Tenant");
+        tablesPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 500, 50));
+
+        jLabel2.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
+        jLabel2.setText("Latest Transaction");
+        tablesPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 500, 50));
+
         javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
         dashboardPanel.setLayout(dashboardPanelLayout);
         dashboardPanelLayout.setHorizontalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboardPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+                    .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         dashboardPanelLayout.setVerticalGroup(
@@ -306,10 +413,53 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(dashboardPanelLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(cardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(498, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 700));
+
+        businessReportPanel.setBackground(new java.awt.Color(184, 208, 201));
+
+        jPanel3.setLayout(new java.awt.GridLayout());
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        clearExpenseButton.setText("Clear Expense");
+
+        addExpenseButton.setText("Add Expense");
+
+        javax.swing.GroupLayout businessReportPanelLayout = new javax.swing.GroupLayout(businessReportPanel);
+        businessReportPanel.setLayout(businessReportPanelLayout);
+        businessReportPanelLayout.setHorizontalGroup(
+            businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, businessReportPanelLayout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1055, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, businessReportPanelLayout.createSequentialGroup()
+                        .addComponent(clearExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16))
+        );
+        businessReportPanelLayout.setVerticalGroup(
+            businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(businessReportPanelLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clearExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        contentPanel.add(businessReportPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -337,6 +487,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void dashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtonActionPerformed
         // TODO add your handling code here:
+	dashboardPanel.setVisible(true);
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
     private void transactionHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionHistoryButtonActionPerformed
@@ -345,6 +496,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void viewTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTenantButtonActionPerformed
         // TODO add your handling code here:
+	dashboardPanel.setVisible(false);
     }//GEN-LAST:event_viewTenantButtonActionPerformed
 
     private void viewRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoomButtonActionPerformed
@@ -379,7 +531,10 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addExpenseButton;
+    private javax.swing.JPanel businessReportPanel;
     private javax.swing.JPanel cardsPanel;
+    private javax.swing.JButton clearExpenseButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JPanel dashboardPanel;
@@ -388,6 +543,14 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel earningsIcon;
     private javax.swing.JLabel earningsSubLabel;
     private javax.swing.JButton incomeReportButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable latestTenantTable;
+    private javax.swing.JTable latestTransactionTable;
     private javax.swing.JPanel overdueCard;
     private javax.swing.JLabel overdueCount;
     private javax.swing.JLabel overdueIcon;
@@ -398,6 +561,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel roomSubLabel;
     private javax.swing.JPanel roomsCard;
     private javax.swing.JPanel sidebarPanel;
+    private javax.swing.JPanel tablesPanel;
     private javax.swing.JLabel tenantCount;
     private javax.swing.JLabel tenantIcon;
     private javax.swing.JLabel tenantSubLabel;
