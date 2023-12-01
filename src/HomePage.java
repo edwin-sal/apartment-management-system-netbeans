@@ -44,10 +44,13 @@ public class HomePage extends javax.swing.JFrame {
         registeredTenantLabel1 = new javax.swing.JLabel();
         registeredTenantSubLabel1 = new javax.swing.JLabel();
         availableRoomCard = new javax.swing.JPanel();
-        registeredRoomIcon = new javax.swing.JLabel();
         registeredRoomLabel = new javax.swing.JLabel();
         registeredRoomSubLabel = new javax.swing.JLabel();
+        registeredRoomIcon1 = new javax.swing.JLabel();
         monthlyEarningCard = new javax.swing.JPanel();
+        registeredRoomIcon = new javax.swing.JLabel();
+        registeredRoomLabel1 = new javax.swing.JLabel();
+        registeredRoomSubLabel1 = new javax.swing.JLabel();
         overdueRentCard = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -251,8 +254,6 @@ public class HomePage extends javax.swing.JFrame {
         availableRoomCard.setBackground(new java.awt.Color(246, 154, 57));
         availableRoomCard.setPreferredSize(new java.awt.Dimension(231, 0));
 
-        registeredRoomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
-
         registeredRoomLabel.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
         registeredRoomLabel.setForeground(new java.awt.Color(255, 255, 255));
         registeredRoomLabel.setText("999");
@@ -264,6 +265,8 @@ public class HomePage extends javax.swing.JFrame {
         registeredRoomSubLabel.setVerifyInputWhenFocusTarget(false);
         registeredRoomSubLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
+        registeredRoomIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
+
         javax.swing.GroupLayout availableRoomCardLayout = new javax.swing.GroupLayout(availableRoomCard);
         availableRoomCard.setLayout(availableRoomCardLayout);
         availableRoomCardLayout.setHorizontalGroup(
@@ -274,37 +277,70 @@ public class HomePage extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(registeredRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, availableRoomCardLayout.createSequentialGroup()
+                    .addGroup(availableRoomCardLayout.createSequentialGroup()
                         .addContainerGap(7, Short.MAX_VALUE)
                         .addComponent(registeredRoomSubLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
-                .addComponent(registeredRoomIcon)
+                .addComponent(registeredRoomIcon1)
                 .addContainerGap())
         );
         availableRoomCardLayout.setVerticalGroup(
             availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(availableRoomCardLayout.createSequentialGroup()
-                .addGroup(availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(availableRoomCardLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(registeredRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(registeredRoomSubLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(availableRoomCardLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(registeredRoomIcon)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(registeredRoomIcon1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        monthlyEarningCard.setBackground(new java.awt.Color(0, 166, 99));
+        monthlyEarningCard.setPreferredSize(new java.awt.Dimension(231, 142));
+
+        registeredRoomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
+
+        registeredRoomLabel1.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
+        registeredRoomLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        registeredRoomLabel1.setText("999");
+
+        registeredRoomSubLabel1.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        registeredRoomSubLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        registeredRoomSubLabel1.setText("<html>Monthly<br>Earnings</html>");
+        registeredRoomSubLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        registeredRoomSubLabel1.setVerifyInputWhenFocusTarget(false);
+        registeredRoomSubLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout monthlyEarningCardLayout = new javax.swing.GroupLayout(monthlyEarningCard);
         monthlyEarningCard.setLayout(monthlyEarningCardLayout);
         monthlyEarningCardLayout.setHorizontalGroup(
             monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, monthlyEarningCardLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(registeredRoomLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(monthlyEarningCardLayout.createSequentialGroup()
+                        .addComponent(registeredRoomSubLabel1)
+                        .addGap(10, 10, 10)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(registeredRoomIcon)
+                .addContainerGap())
         );
         monthlyEarningCardLayout.setVerticalGroup(
             monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(monthlyEarningCardLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(monthlyEarningCardLayout.createSequentialGroup()
+                        .addComponent(registeredRoomLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(registeredRoomSubLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(registeredRoomIcon))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         overdueRentCard.setPreferredSize(new java.awt.Dimension(231, 94));
@@ -333,14 +369,14 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(monthlyEarningCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(overdueRentCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         dashboardContentPanelLayout.setVerticalGroup(
             dashboardContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardContentPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(dashboardContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(monthlyEarningCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(monthlyEarningCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                     .addComponent(availableRoomCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                     .addComponent(registeredTenantCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(overdueRentCard, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
@@ -422,8 +458,11 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel overdueRentCard;
     private javax.swing.JButton pendingPaymentButton;
     private javax.swing.JLabel registeredRoomIcon;
+    private javax.swing.JLabel registeredRoomIcon1;
     private javax.swing.JLabel registeredRoomLabel;
+    private javax.swing.JLabel registeredRoomLabel1;
     private javax.swing.JLabel registeredRoomSubLabel;
+    private javax.swing.JLabel registeredRoomSubLabel1;
     private javax.swing.JPanel registeredTenantCard;
     private javax.swing.JLabel registeredTenantIcon;
     private javax.swing.JLabel registeredTenantLabel1;
