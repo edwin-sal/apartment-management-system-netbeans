@@ -19,6 +19,7 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
 	initComponents();
 	setLocationRelativeTo(null);
+//	dashboardPanel.setVisible(false);
     }
 
     /**
@@ -38,20 +39,25 @@ public class HomePage extends javax.swing.JFrame {
         incomeReportButton = new javax.swing.JButton();
         pendingPaymentButton = new javax.swing.JButton();
         titlebarPanel = new javax.swing.JPanel();
-        dashboardContentPanel = new javax.swing.JPanel();
-        registeredTenantCard = new javax.swing.JPanel();
-        registeredTenantIcon = new javax.swing.JLabel();
-        registeredTenantLabel1 = new javax.swing.JLabel();
-        registeredTenantSubLabel1 = new javax.swing.JLabel();
-        availableRoomCard = new javax.swing.JPanel();
-        registeredRoomLabel = new javax.swing.JLabel();
-        registeredRoomSubLabel = new javax.swing.JLabel();
-        registeredRoomIcon1 = new javax.swing.JLabel();
-        monthlyEarningCard = new javax.swing.JPanel();
-        registeredRoomIcon = new javax.swing.JLabel();
-        registeredRoomLabel1 = new javax.swing.JLabel();
-        registeredRoomSubLabel1 = new javax.swing.JLabel();
-        overdueRentCard = new javax.swing.JPanel();
+        contentPanel = new javax.swing.JPanel();
+        dashboardPanel = new javax.swing.JPanel();
+        cardsPanel = new javax.swing.JPanel();
+        tenantsCard = new javax.swing.JPanel();
+        tenantIcon = new javax.swing.JLabel();
+        tenantCount = new javax.swing.JLabel();
+        tenantSubLabel = new javax.swing.JLabel();
+        roomsCard = new javax.swing.JPanel();
+        roomIcon = new javax.swing.JLabel();
+        roomCount = new javax.swing.JLabel();
+        roomSubLabel = new javax.swing.JLabel();
+        earningsCard = new javax.swing.JPanel();
+        earningsSubLabel = new javax.swing.JLabel();
+        earningsCount = new javax.swing.JLabel();
+        earningsIcon = new javax.swing.JLabel();
+        overdueCard = new javax.swing.JPanel();
+        overdueSubLabel = new javax.swing.JLabel();
+        overdueCount = new javax.swing.JLabel();
+        overdueIcon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +69,7 @@ public class HomePage extends javax.swing.JFrame {
         dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/dashboard_icon.png"))); // NOI18N
         dashboardButton.setText("Dashboard");
         dashboardButton.setBorderPainted(false);
+        dashboardButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         dashboardButton.setFocusable(false);
         dashboardButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         dashboardButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -80,6 +87,7 @@ public class HomePage extends javax.swing.JFrame {
         transactionHistoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/transaction_history_icon.png"))); // NOI18N
         transactionHistoryButton.setText("Transaction History");
         transactionHistoryButton.setBorderPainted(false);
+        transactionHistoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         transactionHistoryButton.setFocusable(false);
         transactionHistoryButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         transactionHistoryButton.setIconTextGap(10);
@@ -96,6 +104,7 @@ public class HomePage extends javax.swing.JFrame {
         viewTenantButton.setText("View Registered Tenants");
         viewTenantButton.setToolTipText("");
         viewTenantButton.setBorderPainted(false);
+        viewTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         viewTenantButton.setFocusable(false);
         viewTenantButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         viewTenantButton.setIconTextGap(10);
@@ -111,6 +120,7 @@ public class HomePage extends javax.swing.JFrame {
         viewRoomButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/view_rooms_icon.png"))); // NOI18N
         viewRoomButton.setText("View Registered Rooms");
         viewRoomButton.setBorderPainted(false);
+        viewRoomButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         viewRoomButton.setFocusable(false);
         viewRoomButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         viewRoomButton.setIconTextGap(10);
@@ -126,6 +136,7 @@ public class HomePage extends javax.swing.JFrame {
         incomeReportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/money_icon.png"))); // NOI18N
         incomeReportButton.setText("Income Report");
         incomeReportButton.setBorderPainted(false);
+        incomeReportButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         incomeReportButton.setFocusable(false);
         incomeReportButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         incomeReportButton.setIconTextGap(10);
@@ -141,6 +152,7 @@ public class HomePage extends javax.swing.JFrame {
         pendingPaymentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/pending_payment_icon.png"))); // NOI18N
         pendingPaymentButton.setText("Pending Payment");
         pendingPaymentButton.setBorderPainted(false);
+        pendingPaymentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pendingPaymentButton.setFocusable(false);
         pendingPaymentButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         pendingPaymentButton.setIconTextGap(10);
@@ -182,7 +194,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(pendingPaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(transactionHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(291, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
                     .addGap(0, 0, 0)
@@ -200,188 +212,104 @@ public class HomePage extends javax.swing.JFrame {
         );
         titlebarPanelLayout.setVerticalGroup(
             titlebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
+            .addGap(0, 112, Short.MAX_VALUE)
         );
 
-        dashboardContentPanel.setBackground(new java.awt.Color(184, 208, 201));
+        contentPanel.setBackground(new java.awt.Color(184, 208, 201));
+        contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        registeredTenantCard.setBackground(new java.awt.Color(0, 193, 234));
-        registeredTenantCard.setPreferredSize(new java.awt.Dimension(231, 175));
+        cardsPanel.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
 
-        registeredTenantIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/people_icon.png"))); // NOI18N
+        tenantsCard.setBackground(new java.awt.Color(0, 193, 234));
+        tenantsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        registeredTenantLabel1.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        registeredTenantLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        registeredTenantLabel1.setText("999");
+        tenantIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/people_icon.png"))); // NOI18N
+        tenantsCard.add(tenantIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
 
-        registeredTenantSubLabel1.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
-        registeredTenantSubLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        registeredTenantSubLabel1.setText("<html>Registered<br>Tenants</html>");
-        registeredTenantSubLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        registeredTenantSubLabel1.setVerifyInputWhenFocusTarget(false);
-        registeredTenantSubLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        tenantCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        tenantCount.setForeground(new java.awt.Color(255, 255, 255));
+        tenantCount.setText("999");
+        tenantsCard.add(tenantCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
-        javax.swing.GroupLayout registeredTenantCardLayout = new javax.swing.GroupLayout(registeredTenantCard);
-        registeredTenantCard.setLayout(registeredTenantCardLayout);
-        registeredTenantCardLayout.setHorizontalGroup(
-            registeredTenantCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registeredTenantCardLayout.createSequentialGroup()
-                .addGroup(registeredTenantCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(registeredTenantCardLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(registeredTenantLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registeredTenantCardLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(registeredTenantSubLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(registeredTenantIcon)
-                .addContainerGap())
+        tenantSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        tenantSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        tenantSubLabel.setText("<html>Registered<br>Tenants</html>");
+        tenantsCard.add(tenantSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        cardsPanel.add(tenantsCard);
+
+        roomsCard.setBackground(new java.awt.Color(246, 154, 57));
+        roomsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
+        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+
+        roomCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        roomCount.setForeground(new java.awt.Color(255, 255, 255));
+        roomCount.setText("999");
+        roomsCard.add(roomCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        roomSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        roomSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        roomSubLabel.setText("<html>Available<br>Rooms</html>");
+        roomsCard.add(roomSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        cardsPanel.add(roomsCard);
+
+        earningsCard.setBackground(new java.awt.Color(0, 166, 99));
+        earningsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        earningsSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        earningsSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        earningsSubLabel.setText("<html>Monthly<br>Earnings</html>");
+        earningsCard.add(earningsSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        earningsCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        earningsCount.setForeground(new java.awt.Color(255, 255, 255));
+        earningsCount.setText("999");
+        earningsCard.add(earningsCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        earningsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
+        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+
+        cardsPanel.add(earningsCard);
+
+        overdueCard.setBackground(new java.awt.Color(225, 73, 63));
+        overdueCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        overdueSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        overdueSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        overdueSubLabel.setText("<html>Overdue<br>Rent</html>");
+        overdueCard.add(overdueSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        overdueCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        overdueCount.setForeground(new java.awt.Color(255, 255, 255));
+        overdueCount.setText("999");
+        overdueCard.add(overdueCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        overdueIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/overdue_rent_icon.png"))); // NOI18N
+        overdueCard.add(overdueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+
+        cardsPanel.add(overdueCard);
+
+        javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
+        dashboardPanel.setLayout(dashboardPanelLayout);
+        dashboardPanelLayout.setHorizontalGroup(
+            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+                .addGap(15, 15, 15))
         );
-        registeredTenantCardLayout.setVerticalGroup(
-            registeredTenantCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(registeredTenantCardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(registeredTenantCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(registeredTenantCardLayout.createSequentialGroup()
-                        .addComponent(registeredTenantLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(registeredTenantSubLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(registeredTenantIcon))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        availableRoomCard.setBackground(new java.awt.Color(246, 154, 57));
-        availableRoomCard.setPreferredSize(new java.awt.Dimension(231, 0));
-
-        registeredRoomLabel.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        registeredRoomLabel.setForeground(new java.awt.Color(255, 255, 255));
-        registeredRoomLabel.setText("999");
-
-        registeredRoomSubLabel.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
-        registeredRoomSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        registeredRoomSubLabel.setText("<html>Registered<br>Tenants</html>");
-        registeredRoomSubLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        registeredRoomSubLabel.setVerifyInputWhenFocusTarget(false);
-        registeredRoomSubLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        registeredRoomIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
-
-        javax.swing.GroupLayout availableRoomCardLayout = new javax.swing.GroupLayout(availableRoomCard);
-        availableRoomCard.setLayout(availableRoomCardLayout);
-        availableRoomCardLayout.setHorizontalGroup(
-            availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(availableRoomCardLayout.createSequentialGroup()
-                .addGroup(availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(availableRoomCardLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(registeredRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(availableRoomCardLayout.createSequentialGroup()
-                        .addContainerGap(7, Short.MAX_VALUE)
-                        .addComponent(registeredRoomSubLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addComponent(registeredRoomIcon1)
-                .addContainerGap())
-        );
-        availableRoomCardLayout.setVerticalGroup(
-            availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(availableRoomCardLayout.createSequentialGroup()
-                .addGroup(availableRoomCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(availableRoomCardLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(registeredRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(registeredRoomSubLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(availableRoomCardLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(registeredRoomIcon1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        dashboardPanelLayout.setVerticalGroup(
+            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(cardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(498, Short.MAX_VALUE))
         );
 
-        monthlyEarningCard.setBackground(new java.awt.Color(0, 166, 99));
-        monthlyEarningCard.setPreferredSize(new java.awt.Dimension(231, 142));
-
-        registeredRoomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
-
-        registeredRoomLabel1.setFont(new java.awt.Font("Poppins", 1, 36)); // NOI18N
-        registeredRoomLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        registeredRoomLabel1.setText("999");
-
-        registeredRoomSubLabel1.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
-        registeredRoomSubLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        registeredRoomSubLabel1.setText("<html>Monthly<br>Earnings</html>");
-        registeredRoomSubLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        registeredRoomSubLabel1.setVerifyInputWhenFocusTarget(false);
-        registeredRoomSubLabel1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-
-        javax.swing.GroupLayout monthlyEarningCardLayout = new javax.swing.GroupLayout(monthlyEarningCard);
-        monthlyEarningCard.setLayout(monthlyEarningCardLayout);
-        monthlyEarningCardLayout.setHorizontalGroup(
-            monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, monthlyEarningCardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(registeredRoomLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(monthlyEarningCardLayout.createSequentialGroup()
-                        .addComponent(registeredRoomSubLabel1)
-                        .addGap(10, 10, 10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(registeredRoomIcon)
-                .addContainerGap())
-        );
-        monthlyEarningCardLayout.setVerticalGroup(
-            monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(monthlyEarningCardLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(monthlyEarningCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(monthlyEarningCardLayout.createSequentialGroup()
-                        .addComponent(registeredRoomLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(registeredRoomSubLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(registeredRoomIcon))
-                .addContainerGap(39, Short.MAX_VALUE))
-        );
-
-        overdueRentCard.setPreferredSize(new java.awt.Dimension(231, 94));
-
-        javax.swing.GroupLayout overdueRentCardLayout = new javax.swing.GroupLayout(overdueRentCard);
-        overdueRentCard.setLayout(overdueRentCardLayout);
-        overdueRentCardLayout.setHorizontalGroup(
-            overdueRentCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 231, Short.MAX_VALUE)
-        );
-        overdueRentCardLayout.setVerticalGroup(
-            overdueRentCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout dashboardContentPanelLayout = new javax.swing.GroupLayout(dashboardContentPanel);
-        dashboardContentPanel.setLayout(dashboardContentPanelLayout);
-        dashboardContentPanelLayout.setHorizontalGroup(
-            dashboardContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboardContentPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(registeredTenantCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(availableRoomCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(monthlyEarningCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(overdueRentCard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        dashboardContentPanelLayout.setVerticalGroup(
-            dashboardContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboardContentPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(dashboardContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(monthlyEarningCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(availableRoomCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(registeredTenantCard, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(overdueRentCard, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -391,7 +319,8 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sidebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(dashboardContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +328,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(titlebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dashboardContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sidebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -450,24 +379,29 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel availableRoomCard;
+    private javax.swing.JPanel cardsPanel;
+    private javax.swing.JPanel contentPanel;
     private javax.swing.JButton dashboardButton;
-    private javax.swing.JPanel dashboardContentPanel;
+    private javax.swing.JPanel dashboardPanel;
+    private javax.swing.JPanel earningsCard;
+    private javax.swing.JLabel earningsCount;
+    private javax.swing.JLabel earningsIcon;
+    private javax.swing.JLabel earningsSubLabel;
     private javax.swing.JButton incomeReportButton;
-    private javax.swing.JPanel monthlyEarningCard;
-    private javax.swing.JPanel overdueRentCard;
+    private javax.swing.JPanel overdueCard;
+    private javax.swing.JLabel overdueCount;
+    private javax.swing.JLabel overdueIcon;
+    private javax.swing.JLabel overdueSubLabel;
     private javax.swing.JButton pendingPaymentButton;
-    private javax.swing.JLabel registeredRoomIcon;
-    private javax.swing.JLabel registeredRoomIcon1;
-    private javax.swing.JLabel registeredRoomLabel;
-    private javax.swing.JLabel registeredRoomLabel1;
-    private javax.swing.JLabel registeredRoomSubLabel;
-    private javax.swing.JLabel registeredRoomSubLabel1;
-    private javax.swing.JPanel registeredTenantCard;
-    private javax.swing.JLabel registeredTenantIcon;
-    private javax.swing.JLabel registeredTenantLabel1;
-    private javax.swing.JLabel registeredTenantSubLabel1;
+    private javax.swing.JLabel roomCount;
+    private javax.swing.JLabel roomIcon;
+    private javax.swing.JLabel roomSubLabel;
+    private javax.swing.JPanel roomsCard;
     private javax.swing.JPanel sidebarPanel;
+    private javax.swing.JLabel tenantCount;
+    private javax.swing.JLabel tenantIcon;
+    private javax.swing.JLabel tenantSubLabel;
+    private javax.swing.JPanel tenantsCard;
     private javax.swing.JPanel titlebarPanel;
     private javax.swing.JButton transactionHistoryButton;
     private javax.swing.JButton viewRoomButton;
