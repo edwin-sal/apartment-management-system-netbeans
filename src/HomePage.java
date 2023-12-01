@@ -91,8 +91,17 @@ public class HomePage extends javax.swing.JFrame {
         businessReportPanel = new javax.swing.JPanel();
         reportCardsPanel = new javax.swing.JPanel();
         grossIncomeCard = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         expensesCard = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         netIncomeCard = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         clearExpenseButton = new javax.swing.JButton();
         addExpenseButton = new javax.swing.JButton();
@@ -430,46 +439,107 @@ public class HomePage extends javax.swing.JFrame {
         reportCardsPanel.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
 
         grossIncomeCard.setBackground(new java.awt.Color(55, 124, 203));
+        grossIncomeCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout grossIncomeCardLayout = new javax.swing.GroupLayout(grossIncomeCard);
-        grossIncomeCard.setLayout(grossIncomeCardLayout);
-        grossIncomeCardLayout.setHorizontalGroup(
-            grossIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 341, Short.MAX_VALUE)
-        );
-        grossIncomeCardLayout.setVerticalGroup(
-            grossIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 184, Short.MAX_VALUE)
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/gross_icon.png"))); // NOI18N
+        grossIncomeCard.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 130, 110));
+
+        jLabel5.setFont(new java.awt.Font("Poppins Black", 0, 45)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("999");
+        grossIncomeCard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 40));
+
+        jLabel6.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("<html>Gross<br>Income</html>");
+        grossIncomeCard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 140, 60));
 
         reportCardsPanel.add(grossIncomeCard);
 
-        expensesCard.setBackground(new java.awt.Color(220, 29, 54));
+        expensesCard.setBackground(new java.awt.Color(201, 36, 57));
+
+        jLabel9.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Expenses");
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/expenses_icon.png"))); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Poppins Black", 0, 45)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("999");
 
         javax.swing.GroupLayout expensesCardLayout = new javax.swing.GroupLayout(expensesCard);
         expensesCard.setLayout(expensesCardLayout);
         expensesCardLayout.setHorizontalGroup(
             expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 341, Short.MAX_VALUE)
+            .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(expensesCardLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         expensesCardLayout.setVerticalGroup(
             expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 184, Short.MAX_VALUE)
+            .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(expensesCardLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(expensesCardLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         reportCardsPanel.add(expensesCard);
 
         netIncomeCard.setBackground(new java.awt.Color(0, 166, 99));
 
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/net_icon.png"))); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Poppins Black", 0, 45)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("999");
+
+        jLabel11.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("<html>Net<br>Income</html>");
+
         javax.swing.GroupLayout netIncomeCardLayout = new javax.swing.GroupLayout(netIncomeCard);
         netIncomeCard.setLayout(netIncomeCardLayout);
         netIncomeCardLayout.setHorizontalGroup(
             netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 341, Short.MAX_VALUE)
+            .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(netIncomeCardLayout.createSequentialGroup()
+                    .addGap(15, 15, 15)
+                    .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
         );
         netIncomeCardLayout.setVerticalGroup(
             netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 184, Short.MAX_VALUE)
+            .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(netIncomeCardLayout.createSequentialGroup()
+                    .addGap(37, 37, 37)
+                    .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(netIncomeCardLayout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, 0)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(37, Short.MAX_VALUE)))
         );
 
         reportCardsPanel.add(netIncomeCard);
@@ -530,8 +600,7 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sidebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -607,8 +676,17 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel grossIncomeCard;
     private javax.swing.JButton incomeReportButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
