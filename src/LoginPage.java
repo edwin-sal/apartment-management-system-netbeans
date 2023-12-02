@@ -64,6 +64,11 @@ public class LoginPage extends javax.swing.JFrame {
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Login");
         loginButton.setFocusable(false);
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
         loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
         loginInputPanel.add(userPinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 420, 50));
 
@@ -84,6 +89,11 @@ public class LoginPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        new PaymentPage();
+	dispose();
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments

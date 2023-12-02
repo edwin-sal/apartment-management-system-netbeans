@@ -15,6 +15,7 @@ public class PaymentPage extends javax.swing.JFrame {
     public PaymentPage() {
 	initComponents();
 	setLocationRelativeTo(null);
+	setVisible(true);
     }
 
     /**
@@ -29,7 +30,6 @@ public class PaymentPage extends javax.swing.JFrame {
         bgPanel = new javax.swing.JPanel();
         loginInputPanel = new javax.swing.JPanel();
         loginLabel = new javax.swing.JLabel();
-        userIdInput = new javax.swing.JTextField();
         userIdLabel = new javax.swing.JLabel();
         userPinLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
@@ -38,6 +38,7 @@ public class PaymentPage extends javax.swing.JFrame {
         userIdLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         userIdInput1 = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -54,7 +55,6 @@ public class PaymentPage extends javax.swing.JFrame {
         loginLabel.setForeground(new java.awt.Color(51, 51, 51));
         loginLabel.setText("Send your Payment");
         loginInputPanel.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 290, 50));
-        loginInputPanel.add(userIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 200, 50));
 
         userIdLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         userIdLabel.setText("User ID");
@@ -72,7 +72,7 @@ public class PaymentPage extends javax.swing.JFrame {
         loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
 
         userIdLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        userIdLabel1.setText("Room ID");
+        userIdLabel1.setText("Pin");
         loginInputPanel.add(userIdLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 120, 30));
 
         jPasswordField2.setEditable(false);
@@ -88,11 +88,12 @@ public class PaymentPage extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "9 months", "12 months" }));
         loginInputPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 200, 50));
         loginInputPanel.add(userIdInput1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 200, 50));
+        loginInputPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 200, 50));
 
-        bgPanel.add(loginInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 460, 420));
+        bgPanel.add(loginInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, 460, 420));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Profiles/gcash.png"))); // NOI18N
-        bgPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, -1, -1));
+        bgPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Poppins ExtraBold", 0, 80)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,11 +152,11 @@ public class PaymentPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginInputPanel;
     private javax.swing.JLabel loginLabel;
-    private javax.swing.JTextField userIdInput;
     private javax.swing.JTextField userIdInput1;
     private javax.swing.JLabel userIdLabel;
     private javax.swing.JLabel userIdLabel1;
