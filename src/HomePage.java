@@ -75,6 +75,32 @@ public class HomePage extends javax.swing.JFrame {
         pendingPaymentButton = new javax.swing.JButton();
         titlebarPanel = new javax.swing.JPanel();
         contentPanel = new javax.swing.JPanel();
+        dashboardPanel = new javax.swing.JPanel();
+        cardsPanel = new javax.swing.JPanel();
+        tenantsCard = new javax.swing.JPanel();
+        tenantIcon = new javax.swing.JLabel();
+        tenantCount = new javax.swing.JLabel();
+        tenantSubLabel = new javax.swing.JLabel();
+        roomsCard = new javax.swing.JPanel();
+        roomIcon = new javax.swing.JLabel();
+        roomCount = new javax.swing.JLabel();
+        roomSubLabel = new javax.swing.JLabel();
+        earningsCard = new javax.swing.JPanel();
+        earningsSubLabel = new javax.swing.JLabel();
+        earningsCount = new javax.swing.JLabel();
+        earningsIcon = new javax.swing.JLabel();
+        overdueCard = new javax.swing.JPanel();
+        overdueSubLabel = new javax.swing.JLabel();
+        overdueCount = new javax.swing.JLabel();
+        overdueIcon = new javax.swing.JLabel();
+        tablesPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        latestTransactionTable = new javax.swing.JTable();
+        latestTenantLabel = new javax.swing.JLabel();
+        latestTransacationLabel = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        latestTenantTable = new javax.swing.JTable();
+        dashboardLabel = new javax.swing.JLabel();
         incomeReportPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -97,31 +123,6 @@ public class HomePage extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        dashboardPanel = new javax.swing.JPanel();
-        cardsPanel = new javax.swing.JPanel();
-        tenantsCard = new javax.swing.JPanel();
-        tenantIcon = new javax.swing.JLabel();
-        tenantCount = new javax.swing.JLabel();
-        tenantSubLabel = new javax.swing.JLabel();
-        roomsCard = new javax.swing.JPanel();
-        roomIcon = new javax.swing.JLabel();
-        roomCount = new javax.swing.JLabel();
-        roomSubLabel = new javax.swing.JLabel();
-        earningsCard = new javax.swing.JPanel();
-        earningsSubLabel = new javax.swing.JLabel();
-        earningsCount = new javax.swing.JLabel();
-        earningsIcon = new javax.swing.JLabel();
-        overdueCard = new javax.swing.JPanel();
-        overdueSubLabel = new javax.swing.JLabel();
-        overdueCount = new javax.swing.JLabel();
-        overdueIcon = new javax.swing.JLabel();
-        tablesPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        latestTransactionTable = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        latestTenantTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -291,6 +292,181 @@ public class HomePage extends javax.swing.JFrame {
         contentPanel.setBackground(new java.awt.Color(184, 208, 201));
         contentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cardsPanel.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
+
+        tenantsCard.setBackground(new java.awt.Color(0, 193, 234));
+        tenantsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tenantIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/people_icon.png"))); // NOI18N
+        tenantsCard.add(tenantIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
+
+        tenantCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        tenantCount.setForeground(new java.awt.Color(255, 255, 255));
+        tenantCount.setText("999");
+        tenantsCard.add(tenantCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        tenantSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        tenantSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        tenantSubLabel.setText("<html>Registered<br>Tenants</html>");
+        tenantsCard.add(tenantSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        cardsPanel.add(tenantsCard);
+
+        roomsCard.setBackground(new java.awt.Color(246, 154, 57));
+        roomsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        roomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
+        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
+
+        roomCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        roomCount.setForeground(new java.awt.Color(255, 255, 255));
+        roomCount.setText("999");
+        roomsCard.add(roomCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        roomSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        roomSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        roomSubLabel.setText("<html>Available<br>Rooms</html>");
+        roomsCard.add(roomSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        cardsPanel.add(roomsCard);
+
+        earningsCard.setBackground(new java.awt.Color(0, 166, 99));
+        earningsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        earningsSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        earningsSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        earningsSubLabel.setText("<html>Monthly<br>Earnings</html>");
+        earningsCard.add(earningsSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        earningsCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        earningsCount.setForeground(new java.awt.Color(255, 255, 255));
+        earningsCount.setText("999");
+        earningsCard.add(earningsCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        earningsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
+        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
+
+        cardsPanel.add(earningsCard);
+
+        overdueCard.setBackground(new java.awt.Color(225, 73, 63));
+        overdueCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        overdueSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        overdueSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        overdueSubLabel.setText("<html>Overdue<br>Rent</html>");
+        overdueCard.add(overdueSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        overdueCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        overdueCount.setForeground(new java.awt.Color(255, 255, 255));
+        overdueCount.setText("999");
+        overdueCard.add(overdueCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        overdueIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/overdue_rent_icon.png"))); // NOI18N
+        overdueCard.add(overdueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
+
+        cardsPanel.add(overdueCard);
+
+        tablesPanel.setBackground(new java.awt.Color(255, 255, 255));
+        tablesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        latestTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Payment ID", "Tenant ID", "Payment Date", "Ammount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(latestTransactionTable);
+
+        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 470, 270));
+
+        latestTenantLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
+        latestTenantLabel.setText("Latest Tenant");
+        tablesPanel.add(latestTenantLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 500, 50));
+
+        latestTransacationLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
+        latestTransacationLabel.setText("Latest Transaction");
+        tablesPanel.add(latestTransacationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 470, 50));
+
+        latestTenantTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Tenant ID", "Room ID", "First Name", "Last Name", "Registration Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(latestTenantTable);
+
+        tablesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 470, 270));
+
+        dashboardLabel.setFont(new java.awt.Font("Archivo SemiBold", 1, 24)); // NOI18N
+        dashboardLabel.setText("Dashboard");
+
+        javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
+        dashboardPanel.setLayout(dashboardPanelLayout);
+        dashboardPanelLayout.setHorizontalGroup(
+            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dashboardLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        dashboardPanelLayout.setVerticalGroup(
+            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(dashboardLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(cardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
+        );
+
+        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 650));
+
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jLabel3.setText("Transaction History");
 
@@ -404,6 +580,11 @@ public class HomePage extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 255, 254));
         jButton2.setText("Add Expenses");
         jButton2.setFocusable(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Profiles/logo_shadow.png"))); // NOI18N
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -451,174 +632,6 @@ public class HomePage extends javax.swing.JFrame {
         );
 
         contentPanel.add(incomeReportPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 650));
-
-        cardsPanel.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
-
-        tenantsCard.setBackground(new java.awt.Color(0, 193, 234));
-        tenantsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tenantIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/people_icon.png"))); // NOI18N
-        tenantsCard.add(tenantIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
-
-        tenantCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        tenantCount.setForeground(new java.awt.Color(255, 255, 255));
-        tenantCount.setText("999");
-        tenantsCard.add(tenantCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
-
-        tenantSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        tenantSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        tenantSubLabel.setText("<html>Registered<br>Tenants</html>");
-        tenantsCard.add(tenantSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
-
-        cardsPanel.add(tenantsCard);
-
-        roomsCard.setBackground(new java.awt.Color(246, 154, 57));
-        roomsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        roomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
-        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
-
-        roomCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        roomCount.setForeground(new java.awt.Color(255, 255, 255));
-        roomCount.setText("999");
-        roomsCard.add(roomCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
-
-        roomSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        roomSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        roomSubLabel.setText("<html>Available<br>Rooms</html>");
-        roomsCard.add(roomSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
-
-        cardsPanel.add(roomsCard);
-
-        earningsCard.setBackground(new java.awt.Color(0, 166, 99));
-        earningsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        earningsSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        earningsSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        earningsSubLabel.setText("<html>Monthly<br>Earnings</html>");
-        earningsCard.add(earningsSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
-
-        earningsCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        earningsCount.setForeground(new java.awt.Color(255, 255, 255));
-        earningsCount.setText("999");
-        earningsCard.add(earningsCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
-
-        earningsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
-        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
-
-        cardsPanel.add(earningsCard);
-
-        overdueCard.setBackground(new java.awt.Color(225, 73, 63));
-        overdueCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        overdueSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        overdueSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        overdueSubLabel.setText("<html>Overdue<br>Rent</html>");
-        overdueCard.add(overdueSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
-
-        overdueCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        overdueCount.setForeground(new java.awt.Color(255, 255, 255));
-        overdueCount.setText("999");
-        overdueCard.add(overdueCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
-
-        overdueIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/overdue_rent_icon.png"))); // NOI18N
-        overdueCard.add(overdueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
-
-        cardsPanel.add(overdueCard);
-
-        tablesPanel.setBackground(new java.awt.Color(255, 255, 255));
-        tablesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        latestTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Payment ID", "Tenant ID", "Payment Date", "Ammount"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(latestTransactionTable);
-
-        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 470, 330));
-
-        jLabel1.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
-        jLabel1.setText("Latest Tenant");
-        tablesPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 500, 50));
-
-        jLabel2.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
-        jLabel2.setText("Latest Transaction");
-        tablesPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 500, 50));
-
-        latestTenantTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Tenant ID", "Room ID", "First Name", "Last Name", "Registration Date"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(latestTenantTable);
-
-        tablesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 470, 330));
-
-        javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
-        dashboardPanel.setLayout(dashboardPanelLayout);
-        dashboardPanelLayout.setHorizontalGroup(
-            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        dashboardPanelLayout.setVerticalGroup(
-            dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-        );
-
-        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 650));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -678,6 +691,11 @@ public class HomePage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_dashboardButtonMouseExited
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+	AddExpensePage expense = new AddExpensePage();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -701,6 +719,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel cardsPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton dashboardButton;
+    private javax.swing.JLabel dashboardLabel;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JPanel earningsCard;
     private javax.swing.JLabel earningsCount;
@@ -718,8 +737,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel incomeReportPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -728,7 +745,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel latestTenantLabel;
     private javax.swing.JTable latestTenantTable;
+    private javax.swing.JLabel latestTransacationLabel;
     private javax.swing.JTable latestTransactionTable;
     private javax.swing.JPanel netIncomeCard;
     private javax.swing.JLabel netIncomeIcon;

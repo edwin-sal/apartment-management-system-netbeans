@@ -19,6 +19,7 @@ public class AddExpensePage extends javax.swing.JFrame {
     public AddExpensePage() {
 	initComponents();
 	setLocationRelativeTo(null);
+	setVisible(true);
     }
 
     /**
@@ -133,6 +134,7 @@ public class AddExpensePage extends javax.swing.JFrame {
 
     private void addExpenseGoBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseGoBackButtonActionPerformed
         // TODO add your handling code here:
+	dispose();
     }//GEN-LAST:event_addExpenseGoBackButtonActionPerformed
 
     private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
