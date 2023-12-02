@@ -80,16 +80,16 @@ public class HomePage extends javax.swing.JFrame {
         titlebarPanel = new javax.swing.JPanel();
         contentPanel = new javax.swing.JPanel();
         viewRegisteredTenantsPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        boxPanel = new javax.swing.JPanel();
+        registeredTenantsLabel = new javax.swing.JLabel();
+        tenantInfoPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        addBoxButton = new javax.swing.JButton();
-        addBoxButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        tenantInfoTable = new javax.swing.JTable();
+        removeTenantButton = new javax.swing.JButton();
+        registerTenantButton = new javax.swing.JButton();
+        orderByBox = new javax.swing.JComboBox<>();
+        orderByLabel = new javax.swing.JLabel();
+        sortByBox = new javax.swing.JComboBox<>();
+        sortByLabel = new javax.swing.JLabel();
         incomeReportPanel = new javax.swing.JPanel();
         transactionHistoryLabel = new javax.swing.JLabel();
         incomeReportCardsPanel = new javax.swing.JPanel();
@@ -300,14 +300,14 @@ public class HomePage extends javax.swing.JFrame {
         contentPanel.setBackground(new java.awt.Color(184, 208, 201));
         contentPanel.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("View Registered Tenants");
+        registeredTenantsLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
+        registeredTenantsLabel.setForeground(new java.awt.Color(51, 51, 51));
+        registeredTenantsLabel.setText("View Registered Tenants");
 
-        boxPanel.setBackground(new java.awt.Color(255, 255, 255));
-        boxPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        tenantInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
+        tenantInfoPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tenantInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -318,57 +318,59 @@ public class HomePage extends javax.swing.JFrame {
                 "Tenant ID", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date", "Due Date", "Status"
             }
         ));
-        jScrollPane5.setViewportView(jTable1);
+        jScrollPane5.setViewportView(tenantInfoTable);
 
-        boxPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 930, 420));
+        tenantInfoPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 930, 420));
 
-        addBoxButton.setBackground(new java.awt.Color(255, 255, 254));
-        addBoxButton.setText("Remove Tenant");
-        addBoxButton.setFocusable(false);
-        addBoxButton.addActionListener(new java.awt.event.ActionListener() {
+        removeTenantButton.setBackground(new java.awt.Color(255, 255, 254));
+        removeTenantButton.setText("Remove Tenant");
+        removeTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removeTenantButton.setFocusable(false);
+        removeTenantButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBoxButtonActionPerformed(evt);
+                removeTenantButtonActionPerformed(evt);
             }
         });
 
-        addBoxButton1.setBackground(new java.awt.Color(255, 255, 254));
-        addBoxButton1.setText("Register Tenant");
-        addBoxButton1.setFocusable(false);
-        addBoxButton1.addActionListener(new java.awt.event.ActionListener() {
+        registerTenantButton.setBackground(new java.awt.Color(255, 255, 254));
+        registerTenantButton.setText("Register Tenant");
+        registerTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerTenantButton.setFocusable(false);
+        registerTenantButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBoxButton1ActionPerformed(evt);
+                registerTenantButtonActionPerformed(evt);
             }
         });
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 254));
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
-        jComboBox1.setFocusable(false);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        orderByBox.setBackground(new java.awt.Color(255, 255, 254));
+        orderByBox.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        orderByBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
+        orderByBox.setFocusable(false);
+        orderByBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                orderByBoxActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/order_by_icon.png"))); // NOI18N
-        jLabel2.setText("Order by");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        orderByLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        orderByLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/order_by_icon.png"))); // NOI18N
+        orderByLabel.setText("Order by");
+        orderByLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
-        jComboBox2.setBackground(new java.awt.Color(255, 255, 254));
-        jComboBox2.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tenant ID", "First Name", "Last Name", "Due Date", "Status" }));
-        jComboBox2.setFocusable(false);
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        sortByBox.setBackground(new java.awt.Color(255, 255, 254));
+        sortByBox.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        sortByBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tenant ID", "First Name", "Last Name", "Due Date", "Status" }));
+        sortByBox.setFocusable(false);
+        sortByBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                sortByBoxActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/sort_icon.png"))); // NOI18N
-        jLabel3.setText("Sort by");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        sortByLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        sortByLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/sort_icon.png"))); // NOI18N
+        sortByLabel.setText("Sort by");
+        sortByLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
         javax.swing.GroupLayout viewRegisteredTenantsPanelLayout = new javax.swing.GroupLayout(viewRegisteredTenantsPanel);
         viewRegisteredTenantsPanel.setLayout(viewRegisteredTenantsPanelLayout);
@@ -378,41 +380,42 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(viewRegisteredTenantsPanelLayout.createSequentialGroup()
-                        .addComponent(addBoxButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(registerTenantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addBoxButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(removeTenantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(viewRegisteredTenantsPanelLayout.createSequentialGroup()
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(registeredTenantsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sortByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sortByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(22, 22, 22)
-                            .addComponent(jLabel2)
+                            .addComponent(orderByLabel)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(boxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(orderByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tenantInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         viewRegisteredTenantsPanelLayout.setVerticalGroup(
             viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewRegisteredTenantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(sortByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sortByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(registeredTenantsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tenantInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addBoxButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBoxButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(removeTenantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerTenantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         contentPanel.add(viewRegisteredTenantsPanel, "card2");
@@ -480,7 +483,7 @@ public class HomePage extends javax.swing.JFrame {
 
         incomeReportCardsPanel.add(netIncomeCard);
 
-        incomeReportLabel.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        incomeReportLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
         incomeReportLabel.setText("Income Report");
 
         transactionHistoryPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -728,7 +731,7 @@ public class HomePage extends javax.swing.JFrame {
 
         tablesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 470, 290));
 
-        dashboardLabel.setFont(new java.awt.Font("Archivo SemiBold", 1, 24)); // NOI18N
+        dashboardLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
         dashboardLabel.setText("Dashboard");
 
         javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
@@ -742,7 +745,7 @@ public class HomePage extends javax.swing.JFrame {
                     .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cardsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -787,9 +790,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sidebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -836,31 +837,25 @@ public class HomePage extends javax.swing.JFrame {
 	AddExpensePage expense = new AddExpensePage();
     }//GEN-LAST:event_addExpensesButtonActionPerformed
 
-    private void addBoxButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBoxButtonActionPerformed
-        // TODO add your handling code here:
-	JPanel box = new JPanel();
-	box.setBackground(new Color(8, 96, 153));
-	box.setPreferredSize(new Dimension(250, 465));
-	boxPanel.add(box);
-	
-	boxPanel.revalidate(); // Refreshes the panel
-    boxPanel.repaint();    // Repaints the panel
+    private void removeTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTenantButtonActionPerformed
 
-    }//GEN-LAST:event_addBoxButtonActionPerformed
 
-    private void addBoxButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBoxButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addBoxButton1ActionPerformed
+    }//GEN-LAST:event_removeTenantButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void registerTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTenantButtonActionPerformed
         // TODO add your handling code here:
-	String selectedValue = (String) jComboBox1.getSelectedItem();
+	new Tenant();
+    }//GEN-LAST:event_registerTenantButtonActionPerformed
+
+    private void orderByBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBoxActionPerformed
+        // TODO add your handling code here:
+	String selectedValue = (String) orderByBox.getSelectedItem();
 	System.out.print(selectedValue);
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_orderByBoxActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void sortByBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_sortByBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -882,10 +877,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBoxButton;
-    private javax.swing.JButton addBoxButton1;
     private javax.swing.JButton addExpensesButton;
-    private javax.swing.JPanel boxPanel;
     private javax.swing.JPanel cardsPanel;
     private javax.swing.JButton clearExpensesButton;
     private javax.swing.JPanel contentPanel;
@@ -908,16 +900,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel incomeReportCardsPanel;
     private javax.swing.JLabel incomeReportLabel;
     private javax.swing.JPanel incomeReportPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel latestTenantLabel;
     private javax.swing.JTable latestTenantTable;
     private javax.swing.JLabel latestTransacationLabel;
@@ -926,12 +912,17 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel netIncomeIcon;
     private javax.swing.JLabel netIncomeLabel;
     private javax.swing.JLabel netIncomeSubLabel;
+    private javax.swing.JComboBox<String> orderByBox;
+    private javax.swing.JLabel orderByLabel;
     private javax.swing.JPanel overdueCard;
     private javax.swing.JLabel overdueCount;
     private javax.swing.JLabel overdueIcon;
     private javax.swing.JLabel overdueSubLabel;
     private javax.swing.JButton pendingPaymentButton;
     private javax.swing.JPanel pendingPaymentPanel;
+    private javax.swing.JButton registerTenantButton;
+    private javax.swing.JLabel registeredTenantsLabel;
+    private javax.swing.JButton removeTenantButton;
     private javax.swing.JLabel rentEzIcon;
     private javax.swing.JLabel roomCount;
     private javax.swing.JLabel roomIcon;
@@ -940,9 +931,13 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton settingsButton;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel sidebarPanel;
+    private javax.swing.JComboBox<String> sortByBox;
+    private javax.swing.JLabel sortByLabel;
     private javax.swing.JPanel tablesPanel;
     private javax.swing.JLabel tenantCount;
     private javax.swing.JLabel tenantIcon;
+    private javax.swing.JPanel tenantInfoPanel;
+    private javax.swing.JTable tenantInfoTable;
     private javax.swing.JLabel tenantSubLabel;
     private javax.swing.JPanel tenantsCard;
     private javax.swing.JPanel titlebarPanel;
