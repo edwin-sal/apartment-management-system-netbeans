@@ -67,7 +67,7 @@ public class PaymentPage extends javax.swing.JFrame {
         loginButton.setBackground(new java.awt.Color(239, 134, 128));
         loginButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
-        loginButton.setText("Login");
+        loginButton.setText("Submit Payment");
         loginButton.setFocusable(false);
         loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
 

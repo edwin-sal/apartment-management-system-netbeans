@@ -60,7 +60,7 @@ public class LoginPage extends javax.swing.JFrame {
         loginInputPanel.add(userPinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 30));
 
         loginButton.setBackground(new java.awt.Color(239, 134, 128));
-        loginButton.setFont(new java.awt.Font("Poppins", 0, 18)); // NOI18N
+        loginButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Login");
         loginButton.setFocusable(false);
