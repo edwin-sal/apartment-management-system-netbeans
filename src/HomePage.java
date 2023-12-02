@@ -374,7 +374,7 @@ public class HomePage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(latestTenantTable);
 
-        tablesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 67, 490, 310));
+        tablesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 70, 470, 310));
 
         latestTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -404,11 +404,11 @@ public class HomePage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(latestTransactionTable);
 
-        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 67, 490, 310));
+        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 67, 470, 310));
 
         jLabel1.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
         jLabel1.setText("Latest Tenant");
-        tablesPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 500, 50));
+        tablesPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 500, 50));
 
         jLabel2.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
         jLabel2.setText("Latest Transaction");
@@ -421,9 +421,9 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(dashboardPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
-                    .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                    .addComponent(cardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 995, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,7 +435,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
