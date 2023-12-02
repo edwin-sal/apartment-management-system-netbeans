@@ -1,5 +1,8 @@
 
+import java.awt.Color;
 import java.awt.Component;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -23,27 +26,35 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
 	initComponents();
 	setLocationRelativeTo(null);
-	dashboardPanel.setVisible(false);
-	setResizable(false);
+	dashboardPanel.setVisible(true);
+	setResizable(true);
 //	jPanel1.setVisible(false);
+	sidebarHoverEffect(dashboardButton, "dashboard_icon.png", "dashboard_icon_white.png");
+	sidebarHoverEffect(viewTenantButton, "view_tenants_icon.png", "view_tenants_icon_white.png");
+	sidebarHoverEffect(viewRoomButton, "view_rooms_icon.png", "view_rooms_icon_white.png");
+	sidebarHoverEffect(incomeReportButton, "money_icon.png", "money_icon_white.png");
+	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
+	sidebarHoverEffect(settingsButton, "settings_icon.png", "settings_icon.png_white.png");
+	
     }
     
-    public void resizeColumnWidth(JTable table) {
-    final TableColumnModel columnModel = table.getColumnModel();
-    for (int column = 0; column < table.getColumnCount(); column++) {
-        // Account for header size
-        double width = table.getTableHeader().getHeaderRect(column).getWidth();
-        for (int row = 0; row < table.getRowCount(); row++) {
-            TableCellRenderer renderer = table.getCellRenderer(row, column);
-            Component comp = table.prepareRenderer(renderer, row, column);
-            width = Math.max(comp.getPreferredSize().width + 1, width);
-        }
-        if (width > 300)
-            width = 300;
-        columnModel.getColumn(column).setPreferredWidth((int) width);
-    }
-}
+   // Add hover effect for the sidebar buttons
+    public void sidebarHoverEffect(JButton button, String iconName, String whiteIconName) {
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(44, 52, 66));
+                button.setForeground(Color.white);
+                button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/" + whiteIconName))); 
 
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                button.setBackground(new Color(52, 68, 77));
+                button.setForeground(new Color(175, 190, 203));
+                button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/" + iconName))); 
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,7 +67,7 @@ public class HomePage extends javax.swing.JFrame {
 
         sidebarPanel = new javax.swing.JPanel();
         dashboardButton = new javax.swing.JButton();
-        transactionHistoryButton = new javax.swing.JButton();
+        settingsButton = new javax.swing.JButton();
         viewTenantButton = new javax.swing.JButton();
         viewRoomButton = new javax.swing.JButton();
         incomeReportButton = new javax.swing.JButton();
@@ -123,25 +134,33 @@ public class HomePage extends javax.swing.JFrame {
         dashboardButton.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         dashboardButton.setIconTextGap(10);
         dashboardButton.setInheritsPopupMenu(true);
+        dashboardButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dashboardButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dashboardButtonMouseExited(evt);
+            }
+        });
         dashboardButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dashboardButtonActionPerformed(evt);
             }
         });
 
-        transactionHistoryButton.setBackground(new java.awt.Color(52, 68, 77));
-        transactionHistoryButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        transactionHistoryButton.setForeground(new java.awt.Color(175, 190, 203));
-        transactionHistoryButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/transaction_history_icon.png"))); // NOI18N
-        transactionHistoryButton.setText("Transaction History");
-        transactionHistoryButton.setBorderPainted(false);
-        transactionHistoryButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        transactionHistoryButton.setFocusable(false);
-        transactionHistoryButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        transactionHistoryButton.setIconTextGap(10);
-        transactionHistoryButton.addActionListener(new java.awt.event.ActionListener() {
+        settingsButton.setBackground(new java.awt.Color(52, 68, 77));
+        settingsButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        settingsButton.setForeground(new java.awt.Color(175, 190, 203));
+        settingsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/settings_icon.png"))); // NOI18N
+        settingsButton.setText("Settings");
+        settingsButton.setBorderPainted(false);
+        settingsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        settingsButton.setFocusable(false);
+        settingsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        settingsButton.setIconTextGap(10);
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                transactionHistoryButtonActionPerformed(evt);
+                settingsButtonActionPerformed(evt);
             }
         });
 
@@ -218,7 +237,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewTenantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(transactionHistoryButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(settingsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(viewRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(incomeReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pendingPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -241,7 +260,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(pendingPaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(transactionHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
@@ -553,6 +572,11 @@ public class HomePage extends javax.swing.JFrame {
         addExpenseButton.setBackground(new java.awt.Color(254, 254, 254));
         addExpenseButton.setText("Add Expense");
         addExpenseButton.setFocusable(false);
+        addExpenseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addExpenseButtonActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Archivo SemiBold", 0, 32)); // NOI18N
         jLabel3.setText("Business Report");
@@ -620,9 +644,9 @@ public class HomePage extends javax.swing.JFrame {
 	dashboardPanel.setVisible(true);
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
-    private void transactionHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transactionHistoryButtonActionPerformed
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_transactionHistoryButtonActionPerformed
+    }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void viewTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTenantButtonActionPerformed
         // TODO add your handling code here:
@@ -640,6 +664,20 @@ public class HomePage extends javax.swing.JFrame {
     private void pendingPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingPaymentButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pendingPaymentButtonActionPerformed
+
+    private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
+        // TODO add your handling code here:
+	double expense;
+	AddExpensePage addExpense = new AddExpensePage();
+    }//GEN-LAST:event_addExpenseButtonActionPerformed
+
+    private void dashboardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dashboardButtonMouseEntered
+
+    private void dashboardButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseExited
+
+    }//GEN-LAST:event_dashboardButtonMouseExited
 
     /**
      * @param args the command line arguments
@@ -703,6 +741,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel roomIcon;
     private javax.swing.JLabel roomSubLabel;
     private javax.swing.JPanel roomsCard;
+    private javax.swing.JButton settingsButton;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JPanel tablesPanel;
     private javax.swing.JLabel tenantCount;
@@ -710,7 +749,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel tenantSubLabel;
     private javax.swing.JPanel tenantsCard;
     private javax.swing.JPanel titlebarPanel;
-    private javax.swing.JButton transactionHistoryButton;
     private javax.swing.JButton viewRoomButton;
     private javax.swing.JButton viewTenantButton;
     // End of variables declaration//GEN-END:variables

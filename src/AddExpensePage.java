@@ -48,6 +48,8 @@ public class AddExpensePage extends javax.swing.JFrame {
         expenseInputPanel.setBackground(new java.awt.Color(255, 255, 255));
         expenseInputPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         expenseInputPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        electricBillInput.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
         expenseInputPanel.add(electricBillInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 340, 40));
 
         electricBillLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
@@ -57,16 +59,22 @@ public class AddExpensePage extends javax.swing.JFrame {
         waterBillLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         waterBillLabel.setText("Water bill");
         expenseInputPanel.add(waterBillLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 120, 30));
+
+        waterBillInput.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
         expenseInputPanel.add(waterBillInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 340, 40));
 
         internetBillLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         internetBillLabel.setText("Internet bill");
         expenseInputPanel.add(internetBillLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 120, 30));
+
+        internetBillInput.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
         expenseInputPanel.add(internetBillInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 340, 40));
 
         maintenanceBillLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         maintenanceBillLabel.setText("Maintenance bill");
         expenseInputPanel.add(maintenanceBillLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 120, 30));
+
+        maintenanceBillInput.setFont(new java.awt.Font("sansserif", 0, 20)); // NOI18N
         expenseInputPanel.add(maintenanceBillInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 340, 40));
 
         expenseInputLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 28)); // NOI18N

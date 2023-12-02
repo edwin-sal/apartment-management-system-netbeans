@@ -59,7 +59,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="viewTenantButton" alignment="1" pref="300" max="32767" attributes="0"/>
-                      <Component id="transactionHistoryButton" alignment="1" max="32767" attributes="0"/>
+                      <Component id="settingsButton" alignment="1" max="32767" attributes="0"/>
                       <Component id="viewRoomButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="incomeReportButton" alignment="1" max="32767" attributes="0"/>
                       <Component id="pendingPaymentButton" alignment="0" max="32767" attributes="0"/>
@@ -87,7 +87,7 @@
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                   <Component id="pendingPaymentButton" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                  <Component id="transactionHistoryButton" min="-2" pref="65" max="-2" attributes="0"/>
+                  <Component id="settingsButton" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -127,10 +127,12 @@
             <Property name="inheritsPopupMenu" type="boolean" value="true"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dashboardButtonMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="dashboardButtonMouseExited"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dashboardButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="transactionHistoryButton">
+        <Component class="javax.swing.JButton" name="settingsButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="4d" green="44" red="34" type="rgb"/>
@@ -142,9 +144,9 @@
               <Color blue="cb" green="be" red="af" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/Icons/sidebar_icons/transaction_history_icon.png"/>
+              <Image iconType="3" name="/images/Icons/sidebar_icons/settings_icon.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Transaction History"/>
+            <Property name="text" type="java.lang.String" value="Settings"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
@@ -154,7 +156,7 @@
             <Property name="iconTextGap" type="int" value="10"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transactionHistoryButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingsButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="viewTenantButton">
@@ -1020,6 +1022,9 @@
                 <Property name="text" type="java.lang.String" value="Add Expense"/>
                 <Property name="focusable" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addExpenseButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
