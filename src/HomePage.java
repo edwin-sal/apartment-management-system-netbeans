@@ -27,7 +27,8 @@ public class HomePage extends javax.swing.JFrame {
 	initComponents();
 	setLocationRelativeTo(null);
 	dashboardPanel.setVisible(true);
-	setResizable(true);
+	setResizable(false);
+//	setSize(1370, 720);
 //	jPanel1.setVisible(false);
 	sidebarHoverEffect(dashboardButton, "dashboard_icon.png", "dashboard_icon_white.png");
 	sidebarHoverEffect(viewTenantButton, "view_tenants_icon.png", "view_tenants_icon_white.png");
@@ -99,26 +100,9 @@ public class HomePage extends javax.swing.JFrame {
         latestTransactionTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        businessReportPanel = new javax.swing.JPanel();
-        reportCardsPanel = new javax.swing.JPanel();
-        grossIncomeCard = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        expensesCard = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        netIncomeCard = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        clearExpenseButton = new javax.swing.JButton();
-        addExpenseButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         sidebarPanel.setBackground(new java.awt.Color(52, 68, 77));
 
@@ -266,7 +250,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
                     .addGap(0, 0, 0)
                     .addComponent(dashboardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 515, Short.MAX_VALUE)))
+                    .addGap(0, 535, Short.MAX_VALUE)))
         );
 
         titlebarPanel.setBackground(new java.awt.Color(239, 134, 128));
@@ -291,7 +275,7 @@ public class HomePage extends javax.swing.JFrame {
         tenantsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tenantIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/people_icon.png"))); // NOI18N
-        tenantsCard.add(tenantIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+        tenantsCard.add(tenantIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
 
         tenantCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         tenantCount.setForeground(new java.awt.Color(255, 255, 255));
@@ -309,7 +293,7 @@ public class HomePage extends javax.swing.JFrame {
         roomsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         roomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
-        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
 
         roomCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         roomCount.setForeground(new java.awt.Color(255, 255, 255));
@@ -337,7 +321,7 @@ public class HomePage extends javax.swing.JFrame {
         earningsCard.add(earningsCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
         earningsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
-        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
 
         cardsPanel.add(earningsCard);
 
@@ -355,7 +339,7 @@ public class HomePage extends javax.swing.JFrame {
         overdueCard.add(overdueCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
         overdueIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/overdue_rent_icon.png"))); // NOI18N
-        overdueCard.add(overdueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 120, 100));
+        overdueCard.add(overdueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
 
         cardsPanel.add(overdueCard);
 
@@ -390,7 +374,7 @@ public class HomePage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(latestTenantTable);
 
-        tablesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 67, 500, 380));
+        tablesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 67, 490, 310));
 
         latestTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -420,7 +404,7 @@ public class HomePage extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(latestTransactionTable);
 
-        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 67, 500, 380));
+        tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 67, 490, 310));
 
         jLabel1.setFont(new java.awt.Font("Archivo SemiBold", 0, 34)); // NOI18N
         jLabel1.setText("Latest Tenant");
@@ -434,187 +418,24 @@ public class HomePage extends javax.swing.JFrame {
         dashboardPanel.setLayout(dashboardPanelLayout);
         dashboardPanelLayout.setHorizontalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dashboardPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1050, Short.MAX_VALUE)
+            .addGroup(dashboardPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tablesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1041, Short.MAX_VALUE)
                     .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(15, 15, 15))
+                .addGap(21, 21, 21))
         );
         dashboardPanelLayout.setVerticalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(cardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(cardsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(tablesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
-        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 700));
-
-        businessReportPanel.setBackground(new java.awt.Color(184, 208, 201));
-
-        reportCardsPanel.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
-
-        grossIncomeCard.setBackground(new java.awt.Color(55, 124, 203));
-        grossIncomeCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/gross_icon.png"))); // NOI18N
-        grossIncomeCard.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 130, 110));
-
-        jLabel5.setFont(new java.awt.Font("Poppins Black", 0, 45)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("999");
-        grossIncomeCard.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 40));
-
-        jLabel6.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("<html>Gross<br>Income</html>");
-        grossIncomeCard.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 140, 60));
-
-        reportCardsPanel.add(grossIncomeCard);
-
-        expensesCard.setBackground(new java.awt.Color(201, 36, 57));
-
-        jLabel9.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Expenses");
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/expenses_icon.png"))); // NOI18N
-
-        jLabel8.setFont(new java.awt.Font("Poppins Black", 0, 45)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("999");
-
-        javax.swing.GroupLayout expensesCardLayout = new javax.swing.GroupLayout(expensesCard);
-        expensesCard.setLayout(expensesCardLayout);
-        expensesCardLayout.setHorizontalGroup(
-            expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 341, Short.MAX_VALUE)
-            .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(expensesCardLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        expensesCardLayout.setVerticalGroup(
-            expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 184, Short.MAX_VALUE)
-            .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(expensesCardLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(expensesCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(expensesCardLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
-        reportCardsPanel.add(expensesCard);
-
-        netIncomeCard.setBackground(new java.awt.Color(0, 166, 99));
-
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/net_icon.png"))); // NOI18N
-
-        jLabel10.setFont(new java.awt.Font("Poppins Black", 0, 45)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("999");
-
-        jLabel11.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("<html>Net<br>Income</html>");
-
-        javax.swing.GroupLayout netIncomeCardLayout = new javax.swing.GroupLayout(netIncomeCard);
-        netIncomeCard.setLayout(netIncomeCardLayout);
-        netIncomeCardLayout.setHorizontalGroup(
-            netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 341, Short.MAX_VALUE)
-            .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(netIncomeCardLayout.createSequentialGroup()
-                    .addGap(15, 15, 15)
-                    .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(16, Short.MAX_VALUE)))
-        );
-        netIncomeCardLayout.setVerticalGroup(
-            netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 184, Short.MAX_VALUE)
-            .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(netIncomeCardLayout.createSequentialGroup()
-                    .addGap(37, 37, 37)
-                    .addGroup(netIncomeCardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(netIncomeCardLayout.createSequentialGroup()
-                            .addGap(10, 10, 10)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(37, Short.MAX_VALUE)))
-        );
-
-        reportCardsPanel.add(netIncomeCard);
-
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        clearExpenseButton.setBackground(new java.awt.Color(254, 254, 254));
-        clearExpenseButton.setText("Clear Expense");
-        clearExpenseButton.setFocusable(false);
-
-        addExpenseButton.setBackground(new java.awt.Color(254, 254, 254));
-        addExpenseButton.setText("Add Expense");
-        addExpenseButton.setFocusable(false);
-        addExpenseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addExpenseButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Archivo SemiBold", 0, 32)); // NOI18N
-        jLabel3.setText("Business Report");
-
-        javax.swing.GroupLayout businessReportPanelLayout = new javax.swing.GroupLayout(businessReportPanel);
-        businessReportPanel.setLayout(businessReportPanelLayout);
-        businessReportPanelLayout.setHorizontalGroup(
-            businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(businessReportPanelLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(reportCardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(businessReportPanelLayout.createSequentialGroup()
-                            .addComponent(clearExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(addExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-        businessReportPanelLayout.setVerticalGroup(
-            businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(businessReportPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(reportCardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(businessReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clearExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-
-        contentPanel.add(businessReportPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 700));
+        contentPanel.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -624,16 +445,15 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(sidebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(titlebarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sidebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(sidebarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -665,12 +485,6 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pendingPaymentButtonActionPerformed
 
-    private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
-        // TODO add your handling code here:
-	double expense;
-	AddExpensePage addExpense = new AddExpensePage();
-    }//GEN-LAST:event_addExpenseButtonActionPerformed
-
     private void dashboardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_dashboardButtonMouseEntered
@@ -699,10 +513,7 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addExpenseButton;
-    private javax.swing.JPanel businessReportPanel;
     private javax.swing.JPanel cardsPanel;
-    private javax.swing.JButton clearExpenseButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JPanel dashboardPanel;
@@ -710,33 +521,18 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel earningsCount;
     private javax.swing.JLabel earningsIcon;
     private javax.swing.JLabel earningsSubLabel;
-    private javax.swing.JPanel expensesCard;
-    private javax.swing.JPanel grossIncomeCard;
     private javax.swing.JButton incomeReportButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable latestTenantTable;
     private javax.swing.JTable latestTransactionTable;
-    private javax.swing.JPanel netIncomeCard;
     private javax.swing.JPanel overdueCard;
     private javax.swing.JLabel overdueCount;
     private javax.swing.JLabel overdueIcon;
     private javax.swing.JLabel overdueSubLabel;
     private javax.swing.JButton pendingPaymentButton;
-    private javax.swing.JPanel reportCardsPanel;
     private javax.swing.JLabel roomCount;
     private javax.swing.JLabel roomIcon;
     private javax.swing.JLabel roomSubLabel;
