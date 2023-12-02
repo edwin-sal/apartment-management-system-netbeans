@@ -31,7 +31,6 @@ public class HomePage extends javax.swing.JFrame {
     public HomePage() {
 	initComponents();
 	setLocationRelativeTo(null);
-//	dashboardPanel.setVisible(false);
 	setResizable(false);
 //	setSize(1370, 720);
 //	jPanel1.setVisible(false);
@@ -58,6 +57,15 @@ public class HomePage extends javax.swing.JFrame {
                 button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/" + iconName))); 
             }
         });
+    }
+    
+    // Hide all content panels
+    public void hideContentPanels() {
+	dashboardPanel.setVisible(false);
+	viewRegisteredTenantsPanel.setVisible(false);
+	viewAddedRoomsPanel.setVisible(false);
+	incomeReportPanel.setVisible(false);
+	pendingPaymentPanel.setVisible(false);
     }
 
     /**
@@ -114,7 +122,7 @@ public class HomePage extends javax.swing.JFrame {
         orderByLabel = new javax.swing.JLabel();
         sortByBox = new javax.swing.JComboBox<>();
         sortByLabel = new javax.swing.JLabel();
-        viewRegisteredRoomsPanel1 = new javax.swing.JPanel();
+        viewAddedRoomsPanel = new javax.swing.JPanel();
         tenantInfoPanel1 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tenantInfoTable1 = new javax.swing.JTable();
@@ -718,14 +726,14 @@ public class HomePage extends javax.swing.JFrame {
         registeredTenantsLabel2.setForeground(new java.awt.Color(51, 51, 51));
         registeredTenantsLabel2.setText("View Added Rooms");
 
-        javax.swing.GroupLayout viewRegisteredRoomsPanel1Layout = new javax.swing.GroupLayout(viewRegisteredRoomsPanel1);
-        viewRegisteredRoomsPanel1.setLayout(viewRegisteredRoomsPanel1Layout);
-        viewRegisteredRoomsPanel1Layout.setHorizontalGroup(
-            viewRegisteredRoomsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewRegisteredRoomsPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout viewAddedRoomsPanelLayout = new javax.swing.GroupLayout(viewAddedRoomsPanel);
+        viewAddedRoomsPanel.setLayout(viewAddedRoomsPanelLayout);
+        viewAddedRoomsPanelLayout.setHorizontalGroup(
+            viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewAddedRoomsPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(viewRegisteredRoomsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(viewRegisteredRoomsPanel1Layout.createSequentialGroup()
+                .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(viewAddedRoomsPanelLayout.createSequentialGroup()
                         .addComponent(registeredTenantsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(sortByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -738,12 +746,12 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(tenantInfoPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
-        viewRegisteredRoomsPanel1Layout.setVerticalGroup(
-            viewRegisteredRoomsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewRegisteredRoomsPanel1Layout.createSequentialGroup()
+        viewAddedRoomsPanelLayout.setVerticalGroup(
+            viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewAddedRoomsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(viewRegisteredRoomsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewRegisteredRoomsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(orderByBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(orderByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(sortByBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -754,7 +762,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        contentPanel.add(viewRegisteredRoomsPanel1, "card2");
+        contentPanel.add(viewAddedRoomsPanel, "card2");
 
         transactionHistoryLabel.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         transactionHistoryLabel.setText("Transaction History");
@@ -1019,26 +1027,32 @@ public class HomePage extends javax.swing.JFrame {
 
     private void dashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtonActionPerformed
         // TODO add your handling code here:
+	hideContentPanels();
 	dashboardPanel.setVisible(true);
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
     private void viewTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTenantButtonActionPerformed
         // TODO add your handling code here:
-	dashboardPanel.setVisible(false);
+	hideContentPanels();
+	viewRegisteredTenantsPanel.setVisible(true);
     }//GEN-LAST:event_viewTenantButtonActionPerformed
 
     private void viewRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoomButtonActionPerformed
         // TODO add your handling code here:
+	hideContentPanels();
+	viewAddedRoomsPanel.setVisible(true);
     }//GEN-LAST:event_viewRoomButtonActionPerformed
 
     private void incomeReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incomeReportButtonActionPerformed
         // TODO add your handling code here:
-	dashboardPanel.setVisible(false);
+	hideContentPanels();
 	incomeReportPanel.setVisible(true);
     }//GEN-LAST:event_incomeReportButtonActionPerformed
 
     private void pendingPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingPaymentButtonActionPerformed
         // TODO add your handling code here:
+	hideContentPanels();
+	pendingPaymentPanel.setVisible(true);
     }//GEN-LAST:event_pendingPaymentButtonActionPerformed
 
     private void dashboardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseEntered
@@ -1197,7 +1211,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel transactionHistoryLabel;
     private javax.swing.JPanel transactionHistoryPanel;
     private javax.swing.JTable transactionHistoryTable;
-    private javax.swing.JPanel viewRegisteredRoomsPanel1;
+    private javax.swing.JPanel viewAddedRoomsPanel;
     private javax.swing.JPanel viewRegisteredTenantsPanel;
     private javax.swing.JButton viewRoomButton;
     private javax.swing.JButton viewTenantButton;
