@@ -2,6 +2,10 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -9,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.TableCellRenderer;
@@ -39,6 +44,8 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(viewRoomButton, "view_rooms_icon.png", "view_rooms_icon_white.png");
 	sidebarHoverEffect(incomeReportButton, "money_icon.png", "money_icon_white.png");
 	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
+	addDate();
+	addTime();
     }
     
    // Add hover effect for the sidebar buttons
@@ -67,7 +74,31 @@ public class HomePage extends javax.swing.JFrame {
 	incomeReportPanel.setVisible(false);
 	pendingPaymentPanel.setVisible(false);
     }
+    
+    // Add date in the title bar
+    public void addDate() {
+	Date date = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("MM-d-yyyy");
+	
+	String dd = sdf.format(date);
+	dateLabel.setText(dd);
+    }
+    
+    // Add time in the title bar
+    public void addTime() {
+        Timer t = new Timer(1000, new ActionListener() { // Set the timer delay to 1000 milliseconds (1 second)
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                SimpleDateFormat sdf = new SimpleDateFormat("h:mm:ss a");
+                Date date = new Date();
+                String time = sdf.format(date);
+                timeLabel.setText(time);
+            }
+        });
 
+        t.start(); // Start the timer
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +115,9 @@ public class HomePage extends javax.swing.JFrame {
         incomeReportButton = new javax.swing.JButton();
         pendingPaymentButton = new javax.swing.JButton();
         titlebarPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         contentPanel = new javax.swing.JPanel();
         dashboardPanel = new javax.swing.JPanel();
         cardsPanel = new javax.swing.JPanel();
@@ -187,6 +221,9 @@ public class HomePage extends javax.swing.JFrame {
         dashboardButton.setIconTextGap(10);
         dashboardButton.setInheritsPopupMenu(true);
         dashboardButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardButtonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 dashboardButtonMouseEntered(evt);
             }
@@ -304,6 +341,28 @@ public class HomePage extends javax.swing.JFrame {
 
         titlebarPanel.setBackground(new java.awt.Color(239, 134, 128));
         titlebarPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Poppins Black", 0, 40)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/keys_icon.png"))); // NOI18N
+        jLabel5.setText("RentEZ");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel5.setIconTextGap(3);
+        titlebarPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 9, 320, 60));
+
+        dateLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dateLabel.setText("00/00/00");
+        dateLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        titlebarPanel.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 40, 150, 30));
+
+        timeLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
+        timeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeLabel.setText("0:0:0 PM/AM");
+        timeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        titlebarPanel.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, 150, 30));
 
         contentPanel.setBackground(new java.awt.Color(184, 208, 201));
         contentPanel.setLayout(new java.awt.CardLayout());
@@ -1029,6 +1088,7 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
 	hideContentPanels();
 	dashboardPanel.setVisible(true);
+	
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
     private void viewTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewTenantButtonActionPerformed
@@ -1104,6 +1164,10 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_removeTenantButton2ActionPerformed
 
+    private void dashboardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dashboardButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1132,6 +1196,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton dashboardButton;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JPanel dashboardPanel;
+    private javax.swing.JLabel dateLabel;
     private javax.swing.JPanel earningsCard;
     private javax.swing.JLabel earningsCount;
     private javax.swing.JLabel earningsIcon;
@@ -1152,6 +1217,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1207,6 +1273,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JTable tenantInfoTable1;
     private javax.swing.JLabel tenantSubLabel;
     private javax.swing.JPanel tenantsCard;
+    private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel titlebarPanel;
     private javax.swing.JLabel transactionHistoryLabel;
     private javax.swing.JPanel transactionHistoryPanel;
