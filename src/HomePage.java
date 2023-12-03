@@ -57,13 +57,12 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     // Method for running basic SQL queries
-    public void runSqlQuery(String query, String message) {
+    public void runSqlQuery(String query) {
 	conn = ConnectXamppMySQL.conn();
 
 	try {
 	    pst = conn.prepareStatement(query);
 	    pst.execute();
-	    System.out.println(message);
 	    } catch(SQLException e) {
 		JOptionPane.showMessageDialog(null, e);
 	    }
@@ -133,7 +132,7 @@ public class HomePage extends javax.swing.JFrame {
 	conn = ConnectXamppMySQL.conn();
 	
 	// Values to be inserted
-	int roomId = Integer.parseInt(roomPriceInput.getText()); 
+	int roomId = Integer.parseInt(roomIdInput.getText()); 
 	String roomType = (String) roomTypeBox.getSelectedItem();
 	int roomCapacity = Integer.parseInt((String) roomCapacityBox.getSelectedItem());
 	String dateTime = getDateTime(); 
@@ -159,6 +158,12 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     // Function for removing room
+    public void removeRoom() {
+	int roomId = Integer.valueOf(JOptionPane.showInputDialog(null, "Enter the room ID to be removed"));
+	String query = "DELETE FROM rooms WHERE room_id=" + roomId;
+	runSqlQuery(query);
+	JOptionPane.showMessageDialog(null, "Room ID: " + roomId + " succesfully removed!");
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -230,7 +235,7 @@ public class HomePage extends javax.swing.JFrame {
         roomTypeLabel = new javax.swing.JLabel();
         roomTypeBox = new javax.swing.JComboBox<>();
         roomCapacityBox = new javax.swing.JComboBox<>();
-        roomIdInput1 = new javax.swing.JTextField();
+        roomIdInput = new javax.swing.JTextField();
         orderByBox1 = new javax.swing.JComboBox<>();
         orderByLabel1 = new javax.swing.JLabel();
         sortByBox1 = new javax.swing.JComboBox<>();
@@ -826,7 +831,7 @@ public class HomePage extends javax.swing.JFrame {
         roomCapacityBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
         roomCapacityBox.setFocusable(false);
         tenantInfoPanel1.add(roomCapacityBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 220, 40));
-        tenantInfoPanel1.add(roomIdInput1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, 220, 40));
+        tenantInfoPanel1.add(roomIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, 220, 40));
 
         orderByBox1.setBackground(new java.awt.Color(255, 255, 254));
         orderByBox1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
@@ -1240,6 +1245,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void removeTenantButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTenantButton2ActionPerformed
         // TODO add your handling code here:
+	removeRoom();
     }//GEN-LAST:event_removeTenantButton2ActionPerformed
 
     private void dashboardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseClicked
@@ -1332,7 +1338,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel roomCapacityLabel;
     private javax.swing.JLabel roomCount;
     private javax.swing.JLabel roomIcon;
-    private javax.swing.JTextField roomIdInput1;
+    private javax.swing.JTextField roomIdInput;
     private javax.swing.JTextField roomPriceInput;
     private javax.swing.JLabel roomPriceLabel;
     private javax.swing.JLabel roomSubLabel;

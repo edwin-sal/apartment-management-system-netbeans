@@ -15,6 +15,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Tenant extends javax.swing.JFrame {
     static Connection conn;
     static PreparedStatement pst;
+    
+    
+    
 
     /**
      * Creates new form AddExpensePage
