@@ -35,12 +35,16 @@ public class Main {
 	conn = ConnectXamppMySQL.conn();
 	LoginPage login;
 	HomePage home = new HomePage();
+	Payment payment = new Payment();
 
 	login = new LoginPage();
 	login.setLoginPageCallback(new LoginPageCallback() {
 	@Override
 	public void onLoginPageDisposed() {
 	    home.setVisible(true);	 
+	    }
+	public void onLoginPageHidden() {
+	    payment.setVisible(true);	 
 	    }
 	});
 	

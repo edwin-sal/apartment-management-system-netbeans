@@ -6,6 +6,7 @@ import java.sql.*;
 
 interface LoginPageCallback {
     void onLoginPageDisposed();
+    void onLoginPageHidden();
 }
 
 public class LoginPage extends javax.swing.JFrame {
@@ -66,6 +67,37 @@ public class LoginPage extends javax.swing.JFrame {
 	}
     }
     
+    // This method checks if the login credentials is for tenant access
+    // Retrieve tetnant id
+    public void isTenantLogin() {
+	int userId = Integer.parseInt(userIdInput.getText());
+	int userPin = Integer.parseInt(userPinInput.getText());
+	int tenantId;
+	
+	conn = ConnectXamppMySQL.conn();
+	
+	// Query to retrieve tenant id
+	String query = "SELECT tenant_id FROM tenants WHERE tenant_id = ? AND tenant_pin = ?";
+	try (PreparedStatement statement = conn.prepareStatement(query)) {
+	    statement.setInt(1, userId);
+	    statement.setInt(2, userPin);
+        
+	    ResultSet resultSet = statement.executeQuery();
+	    if (resultSet.next()) {
+		tenantId = resultSet.getInt("tenant_id");
+//		System.out.println("Tenant ID: " + tenantId);
+		hideLoginPage();
+	    } else {
+		JOptionPane.showMessageDialog(null, "Invalid user ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
+		userIdInput.setText("");
+		userPinInput.setText("");
+	    }
+	    } catch (SQLException e) {
+		e.printStackTrace();
+	}
+    }
+	
+    
     // For setting callback, used to prevent the homepage from showing unless login is verified
     public void setLoginPageCallback(LoginPageCallback callback) {
 	this.callback = callback;
@@ -82,6 +114,15 @@ public class LoginPage extends javax.swing.JFrame {
         callback.onLoginPageDisposed();
 	}
     }
+    
+    private void hideLoginPage() {
+    setVisible(false);
+  
+    if (callback != null) {
+        callback.onLoginPageHidden();
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -100,6 +141,7 @@ public class LoginPage extends javax.swing.JFrame {
         userPinLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         userPinInput = new javax.swing.JPasswordField();
+        adminCheckBox = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -138,6 +180,20 @@ public class LoginPage extends javax.swing.JFrame {
         loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
         loginInputPanel.add(userPinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 420, 50));
 
+        adminCheckBox.setBackground(new java.awt.Color(255, 255, 255));
+        adminCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        adminCheckBox.setText("Admin");
+        adminCheckBox.setFocusPainted(false);
+        adminCheckBox.setFocusable(false);
+        adminCheckBox.setHideActionText(true);
+        adminCheckBox.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        adminCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminCheckBoxActionPerformed(evt);
+            }
+        });
+        loginInputPanel.add(adminCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 300, 90, 30));
+
         bgPanel.add(loginInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, 460, 420));
 
         jLabel5.setFont(new java.awt.Font("Poppins ExtraBold", 0, 80)); // NOI18N
@@ -157,8 +213,18 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        isAdminLogin();
+        if(adminLogin) {
+	    isAdminLogin();
+	} else {
+	    isTenantLogin();
+	}
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void adminCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCheckBoxActionPerformed
+        // TODO add your handling code here:
+	adminLogin = adminCheckBox.isSelected();
+	System.out.println("Admin login: " + adminLogin);
+    }//GEN-LAST:event_adminCheckBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +262,7 @@ public class LoginPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox adminCheckBox;
     private javax.swing.JPanel bgPanel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

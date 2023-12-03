@@ -5,6 +5,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Payment extends javax.swing.JFrame {
+    private int contract;
+    
     static Connection conn;
     static PreparedStatement pst;
     
@@ -13,7 +15,32 @@ public class Payment extends javax.swing.JFrame {
 	setLocationRelativeTo(null);
     }
     
-    // Method to register payment
+    // Set value of contract
+    public void setContract() {
+	switch((String)contractBox.getSelectedItem()) {
+	    case "1 month":
+		contract = 1;
+		break;
+	    case "3 months":
+		contract = 3;
+	    case "6 months":
+		contract = 6;
+		break;
+	    case "9 months":
+		contract = 9;
+		break;
+	    case "12 months":
+		contract = 12;
+		break;
+	}
+    }
+    
+    // Get value of contract
+    public int getContract() {
+	return contract;
+    }
+    
+    // Method to register payment for registration
     public void setRegistrationPayment(Double roomPrice, int tenantId, int roomId, String pin, int contract, String paymentType) {
 	
 	conn = ConnectXamppMySQL.conn();
@@ -38,6 +65,36 @@ public class Payment extends javax.swing.JFrame {
 	    e.printStackTrace();
 	}
     }
+    
+    // Method to register payment for renewal
+    // Method to register payment
+    public void setRenewalPayment() {
+	setContract();
+	Room room = new Room();
+	room.setRoomPrice(getContract(), Integer.parseInt(roomIdInput.getText()));
+	
+	conn = ConnectXamppMySQL.conn();
+	
+	//  SQL query to register tenant
+	String registerPaymentQuery = "INSERT INTO payment(tenant_id, room_id, payment_date, amount, payment_type, month_contract) VALUES (?, ?, ?, ?, ?, ?)";
+
+	try (PreparedStatement statement = conn.prepareStatement(registerPaymentQuery)) {
+	    statement.setString(1, tenantIdInput.getText());
+	    statement.setString(2, roomIdInput.getText());
+	    statement.setString(3, new Main().getDateTime());
+	    statement.setDouble(4, room.getRoomPrice());
+	    statement.setString(5, "Renewal");
+	    statement.setInt(6, getContract());
+	    
+    
+	// Execute the query
+	statement.executeUpdate();
+	JOptionPane.showMessageDialog(null, "Payment renewal Success!");
+	} catch (SQLException e) {
+	    // Handle any SQL errors
+	    e.printStackTrace();
+	}
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -51,11 +108,11 @@ public class Payment extends javax.swing.JFrame {
         userPinLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         userIdLabel1 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        userIdLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        userIdInput1 = new javax.swing.JTextField();
+        roomIdLabel = new javax.swing.JLabel();
+        contractBox = new javax.swing.JComboBox<>();
+        roomIdInput = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
+        tenantIdInput = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,28 +143,29 @@ public class Payment extends javax.swing.JFrame {
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.setText("Submit Payment");
         loginButton.setFocusable(false);
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
         loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
 
         userIdLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         userIdLabel1.setText("Pin");
         loginInputPanel.add(userIdLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 120, 30));
 
-        jPasswordField2.setEditable(false);
-        jPasswordField2.setEnabled(false);
-        jPasswordField2.setFocusable(false);
-        loginInputPanel.add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 200, 50));
+        roomIdLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        roomIdLabel.setText("Room ID");
+        loginInputPanel.add(roomIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, 30));
 
-        userIdLabel2.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        userIdLabel2.setText("Total");
-        loginInputPanel.add(userIdLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, 30));
-
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 254));
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "9 months", "12 months" }));
-        jComboBox1.setFocusable(false);
-        loginInputPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 200, 50));
-        loginInputPanel.add(userIdInput1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 200, 50));
+        contractBox.setBackground(new java.awt.Color(255, 255, 254));
+        contractBox.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        contractBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "9 months", "12 months" }));
+        contractBox.setFocusable(false);
+        loginInputPanel.add(contractBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 200, 50));
+        loginInputPanel.add(roomIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 200, 50));
         loginInputPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 200, 50));
+        loginInputPanel.add(tenantIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 200, 50));
 
         bgPanel.add(loginInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, 460, 420));
 
@@ -129,6 +187,11 @@ public class Payment extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // TODO add your handling code here:
+	setRenewalPayment();
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,19 +230,19 @@ public class Payment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bgPanel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> contractBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginInputPanel;
     private javax.swing.JLabel loginLabel;
-    private javax.swing.JTextField userIdInput1;
+    private javax.swing.JTextField roomIdInput;
+    private javax.swing.JLabel roomIdLabel;
+    private javax.swing.JTextField tenantIdInput;
     private javax.swing.JLabel userIdLabel;
     private javax.swing.JLabel userIdLabel1;
-    private javax.swing.JLabel userIdLabel2;
     private javax.swing.JLabel userPinLabel;
     // End of variables declaration//GEN-END:variables
 }

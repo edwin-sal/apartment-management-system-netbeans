@@ -1230,6 +1230,11 @@ public class HomePage extends javax.swing.JFrame {
         clearExpensesButton.setBackground(new java.awt.Color(255, 255, 254));
         clearExpensesButton.setText("Clear Expenses");
         clearExpensesButton.setFocusable(false);
+        clearExpensesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearExpensesButtonActionPerformed(evt);
+            }
+        });
 
         addExpensesButton.setBackground(new java.awt.Color(255, 255, 254));
         addExpensesButton.setText("Add Expenses");
@@ -1515,6 +1520,13 @@ public class HomePage extends javax.swing.JFrame {
 	    JOptionPane.showMessageDialog(null, "System PIN changed succesfully!");
 	}
     }//GEN-LAST:event_changeSystemPinButtonActionPerformed
+
+    private void clearExpensesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearExpensesButtonActionPerformed
+        // TODO add your handling code here:
+	String query = "UPDATE system_configuration SET expenses = 0 WHERE config_id = 1";
+	new Main().runSqlQuery(query);
+	JOptionPane.showMessageDialog(null, "Expenses succesfully cleared!");
+    }//GEN-LAST:event_clearExpensesButtonActionPerformed
 
     /**
      * @param args the command line arguments
