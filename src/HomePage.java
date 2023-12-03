@@ -188,14 +188,14 @@ public class HomePage extends javax.swing.JFrame {
         tenantInfoTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        roomStatusLabel = new javax.swing.JLabel();
         roomCapacityLabel = new javax.swing.JLabel();
         removeTenantButton1 = new javax.swing.JButton();
         removeTenantButton2 = new javax.swing.JButton();
         roomTypeLabel = new javax.swing.JLabel();
         roomTypeBox = new javax.swing.JComboBox<>();
-        roomCapacityBox = new javax.swing.JComboBox<>();
+        roomStatusBox = new javax.swing.JComboBox<>();
+        roomCapacityBox1 = new javax.swing.JComboBox<>();
         orderByBox1 = new javax.swing.JComboBox<>();
         orderByLabel1 = new javax.swing.JLabel();
         sortByBox1 = new javax.swing.JComboBox<>();
@@ -742,12 +742,11 @@ public class HomePage extends javax.swing.JFrame {
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         tenantInfoPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 100, 30));
         tenantInfoPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, 220, 40));
-        tenantInfoPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 220, 40));
 
-        jLabel2.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
-        jLabel2.setText("Room Type");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        tenantInfoPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 100, 30));
+        roomStatusLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
+        roomStatusLabel.setText("Room Status");
+        roomStatusLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        tenantInfoPanel1.add(roomStatusLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 100, 30));
 
         roomCapacityLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         roomCapacityLabel.setText("Room Capacity");
@@ -781,11 +780,17 @@ public class HomePage extends javax.swing.JFrame {
         roomTypeLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         tenantInfoPanel1.add(roomTypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, 120, 30));
 
-        roomTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        roomTypeBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        roomTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Bedroom", "2 Bedroom" }));
         tenantInfoPanel1.add(roomTypeBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 220, 40));
 
-        roomCapacityBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        tenantInfoPanel1.add(roomCapacityBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 220, 40));
+        roomStatusBox.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        roomStatusBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Occupied", "Unoccupied" }));
+        tenantInfoPanel1.add(roomStatusBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 220, 40));
+
+        roomCapacityBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        roomCapacityBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        tenantInfoPanel1.add(roomCapacityBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 220, 40));
 
         orderByBox1.setBackground(new java.awt.Color(255, 255, 254));
         orderByBox1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
@@ -1250,7 +1255,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel incomeReportLabel;
     private javax.swing.JPanel incomeReportPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -1263,7 +1267,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel latestTenantLabel;
     private javax.swing.JTable latestTenantTable;
     private javax.swing.JLabel latestTransacationLabel;
@@ -1289,10 +1292,12 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton removeTenantButton1;
     private javax.swing.JButton removeTenantButton2;
     private javax.swing.JLabel rentEzIcon;
-    private javax.swing.JComboBox<String> roomCapacityBox;
+    private javax.swing.JComboBox<String> roomCapacityBox1;
     private javax.swing.JLabel roomCapacityLabel;
     private javax.swing.JLabel roomCount;
     private javax.swing.JLabel roomIcon;
+    private javax.swing.JComboBox<String> roomStatusBox;
+    private javax.swing.JLabel roomStatusLabel;
     private javax.swing.JLabel roomSubLabel;
     private javax.swing.JComboBox<String> roomTypeBox;
     private javax.swing.JLabel roomTypeLabel;
