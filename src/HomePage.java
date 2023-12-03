@@ -59,6 +59,7 @@ public class HomePage extends javax.swing.JFrame {
 	setRentedRoomsCardLabel();
 	populateLatestTransactionTable();
 	populateLatestTenantTable();
+	populateRegisteredTenantsTable();
 //	setVisible(false);
     }
     
@@ -223,7 +224,7 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     
-    // Show values of the lates transaction table
+    // Populate the latest transaction table
     public void populateLatestTransactionTable() {
 	
 	String query = "SELECT payment_id, tenant_id, payment_date, amount FROM payment ORDER BY payment_date DESC";
@@ -258,7 +259,7 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
     
-    // Show values of the lates transaction table
+    // Populate the latest tenant table
     public void populateLatestTenantTable() {
 	
 	String query = "SELECT tenant_id, room_id, tenant_first_name, tenant_last_name, registration_date FROM tenants ORDER BY registration_date DESC";
@@ -282,6 +283,49 @@ public class HomePage extends javax.swing.JFrame {
                 rowData[2] = resultSet.getObject("tenant_first_name");
 		rowData[3] = resultSet.getObject("tenant_last_name");
 		rowData[4] = resultSet.getObject("registration_date");
+                model.addRow(rowData);
+            }
+            
+            // Close the result set, statement, and connection
+            resultSet.close();
+            statement.close();
+            conn.close();
+	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+    // Populate the registered tenants table
+    public void populateRegisteredTenantsTable() {
+	
+	String query = "SELECT tenant_id, room_id, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date, rent_status FROM tenants ORDER BY tenant_id ASC";
+	try {
+            conn = ConnectXamppMySQL.conn();
+
+            // Create the statement
+            Statement statement = conn.createStatement();
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Create the DefaultTableModel with column names
+            DefaultTableModel model = (DefaultTableModel) tenantInfoTable.getModel();
+
+            // Iterate through the result set and populate the model
+            while (resultSet.next()) {
+                Object[] rowData = new Object[10]; // Assuming 10 columns
+                rowData[0] = resultSet.getObject("tenant_id");
+                rowData[1] = resultSet.getObject("room_id");
+                rowData[2] = resultSet.getObject("tenant_first_name");
+		rowData[3] = resultSet.getObject("tenant_last_name");
+		rowData[4] = resultSet.getObject("tenant_middle_name");
+		rowData[5] = resultSet.getObject("contact_number");
+		rowData[6] = resultSet.getObject("gender");
+		rowData[7] = resultSet.getObject("age");
+		rowData[8] = resultSet.getObject("registration_date");
+		rowData[9] = resultSet.getObject("rent_status");
                 model.addRow(rowData);
             }
             
@@ -748,29 +792,13 @@ public class HomePage extends javax.swing.JFrame {
 
         tenantInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Tenant ID", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date", "Due Date", "Status"
+                "Tenant ID", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date", "Status"
             }
         ));
         jScrollPane5.setViewportView(tenantInfoTable);
-        if (tenantInfoTable.getColumnModel().getColumnCount() > 0) {
-            tenantInfoTable.getColumnModel().getColumn(0).setHeaderValue("Tenant ID");
-            tenantInfoTable.getColumnModel().getColumn(1).setResizable(false);
-            tenantInfoTable.getColumnModel().getColumn(2).setResizable(false);
-            tenantInfoTable.getColumnModel().getColumn(3).setResizable(false);
-            tenantInfoTable.getColumnModel().getColumn(4).setResizable(false);
-            tenantInfoTable.getColumnModel().getColumn(5).setResizable(false);
-            tenantInfoTable.getColumnModel().getColumn(6).setHeaderValue("Gender");
-            tenantInfoTable.getColumnModel().getColumn(7).setHeaderValue("Age");
-            tenantInfoTable.getColumnModel().getColumn(8).setHeaderValue("Registration Date");
-            tenantInfoTable.getColumnModel().getColumn(9).setHeaderValue("Due Date");
-            tenantInfoTable.getColumnModel().getColumn(10).setHeaderValue("Status");
-        }
 
         tenantInfoPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 930, 420));
 
