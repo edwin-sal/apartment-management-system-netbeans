@@ -58,6 +58,7 @@ public class HomePage extends javax.swing.JFrame {
 	setAvailableRoomsCardLabel();
 	setRentedRoomsCardLabel();
 	populateLatestTransactionTable();
+	populateLatestTenantTable();
 //	setVisible(false);
     }
     
@@ -245,6 +246,42 @@ public class HomePage extends javax.swing.JFrame {
                 rowData[1] = resultSet.getObject("tenant_id");
                 rowData[2] = resultSet.getObject("payment_date");
 		rowData[3] = resultSet.getObject("amount");
+                model.addRow(rowData);
+            }
+            
+            // Close the result set, statement, and connection
+            resultSet.close();
+            statement.close();
+            conn.close();
+	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Show values of the lates transaction table
+    public void populateLatestTenantTable() {
+	
+	String query = "SELECT tenant_id, room_id, tenant_first_name, tenant_last_name, registration_date FROM tenants ORDER BY registration_date DESC";
+	try {
+            conn = ConnectXamppMySQL.conn();
+
+            // Create the statement
+            Statement statement = conn.createStatement();
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Create the DefaultTableModel with column names
+            DefaultTableModel model = (DefaultTableModel) latestTenantTable.getModel();
+
+            // Iterate through the result set and populate the model
+            while (resultSet.next()) {
+                Object[] rowData = new Object[5]; // Assuming 5 columns
+                rowData[0] = resultSet.getObject("tenant_id");
+                rowData[1] = resultSet.getObject("room_id");
+                rowData[2] = resultSet.getObject("tenant_first_name");
+		rowData[3] = resultSet.getObject("tenant_last_name");
+		rowData[4] = resultSet.getObject("registration_date");
                 model.addRow(rowData);
             }
             
@@ -640,31 +677,35 @@ public class HomePage extends javax.swing.JFrame {
 
         latestTenantTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Tenant ID", "Room ID", "First Name", "Last Name", "Registration Date"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane4.setViewportView(latestTenantTable);
+        if (latestTenantTable.getColumnModel().getColumnCount() > 0) {
+            latestTenantTable.getColumnModel().getColumn(0).setMinWidth(60);
+            latestTenantTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+            latestTenantTable.getColumnModel().getColumn(0).setMaxWidth(60);
+            latestTenantTable.getColumnModel().getColumn(1).setMinWidth(60);
+            latestTenantTable.getColumnModel().getColumn(1).setPreferredWidth(60);
+            latestTenantTable.getColumnModel().getColumn(1).setMaxWidth(60);
+            latestTenantTable.getColumnModel().getColumn(2).setMinWidth(90);
+            latestTenantTable.getColumnModel().getColumn(2).setPreferredWidth(90);
+            latestTenantTable.getColumnModel().getColumn(2).setMaxWidth(90);
+            latestTenantTable.getColumnModel().getColumn(3).setMinWidth(90);
+            latestTenantTable.getColumnModel().getColumn(3).setPreferredWidth(90);
+            latestTenantTable.getColumnModel().getColumn(3).setMaxWidth(90);
+        }
 
         tablesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 470, 290));
 
