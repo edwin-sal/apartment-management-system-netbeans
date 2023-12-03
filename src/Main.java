@@ -19,6 +19,18 @@ public class Main {
         return formattedDateTime;
     }
     
+    // Method for running basic SQL queries
+    public void runSqlQuery(String query) {
+	conn = ConnectXamppMySQL.conn();
+
+	try {
+	    pst = conn.prepareStatement(query);
+	    pst.execute();
+	    } catch(SQLException e) {
+		JOptionPane.showMessageDialog(null, e);
+	    }
+    }
+    
     public static void main(String[] args) {
 	conn = ConnectXamppMySQL.conn();
 	LoginPage login;

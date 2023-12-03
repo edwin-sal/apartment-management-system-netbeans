@@ -1,18 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author edwin
- */
-public class PaymentPage extends javax.swing.JFrame {
+public class Payment extends javax.swing.JFrame {
 
     /**
      * Creates new form LoginPage
      */
-    public PaymentPage() {
+    public Payment() {
 	initComponents();
 	setLocationRelativeTo(null);
 	setVisible(true);
@@ -143,7 +134,7 @@ public class PaymentPage extends javax.swing.JFrame {
 	/* Create and display the form */
 	java.awt.EventQueue.invokeLater(new Runnable() {
 	    public void run() {
-		new PaymentPage().setVisible(true);
+		new Payment().setVisible(true);
 	    }
 	});
     }

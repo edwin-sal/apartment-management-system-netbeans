@@ -1211,13 +1211,13 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_addExpensesButtonActionPerformed
 
     private void removeTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTenantButtonActionPerformed
-
+	new Tenant().removeTenant();
 
     }//GEN-LAST:event_removeTenantButtonActionPerformed
 
     private void registerTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTenantButtonActionPerformed
         // TODO add your handling code here:
-	new Tenant();
+	new Tenant().setVisible(true);
     }//GEN-LAST:event_registerTenantButtonActionPerformed
 
     private void orderByBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBoxActionPerformed
