@@ -24,7 +24,6 @@ public class Main {
 	});
 	
 	login.setVisible(true);
-	home.forTesting();
     }
 }
     

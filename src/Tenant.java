@@ -16,8 +16,13 @@ public class Tenant extends javax.swing.JFrame {
     static Connection conn;
     static PreparedStatement pst;
     
-    
-    
+    private String firstName, lastName, middleName;
+    private String contactNumber;
+    private String pin;
+    private String contract;
+    private String gender;
+    private int age;	    
+    private int roomId;
 
     /**
      * Creates new form AddExpensePage
@@ -28,6 +33,61 @@ public class Tenant extends javax.swing.JFrame {
 	setVisible(true);
 	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }	
+    
+    // Set value of the first name
+    public void setFirstName() {
+	firstName = fistNameInput.getText();
+    }
+    
+    // Set value of the last name
+    public void setLastName() {
+	lastName = lastNameInput.getText();
+    }
+    
+    // Set value of the middle name
+    public void setMiddleName() {
+	middleName = middleNameInput.getText();
+    }
+    
+    // Set value of the contact number
+    public void setContactNumber() {
+	contactNumber = contactNumberInput.getText();
+    }
+    
+    // Set value of the pin
+    public void setPin() {
+	pin = pinInput.getText();
+    }
+    
+    // Set value of the contract
+    public void setContract() {
+	contract = (String) contractBox.getSelectedItem();
+    }
+    
+    // Set value of the gender() 
+    public void setGender() {
+	maleRadio.addActionListener(e -> {
+            if (maleRadio.isSelected()) {
+                gender = "Male";
+            }
+        });
+
+        femaleRadio.addActionListener(e -> {
+            if (femaleRadio.isSelected()) {
+                gender = "Female";
+            }
+        });
+    }
+    
+    // Set value of the contract
+    public void setAge() {
+	age = (int) ageSpinner.getValue();
+    }
+    
+    // Set value of the room ID
+    public void setRoomId() {
+	roomId =  Integer.parseInt(roomIdInput.getText());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,9 +108,8 @@ public class Tenant extends javax.swing.JFrame {
         lastNameInput = new javax.swing.JTextField();
         lastNameLabel = new javax.swing.JLabel();
         fistNameInput = new javax.swing.JTextField();
-        ageBox = new javax.swing.JSpinner();
+        ageSpinner = new javax.swing.JSpinner();
         middleNameLabel = new javax.swing.JLabel();
-        pinInput = new javax.swing.JTextField();
         middleNameInput = new javax.swing.JTextField();
         roomIdInput = new javax.swing.JTextField();
         roomIdLabel = new javax.swing.JLabel();
@@ -59,6 +118,7 @@ public class Tenant extends javax.swing.JFrame {
         contractLabel = new javax.swing.JLabel();
         femaleRadio = new javax.swing.JRadioButton();
         maleRadio = new javax.swing.JRadioButton();
+        pinInput = new javax.swing.JPasswordField();
         registerTenantLabel = new javax.swing.JLabel();
         addExpenseGoBackButton = new javax.swing.JButton();
         addExpenseButton = new javax.swing.JButton();
@@ -91,12 +151,11 @@ public class Tenant extends javax.swing.JFrame {
         lastNameLabel.setText("Last Name");
         expenseInputPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 120, 30));
         expenseInputPanel.add(fistNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, 40));
-        expenseInputPanel.add(ageBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 150, 40));
+        expenseInputPanel.add(ageSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 150, 40));
 
         middleNameLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         middleNameLabel.setText("Middle Name");
         expenseInputPanel.add(middleNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 120, 30));
-        expenseInputPanel.add(pinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 150, 40));
         expenseInputPanel.add(middleNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 150, 40));
         expenseInputPanel.add(roomIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 150, 40));
 
@@ -133,6 +192,7 @@ public class Tenant extends javax.swing.JFrame {
         maleRadio.setContentAreaFilled(false);
         maleRadio.setFocusPainted(false);
         expenseInputPanel.add(maleRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, -1, -1));
+        expenseInputPanel.add(pinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 140, 40));
 
         registerTenantLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 28)); // NOI18N
         registerTenantLabel.setText("Register Tenant");
@@ -197,6 +257,25 @@ public class Tenant extends javax.swing.JFrame {
 
     private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
         // TODO add your handling code here:
+	setFirstName();
+	setLastName();
+	setMiddleName();
+	setContactNumber();
+	setPin();
+	setContract();
+	setGender();
+	setAge();
+	setRoomId();
+	
+	System.out.println("First name: " + firstName);
+	System.out.println("Last Name: " + lastName);
+	System.out.println("Middle Name: " + middleName);
+	System.out.println("Contact number: " + contactNumber);
+	System.out.println("PIN: " + pin);
+	System.out.println("Contract: " + contract);
+	System.out.println("Gender: " + gender);
+	System.out.println("Age: " + age);
+	System.out.println("Room ID: " + roomId);
     }//GEN-LAST:event_addExpenseButtonActionPerformed
 
     /**
@@ -221,8 +300,8 @@ public class Tenant extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExpenseButton;
     private javax.swing.JButton addExpenseGoBackButton;
-    private javax.swing.JSpinner ageBox;
     private javax.swing.JLabel ageLabel;
+    private javax.swing.JSpinner ageSpinner;
     private javax.swing.JTextField contactNumberInput;
     private javax.swing.JLabel contactNumberLabel;
     private javax.swing.JComboBox<String> contractBox;
@@ -238,7 +317,7 @@ public class Tenant extends javax.swing.JFrame {
     private javax.swing.JRadioButton maleRadio;
     private javax.swing.JTextField middleNameInput;
     private javax.swing.JLabel middleNameLabel;
-    private javax.swing.JTextField pinInput;
+    private javax.swing.JPasswordField pinInput;
     private javax.swing.JLabel pinLabel;
     private javax.swing.JLabel registerTenantLabel;
     private javax.swing.JTextField roomIdInput;
