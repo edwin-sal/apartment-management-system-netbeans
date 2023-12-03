@@ -35,8 +35,6 @@ public class Main {
 	conn = ConnectXamppMySQL.conn();
 	LoginPage login;
 	HomePage home = new HomePage();
-	
-	
 
 	login = new LoginPage();
 	login.setLoginPageCallback(new LoginPageCallback() {

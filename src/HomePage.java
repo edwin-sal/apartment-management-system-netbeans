@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -53,6 +54,7 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
 	addDate();
 	addTime();
+	setTenantsCardCount();
 //	setVisible(false);
     }
     
@@ -157,13 +159,36 @@ public class HomePage extends javax.swing.JFrame {
 	}
     }
     
-    // Function for removing room
+    // Method for removing room
     public void removeRoom() {
 	int roomId = Integer.valueOf(JOptionPane.showInputDialog(null, "Enter the room ID to be removed"));
 	String query = "DELETE FROM rooms WHERE room_id=" + roomId;
 	runSqlQuery(query);
 	JOptionPane.showMessageDialog(null, "Room ID: " + roomId + " succesfully removed!");
     }
+    
+    // Create method to set text for registered tenants card
+    public void setTenantsCardCount() {
+	int tenantsCount = 0;
+	
+	// Query to retrieve tenant id
+	String sql = "SELECT COUNT(tenant_id) FROM tenants WHERE rent_status <> 'REMOVED'";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    tenantsCount = resultSet.getInt(1);
+//	    System.out.println("Tenants Count" + tenantsCount);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	
+	tenantCountLabel.setText(String.valueOf(tenantsCount));
+    }
+	
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -189,20 +214,20 @@ public class HomePage extends javax.swing.JFrame {
         cardsPanel = new javax.swing.JPanel();
         tenantsCard = new javax.swing.JPanel();
         tenantIcon = new javax.swing.JLabel();
-        tenantCount = new javax.swing.JLabel();
+        tenantCountLabel = new javax.swing.JLabel();
         tenantSubLabel = new javax.swing.JLabel();
         roomsCard = new javax.swing.JPanel();
         roomIcon = new javax.swing.JLabel();
         roomCount = new javax.swing.JLabel();
         roomSubLabel = new javax.swing.JLabel();
+        occupiedRooms = new javax.swing.JPanel();
+        occupiedRoomsSubLabel = new javax.swing.JLabel();
+        occupiedRoomsCountLabel = new javax.swing.JLabel();
+        occupiedRoomsIcon = new javax.swing.JLabel();
         earningsCard = new javax.swing.JPanel();
         earningsSubLabel = new javax.swing.JLabel();
         earningsCount = new javax.swing.JLabel();
         earningsIcon = new javax.swing.JLabel();
-        overdueCard = new javax.swing.JPanel();
-        overdueSubLabel = new javax.swing.JLabel();
-        overdueCount = new javax.swing.JLabel();
-        overdueIcon = new javax.swing.JLabel();
         tablesPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         latestTransactionTable = new javax.swing.JTable();
@@ -443,10 +468,10 @@ public class HomePage extends javax.swing.JFrame {
         tenantIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/people_icon.png"))); // NOI18N
         tenantsCard.add(tenantIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
 
-        tenantCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        tenantCount.setForeground(new java.awt.Color(255, 255, 255));
-        tenantCount.setText("999");
-        tenantsCard.add(tenantCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        tenantCountLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        tenantCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        tenantCountLabel.setText("999");
+        tenantsCard.add(tenantCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
         tenantSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
         tenantSubLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -459,7 +484,7 @@ public class HomePage extends javax.swing.JFrame {
         roomsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         roomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
-        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
+        roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
 
         roomCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         roomCount.setForeground(new java.awt.Color(255, 255, 255));
@@ -472,6 +497,24 @@ public class HomePage extends javax.swing.JFrame {
         roomsCard.add(roomSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
 
         cardsPanel.add(roomsCard);
+
+        occupiedRooms.setBackground(new java.awt.Color(225, 73, 63));
+        occupiedRooms.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        occupiedRoomsSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        occupiedRoomsSubLabel.setForeground(new java.awt.Color(255, 255, 255));
+        occupiedRoomsSubLabel.setText("<html>Occupied<br>Rooms</html>");
+        occupiedRooms.add(occupiedRoomsSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+
+        occupiedRoomsCountLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        occupiedRoomsCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        occupiedRoomsCountLabel.setText("999");
+        occupiedRooms.add(occupiedRoomsCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+
+        occupiedRoomsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/occupied_rooms_icon.png"))); // NOI18N
+        occupiedRooms.add(occupiedRoomsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
+
+        cardsPanel.add(occupiedRooms);
 
         earningsCard.setBackground(new java.awt.Color(0, 166, 99));
         earningsCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -490,24 +533,6 @@ public class HomePage extends javax.swing.JFrame {
         earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
 
         cardsPanel.add(earningsCard);
-
-        overdueCard.setBackground(new java.awt.Color(225, 73, 63));
-        overdueCard.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        overdueSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        overdueSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        overdueSubLabel.setText("<html>Overdue<br>Rent</html>");
-        overdueCard.add(overdueSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
-
-        overdueCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        overdueCount.setForeground(new java.awt.Color(255, 255, 255));
-        overdueCount.setText("999");
-        overdueCard.add(overdueCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
-
-        overdueIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/overdue_rent_icon.png"))); // NOI18N
-        overdueCard.add(overdueIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
-
-        cardsPanel.add(overdueCard);
 
         tablesPanel.setBackground(new java.awt.Color(255, 255, 255));
         tablesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1317,14 +1342,14 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel netIncomeIcon;
     private javax.swing.JLabel netIncomeLabel;
     private javax.swing.JLabel netIncomeSubLabel;
+    private javax.swing.JPanel occupiedRooms;
+    private javax.swing.JLabel occupiedRoomsCountLabel;
+    private javax.swing.JLabel occupiedRoomsIcon;
+    private javax.swing.JLabel occupiedRoomsSubLabel;
     private javax.swing.JComboBox<String> orderByBox;
     private javax.swing.JComboBox<String> orderByBox1;
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JLabel orderByLabel1;
-    private javax.swing.JPanel overdueCard;
-    private javax.swing.JLabel overdueCount;
-    private javax.swing.JLabel overdueIcon;
-    private javax.swing.JLabel overdueSubLabel;
     private javax.swing.JButton pendingPaymentButton;
     private javax.swing.JPanel pendingPaymentPanel;
     private javax.swing.JButton registerTenantButton;
@@ -1351,7 +1376,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel sortByLabel;
     private javax.swing.JLabel sortByLabel1;
     private javax.swing.JPanel tablesPanel;
-    private javax.swing.JLabel tenantCount;
+    private javax.swing.JLabel tenantCountLabel;
     private javax.swing.JLabel tenantIcon;
     private javax.swing.JPanel tenantInfoPanel;
     private javax.swing.JPanel tenantInfoPanel1;
