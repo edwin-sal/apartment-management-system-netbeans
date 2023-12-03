@@ -28,6 +28,9 @@ public class Room {
 	
 	// Multiply based on contract
 	switch(contract) {
+	    case 1:
+		roomPrice *= 1;
+		break;
 	    case 3:
 		roomPrice *= 3;
 		break;

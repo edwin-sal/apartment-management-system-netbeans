@@ -290,7 +290,7 @@ public class Tenant extends javax.swing.JFrame {
     // Technically does not remove tenant from the database (for data information purposes)
     public void removeTenant() {
 	int tenant_id = Integer.valueOf(JOptionPane.showInputDialog(null, "Enter Tenant ID to be removed"));
-	String query = "UPDATE tenants SET rent_status = 'REMOVED' WHERE tenant_id = " + tenant_id;
+	String query = "UPDATE tenants SET rent_status = 'Removed' WHERE tenant_id = " + tenant_id;
 
 	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this tenant??");
 	if(confirmation == JOptionPane.YES_OPTION) {

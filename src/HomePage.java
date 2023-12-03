@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
@@ -54,9 +55,9 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
 	addDate();
 	addTime();
-	setTenantsCardCountLabel();
 	setAvailableRoomsCardLabel();
-	setOccupiedRoomsCardLabel();
+	setRentedRoomsCardLabel();
+	populateLatestTransactionTable();
 //	setVisible(false);
     }
     
@@ -169,27 +170,6 @@ public class HomePage extends javax.swing.JFrame {
 	JOptionPane.showMessageDialog(null, "Room ID: " + roomId + " succesfully removed!");
     }
     
-    // Create method to set text for the registered tenants card
-    public void setTenantsCardCountLabel() {
-	int tenantsCount = 0;
-	
-	// Query to retrieve tenant id
-	String sql = "SELECT COUNT(tenant_id) FROM tenants WHERE rent_status <> 'Removed'";
-	conn = ConnectXamppMySQL.conn();
-	
-	try (Statement statement = conn.createStatement()) {
-	   ResultSet resultSet = statement.executeQuery(sql);
-	    if (resultSet.next()) {
-	    tenantsCount = resultSet.getInt(1);
-//	    System.out.println("Tenants Count" + tenantsCount);
-	    }
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	}
-	
-	tenantCountLabel.setText(String.valueOf(tenantsCount));
-    }
-    
     // Create method to set text for the available rooms card
     public void setAvailableRoomsCardLabel() {
 	int availableRoomsCount = 0;
@@ -202,7 +182,7 @@ public class HomePage extends javax.swing.JFrame {
 	   ResultSet resultSet = statement.executeQuery(sql);
 	    if (resultSet.next()) {
 	    availableRoomsCount = resultSet.getInt(1);
-//	    System.out.println("Tenants Count" + tenantsCount);
+	   System.out.println("Available rooms count: " + availableRoomsCount);
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
@@ -213,28 +193,69 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     // Create method to set text for the occupied rooms card
-    public void setOccupiedRoomsCardLabel() {
-	int occupiedRoomsCount = 0;
+    public void setRentedRoomsCardLabel() {
+	int rentedRoomsCount = 0;
 	
 	// Query to retrieve tenant id
-	String sql = "SELECT COUNT(room_id) FROM rooms WHERE room_status = 'Occupied'";
+	String sql = "SELECT COUNT(room_id) FROM rooms WHERE room_status = 'Rented'";
 	conn = ConnectXamppMySQL.conn();
 	
 	try (Statement statement = conn.createStatement()) {
 	   ResultSet resultSet = statement.executeQuery(sql);
 	    if (resultSet.next()) {
-	    occupiedRoomsCount = resultSet.getInt(1);
+	    rentedRoomsCount = resultSet.getInt(1);
+	    System.out.println("Rented rooms count: " + rentedRoomsCount);
 	    }
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	}
 	
 	
-	occupiedRoomsLabel.setText(String.valueOf(occupiedRoomsCount));
+	rentedRoomsLabel.setText(String.valueOf(rentedRoomsCount));
     }
 	
     
+    // Refresh frame
+    public void refreshFrame() {
+	repaint();
+	revalidate();
+    }
     
+    
+    // Show values of the lates transaction table
+    public void populateLatestTransactionTable() {
+	
+	String query = "SELECT payment_id, tenant_id, payment_date, amount FROM payment ORDER BY payment_date DESC";
+	try {
+            conn = ConnectXamppMySQL.conn();
+
+            // Create the statement
+            Statement statement = conn.createStatement();
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Create the DefaultTableModel with column names
+            DefaultTableModel model = (DefaultTableModel) latestTransactionTable.getModel();
+
+            // Iterate through the result set and populate the model
+            while (resultSet.next()) {
+                Object[] rowData = new Object[4]; // Assuming 4 columns
+                rowData[0] = resultSet.getObject("payment_id");
+                rowData[1] = resultSet.getObject("tenant_id");
+                rowData[2] = resultSet.getObject("payment_date");
+		rowData[3] = resultSet.getObject("amount");
+                model.addRow(rowData);
+            }
+            
+            // Close the result set, statement, and connection
+            resultSet.close();
+            statement.close();
+            conn.close();
+	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,9 +288,9 @@ public class HomePage extends javax.swing.JFrame {
         availableRoomsLabel = new javax.swing.JLabel();
         roomSubLabel = new javax.swing.JLabel();
         occupiedRooms = new javax.swing.JPanel();
-        occupiedRoomsSubLabel = new javax.swing.JLabel();
-        occupiedRoomsLabel = new javax.swing.JLabel();
-        occupiedRoomsIcon = new javax.swing.JLabel();
+        rentedRoomsCountLabel = new javax.swing.JLabel();
+        rentedRoomsLabel = new javax.swing.JLabel();
+        rentedRoomsIcon = new javax.swing.JLabel();
         earningsCard = new javax.swing.JPanel();
         earningsSubLabel = new javax.swing.JLabel();
         earningsCount = new javax.swing.JLabel();
@@ -301,8 +322,8 @@ public class HomePage extends javax.swing.JFrame {
         roomPriceInput = new javax.swing.JTextField();
         roomPriceLabel = new javax.swing.JLabel();
         roomCapacityLabel = new javax.swing.JLabel();
-        removeTenantButton1 = new javax.swing.JButton();
-        removeTenantButton2 = new javax.swing.JButton();
+        addRoomButton = new javax.swing.JButton();
+        removeRoomButton = new javax.swing.JButton();
         roomTypeLabel = new javax.swing.JLabel();
         roomTypeBox = new javax.swing.JComboBox<>();
         roomCapacityBox = new javax.swing.JComboBox<>();
@@ -547,18 +568,18 @@ public class HomePage extends javax.swing.JFrame {
         occupiedRooms.setBackground(new java.awt.Color(225, 73, 63));
         occupiedRooms.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        occupiedRoomsSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        occupiedRoomsSubLabel.setForeground(new java.awt.Color(255, 255, 255));
-        occupiedRoomsSubLabel.setText("<html>Occupied<br>Rooms</html>");
-        occupiedRooms.add(occupiedRoomsSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
+        rentedRoomsCountLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        rentedRoomsCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        rentedRoomsCountLabel.setText("<html>Rented<br>Rooms</html>");
+        occupiedRooms.add(rentedRoomsCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
 
-        occupiedRoomsLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        occupiedRoomsLabel.setForeground(new java.awt.Color(255, 255, 255));
-        occupiedRoomsLabel.setText("999");
-        occupiedRooms.add(occupiedRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        rentedRoomsLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        rentedRoomsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        rentedRoomsLabel.setText("999");
+        occupiedRooms.add(rentedRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
-        occupiedRoomsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/occupied_rooms_icon.png"))); // NOI18N
-        occupiedRooms.add(occupiedRoomsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
+        rentedRoomsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/occupied_rooms_icon.png"))); // NOI18N
+        occupiedRooms.add(rentedRoomsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
 
         cardsPanel.add(occupiedRooms);
 
@@ -585,31 +606,27 @@ public class HomePage extends javax.swing.JFrame {
 
         latestTransactionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Payment ID", "Tenant ID", "Payment Date", "Ammount"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(latestTransactionTable);
+        if (latestTransactionTable.getColumnModel().getColumnCount() > 0) {
+            latestTransactionTable.getColumnModel().getColumn(0).setResizable(false);
+            latestTransactionTable.getColumnModel().getColumn(1).setResizable(false);
+            latestTransactionTable.getColumnModel().getColumn(2).setResizable(false);
+            latestTransactionTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         tablesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 470, 290));
 
@@ -864,27 +881,27 @@ public class HomePage extends javax.swing.JFrame {
         roomCapacityLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         tenantInfoPanel1.add(roomCapacityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 120, 30));
 
-        removeTenantButton1.setBackground(new java.awt.Color(255, 255, 254));
-        removeTenantButton1.setText("Add Room");
-        removeTenantButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        removeTenantButton1.setFocusable(false);
-        removeTenantButton1.addActionListener(new java.awt.event.ActionListener() {
+        addRoomButton.setBackground(new java.awt.Color(255, 255, 254));
+        addRoomButton.setText("Add Room");
+        addRoomButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addRoomButton.setFocusable(false);
+        addRoomButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeTenantButton1ActionPerformed(evt);
+                addRoomButtonActionPerformed(evt);
             }
         });
-        tenantInfoPanel1.add(removeTenantButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 220, 50));
+        tenantInfoPanel1.add(addRoomButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 220, 50));
 
-        removeTenantButton2.setBackground(new java.awt.Color(255, 255, 254));
-        removeTenantButton2.setText("Remove Room");
-        removeTenantButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        removeTenantButton2.setFocusable(false);
-        removeTenantButton2.addActionListener(new java.awt.event.ActionListener() {
+        removeRoomButton.setBackground(new java.awt.Color(255, 255, 254));
+        removeRoomButton.setText("Remove Room");
+        removeRoomButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        removeRoomButton.setFocusable(false);
+        removeRoomButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeTenantButton2ActionPerformed(evt);
+                removeRoomButtonActionPerformed(evt);
             }
         });
-        tenantInfoPanel1.add(removeTenantButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 480, 220, 50));
+        tenantInfoPanel1.add(removeRoomButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 480, 220, 50));
 
         roomTypeLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         roomTypeLabel.setText("Room Type");
@@ -1241,6 +1258,7 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
 	hideContentPanels();
 	dashboardPanel.setVisible(true);
+	refreshFrame();
 	
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
@@ -1248,24 +1266,28 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
 	hideContentPanels();
 	viewRegisteredTenantsPanel.setVisible(true);
+	refreshFrame();
     }//GEN-LAST:event_viewTenantButtonActionPerformed
 
     private void viewRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoomButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
 	viewAddedRoomsPanel.setVisible(true);
+	refreshFrame();
     }//GEN-LAST:event_viewRoomButtonActionPerformed
 
     private void incomeReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incomeReportButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
 	incomeReportPanel.setVisible(true);
+	refreshFrame();
     }//GEN-LAST:event_incomeReportButtonActionPerformed
 
     private void pendingPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingPaymentButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
 	pendingPaymentPanel.setVisible(true);
+	refreshFrame();
     }//GEN-LAST:event_pendingPaymentButtonActionPerformed
 
     private void dashboardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseEntered
@@ -1289,6 +1311,8 @@ public class HomePage extends javax.swing.JFrame {
     private void registerTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTenantButtonActionPerformed
         // TODO add your handling code here:
 	new Tenant().setVisible(true);
+	setRentedRoomsCardLabel();
+	setAvailableRoomsCardLabel();
     }//GEN-LAST:event_registerTenantButtonActionPerformed
 
     private void orderByBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBoxActionPerformed
@@ -1301,10 +1325,12 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sortByBoxActionPerformed
 
-    private void removeTenantButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTenantButton1ActionPerformed
+    private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomButtonActionPerformed
         // TODO add your handling code here:
 	addRoom();
-    }//GEN-LAST:event_removeTenantButton1ActionPerformed
+	setAvailableRoomsCardLabel();
+	setRentedRoomsCardLabel();
+    }//GEN-LAST:event_addRoomButtonActionPerformed
 
     private void orderByBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBox1ActionPerformed
         // TODO add your handling code here:
@@ -1314,10 +1340,12 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sortByBox1ActionPerformed
 
-    private void removeTenantButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTenantButton2ActionPerformed
+    private void removeRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRoomButtonActionPerformed
         // TODO add your handling code here:
 	removeRoom();
-    }//GEN-LAST:event_removeTenantButton2ActionPerformed
+	setAvailableRoomsCardLabel();
+	setRentedRoomsCardLabel();
+    }//GEN-LAST:event_removeRoomButtonActionPerformed
 
     private void dashboardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseClicked
         // TODO add your handling code here:
@@ -1344,6 +1372,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExpensesButton;
+    private javax.swing.JButton addRoomButton;
     private javax.swing.JLabel availableRoomsLabel;
     private javax.swing.JPanel bkup;
     private javax.swing.JPanel cardsPanel;
@@ -1390,9 +1419,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel netIncomeLabel;
     private javax.swing.JLabel netIncomeSubLabel;
     private javax.swing.JPanel occupiedRooms;
-    private javax.swing.JLabel occupiedRoomsIcon;
-    private javax.swing.JLabel occupiedRoomsLabel;
-    private javax.swing.JLabel occupiedRoomsSubLabel;
     private javax.swing.JComboBox<String> orderByBox;
     private javax.swing.JComboBox<String> orderByBox1;
     private javax.swing.JLabel orderByLabel;
@@ -1402,10 +1428,12 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton registerTenantButton;
     private javax.swing.JLabel registeredTenantsLabel;
     private javax.swing.JLabel registeredTenantsLabel2;
+    private javax.swing.JButton removeRoomButton;
     private javax.swing.JButton removeTenantButton;
-    private javax.swing.JButton removeTenantButton1;
-    private javax.swing.JButton removeTenantButton2;
     private javax.swing.JLabel rentEzIcon;
+    private javax.swing.JLabel rentedRoomsCountLabel;
+    private javax.swing.JLabel rentedRoomsIcon;
+    private javax.swing.JLabel rentedRoomsLabel;
     private javax.swing.JComboBox<String> roomCapacityBox;
     private javax.swing.JLabel roomCapacityLabel;
     private javax.swing.JLabel roomIcon;
