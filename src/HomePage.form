@@ -447,7 +447,7 @@
                         </Constraint>
                       </Constraints>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="roomCount">
+                    <Component class="javax.swing.JLabel" name="availableRoomsLabel">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Poppins Black" size="42" style="0"/>

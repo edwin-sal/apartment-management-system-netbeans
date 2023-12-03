@@ -54,7 +54,8 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
 	addDate();
 	addTime();
-	setTenantsCardCount();
+	setTenantsCardCountLabel();
+	setAvailableRoomsCardLabel();
 //	setVisible(false);
     }
     
@@ -167,8 +168,8 @@ public class HomePage extends javax.swing.JFrame {
 	JOptionPane.showMessageDialog(null, "Room ID: " + roomId + " succesfully removed!");
     }
     
-    // Create method to set text for registered tenants card
-    public void setTenantsCardCount() {
+    // Create method to set text for the registered tenants card
+    public void setTenantsCardCountLabel() {
 	int tenantsCount = 0;
 	
 	// Query to retrieve tenant id
@@ -185,9 +186,32 @@ public class HomePage extends javax.swing.JFrame {
 	    e.printStackTrace();
 	}
 	
-	
 	tenantCountLabel.setText(String.valueOf(tenantsCount));
     }
+    
+    // Create method to set text for the available rooms card
+    public void setAvailableRoomsCardLabel() {
+	int availableRoomsCount = 0;
+	
+	// Query to retrieve tenant id
+	String sql = "SELECT COUNT(room_id) FROM rooms WHERE room_status <> 'Available101'";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    availableRoomsCount = resultSet.getInt(1);
+//	    System.out.println("Tenants Count" + tenantsCount);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	
+	availableRoomsLabel.setText(String.valueOf(availableRoomsCount));
+    }
+    
+    
 	
     
     /**
@@ -218,7 +242,7 @@ public class HomePage extends javax.swing.JFrame {
         tenantSubLabel = new javax.swing.JLabel();
         roomsCard = new javax.swing.JPanel();
         roomIcon = new javax.swing.JLabel();
-        roomCount = new javax.swing.JLabel();
+        availableRoomsLabel = new javax.swing.JLabel();
         roomSubLabel = new javax.swing.JLabel();
         occupiedRooms = new javax.swing.JPanel();
         occupiedRoomsSubLabel = new javax.swing.JLabel();
@@ -486,10 +510,10 @@ public class HomePage extends javax.swing.JFrame {
         roomIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/available_rooms_icon.png"))); // NOI18N
         roomsCard.add(roomIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
 
-        roomCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        roomCount.setForeground(new java.awt.Color(255, 255, 255));
-        roomCount.setText("999");
-        roomsCard.add(roomCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        availableRoomsLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        availableRoomsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        availableRoomsLabel.setText("999");
+        roomsCard.add(availableRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
         roomSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
         roomSubLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1298,6 +1322,7 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addExpensesButton;
+    private javax.swing.JLabel availableRoomsLabel;
     private javax.swing.JPanel bkup;
     private javax.swing.JPanel cardsPanel;
     private javax.swing.JButton clearExpensesButton;
@@ -1361,7 +1386,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel rentEzIcon;
     private javax.swing.JComboBox<String> roomCapacityBox;
     private javax.swing.JLabel roomCapacityLabel;
-    private javax.swing.JLabel roomCount;
     private javax.swing.JLabel roomIcon;
     private javax.swing.JTextField roomIdInput;
     private javax.swing.JTextField roomPriceInput;
