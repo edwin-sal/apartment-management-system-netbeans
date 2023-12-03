@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.sql.*;
 
-/**
- *
- * @author edwin
- */
 public class LoginPage extends javax.swing.JFrame {
+    static Connection conn;
+    static PreparedStatement pst;
 
     /**
      * Creates new form LoginPage
@@ -16,6 +15,55 @@ public class LoginPage extends javax.swing.JFrame {
 	initComponents();
 	setVisible(true);
 	setLocationRelativeTo(null);
+    }
+    
+    // Run SQL queries here
+    public void runSqlQuery(String query, String message) {
+	conn = ConnectXamppMySQL.conn();
+
+	try {
+	    pst = conn.prepareStatement(query);
+	    pst.execute();
+	    JOptionPane.showMessageDialog(null, message);
+	    } catch(SQLException e) {
+		    JOptionPane.showMessageDialog(null, e);
+		}
+	    }
+    
+    // Run SQL queries to retrieve data
+    public void getSystemConfig(String query) {
+	conn = ConnectXamppMySQL.conn();
+	
+	try {
+            PreparedStatement pst = conn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                // Retrieve data from the result set
+                int system_id = rs.getInt("system_id");
+                String system_pin = rs.getString("system_pin");
+                // Retrieve other columns as needed
+		    
+                // Process the retrieved data
+                System.out.println("System id: " + system_id);
+                System.out.println("System pin: " + system_pin);
+                // Process other columns as needed
+            }
+            JOptionPane.showMessageDialog(null, "Retrieve Data succesfully!");
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    // Function when login button is clicked
+    public String login() {
+	String userID = userIdInput.getText();
+	String userPin = userPinInput.getText();
+	
+	return userID + "," + userPin;
     }
 
     /**
@@ -92,8 +140,10 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        new PaymentPage();
-	dispose();
+        login();
+//	runSqlQuery("UPDATE users SET name='sal' WHERE id=2", "Update user's name");
+	getSystemConfig("SELECT system_id, system_pin FROM system_configuration");
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

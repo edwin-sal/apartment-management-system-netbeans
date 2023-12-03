@@ -11,12 +11,12 @@ public class Main {
     public static void main(String[] args) {
 	conn = ConnectXamppMySQL.conn();
 	
-//	String query = "INSERT INTO users(id, name, email, password) VALUES(2, 'kath', 'kath@gmail.com', 'kath')";
+//	String query = "INSERT INTO system_configuration (config_id, system_id, system_pin) VALUES (1, 1010, 0000)";
 //	
 //	try {
 //	    pst = conn.prepareStatement(query);
 //	    pst.execute();
-//	    JOptionPane.showMessageDialog(null, "Query added!");
+//	    JOptionPane.showMessageDialog(null, "Query success!!!");
 //	} catch(SQLException e) {
 //	    JOptionPane.showMessageDialog(null, e);
 //	}
