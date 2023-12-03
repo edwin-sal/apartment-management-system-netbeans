@@ -85,7 +85,9 @@ public class PaymentPage extends javax.swing.JFrame {
         loginInputPanel.add(userIdLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, 30));
 
         jComboBox1.setBackground(new java.awt.Color(255, 255, 254));
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "9 months", "12 months" }));
+        jComboBox1.setFocusable(false);
         loginInputPanel.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 200, 50));
         loginInputPanel.add(userIdInput1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 200, 50));
         loginInputPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 200, 50));
