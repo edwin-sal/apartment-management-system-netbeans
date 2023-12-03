@@ -1,4 +1,5 @@
-
+import java.sql.*;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -12,6 +13,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author edwin
  */
 public class Tenant extends javax.swing.JFrame {
+    static Connection conn;
+    static PreparedStatement pst;
 
     /**
      * Creates new form AddExpensePage
@@ -20,7 +23,8 @@ public class Tenant extends javax.swing.JFrame {
 	initComponents();
 	setLocationRelativeTo(null);
 	setVisible(true);
-    }
+	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }	
 
     /**
      * This method is called from within the constructor to initialize the form.

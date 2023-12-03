@@ -1,15 +1,18 @@
-
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,6 +32,8 @@ import javax.swing.table.TableColumnModel;
  * @author edwin
  */
 public class HomePage extends javax.swing.JFrame {
+    static Connection conn;
+    static PreparedStatement pst;
 
     /**
      * Creates new form HomePage
@@ -104,6 +109,22 @@ public class HomePage extends javax.swing.JFrame {
         t.start(); // Start the timer
     }
     
+    // Add rooms to the database
+    public void addRoom() {
+	conn = ConnectXamppMySQL.conn();
+	
+	// Values to be inserted
+	
+
+	try {
+	    pst = conn.prepareStatement("");
+	    pst.execute();
+	    JOptionPane.showMessageDialog(null, message);
+	} catch(SQLException e) {
+	    JOptionPane.showMessageDialog(null, e);
+	}
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,10 +190,12 @@ public class HomePage extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        roomCapacityLabel = new javax.swing.JLabel();
         removeTenantButton1 = new javax.swing.JButton();
         removeTenantButton2 = new javax.swing.JButton();
+        roomTypeLabel = new javax.swing.JLabel();
+        roomTypeBox = new javax.swing.JComboBox<>();
+        roomCapacityBox = new javax.swing.JComboBox<>();
         orderByBox1 = new javax.swing.JComboBox<>();
         orderByLabel1 = new javax.swing.JLabel();
         sortByBox1 = new javax.swing.JComboBox<>();
@@ -717,22 +740,19 @@ public class HomePage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         jLabel1.setText("Room ID");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        tenantInfoPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 70, 100, 30));
-        tenantInfoPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 220, 40));
-        tenantInfoPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 220, 40));
+        tenantInfoPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, 100, 30));
+        tenantInfoPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 60, 220, 40));
+        tenantInfoPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, 220, 40));
 
         jLabel2.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         jLabel2.setText("Room Type");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        tenantInfoPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, 100, 30));
+        tenantInfoPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 120, 100, 30));
 
-        jLabel3.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
-        jLabel3.setText("Room Capacity");
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        tenantInfoPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 260, 120, 30));
-
-        jSpinner1.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
-        tenantInfoPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 290, 220, 40));
+        roomCapacityLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
+        roomCapacityLabel.setText("Room Capacity");
+        roomCapacityLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        tenantInfoPanel1.add(roomCapacityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 120, 30));
 
         removeTenantButton1.setBackground(new java.awt.Color(255, 255, 254));
         removeTenantButton1.setText("Add Room");
@@ -743,7 +763,7 @@ public class HomePage extends javax.swing.JFrame {
                 removeTenantButton1ActionPerformed(evt);
             }
         });
-        tenantInfoPanel1.add(removeTenantButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 380, 220, 50));
+        tenantInfoPanel1.add(removeTenantButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 220, 50));
 
         removeTenantButton2.setBackground(new java.awt.Color(255, 255, 254));
         removeTenantButton2.setText("Remove Room");
@@ -754,7 +774,18 @@ public class HomePage extends javax.swing.JFrame {
                 removeTenantButton2ActionPerformed(evt);
             }
         });
-        tenantInfoPanel1.add(removeTenantButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 220, 50));
+        tenantInfoPanel1.add(removeTenantButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 480, 220, 50));
+
+        roomTypeLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
+        roomTypeLabel.setText("Room Type");
+        roomTypeLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        tenantInfoPanel1.add(roomTypeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, 120, 30));
+
+        roomTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tenantInfoPanel1.add(roomTypeBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 350, 220, 40));
+
+        roomCapacityBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tenantInfoPanel1.add(roomCapacityBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 220, 40));
 
         orderByBox1.setBackground(new java.awt.Color(255, 255, 254));
         orderByBox1.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
@@ -1220,7 +1251,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel incomeReportPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -1232,7 +1262,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel latestTenantLabel;
@@ -1260,9 +1289,13 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JButton removeTenantButton1;
     private javax.swing.JButton removeTenantButton2;
     private javax.swing.JLabel rentEzIcon;
+    private javax.swing.JComboBox<String> roomCapacityBox;
+    private javax.swing.JLabel roomCapacityLabel;
     private javax.swing.JLabel roomCount;
     private javax.swing.JLabel roomIcon;
     private javax.swing.JLabel roomSubLabel;
+    private javax.swing.JComboBox<String> roomTypeBox;
+    private javax.swing.JLabel roomTypeLabel;
     private javax.swing.JPanel roomsCard;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JComboBox<String> sortByBox;
