@@ -32,9 +32,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="addExpenseGoBackButton" min="-2" pref="185" max="-2" attributes="0"/>
+                          <Component id="registerTenantGoBackButton" min="-2" pref="185" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="addExpenseButton" max="32767" attributes="0"/>
+                          <Component id="registerTenantButton" max="32767" attributes="0"/>
                       </Group>
                       <Component id="expenseInputPanel" min="-2" pref="381" max="-2" attributes="0"/>
                   </Group>
@@ -53,8 +53,8 @@
               <Component id="expenseInputPanel" min="-2" pref="525" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addExpenseButton" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="addExpenseGoBackButton" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="registerTenantButton" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="registerTenantGoBackButton" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
@@ -332,7 +332,7 @@
         <Property name="text" type="java.lang.String" value="Register Tenant"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="addExpenseGoBackButton">
+    <Component class="javax.swing.JButton" name="registerTenantGoBackButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fe" green="fe" red="fe" type="rgb"/>
@@ -344,10 +344,10 @@
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addExpenseGoBackButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerTenantGoBackButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="addExpenseButton">
+    <Component class="javax.swing.JButton" name="registerTenantButton">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="fe" green="fe" red="fe" type="rgb"/>
@@ -359,7 +359,7 @@
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addExpenseButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerTenantButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -26,9 +26,9 @@ public class Main {
 	try {
 	    pst = conn.prepareStatement(query);
 	    pst.execute();
-	    } catch(SQLException e) {
+	} catch(SQLException e) {
 		JOptionPane.showMessageDialog(null, e);
-	    }
+	}
     }
     
     public static void main(String[] args) {

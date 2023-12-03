@@ -27,7 +27,6 @@ public class Tenant extends javax.swing.JFrame {
     private int roomId;
     private int tenantId;
     private int contractInt;
-    private double roomPrice;
 
     /**
      * Creates new form AddExpensePage
@@ -64,10 +63,13 @@ public class Tenant extends javax.swing.JFrame {
     }
     
     // Set value of the contract
-    public void setContract() {
+    public void setContractInt() {
 	contract = (String) contractBox.getSelectedItem();
 	
 	switch(contract) {
+	    case "1 month":
+		contractInt = 1;
+		break;
 	    case "3 months":
 		contractInt = 3;
 		break;
@@ -158,10 +160,10 @@ public class Tenant extends javax.swing.JFrame {
 	return registrationDate;
     }
     
-    // Get the value of the room price
-    public Double getRoomPrice() {
-	return roomPrice;
-    }
+//    // Get the value of the room price
+//    public Double getRoomPrice() {
+//	return roomPrice;
+//    }
     
     // Get the value of the tenant id
     public int getTenantId() {
@@ -193,16 +195,16 @@ public class Tenant extends javax.swing.JFrame {
 	setMiddleName();
 	setContactNumber();
 	setPin();
-	setContract();
 	setAge();
 	setRoomId();
 	setRegistrationDate();
+	setContractInt();
 	rentStatus = "Paid";	
 	
 	conn = ConnectXamppMySQL.conn();
 	
 	//  SQL query to register tenant
-	String registerTenantQuery = "INSERT INTO tenants(room_id, tenant_pin, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date, rent_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	String registerTenantQuery = "INSERT INTO tenants(room_id, tenant_pin, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	try (PreparedStatement statement = conn.prepareStatement(registerTenantQuery)) {
 	    statement.setInt(1, getRoomId());
@@ -214,7 +216,6 @@ public class Tenant extends javax.swing.JFrame {
 	    statement.setString(7,getGender());
 	    statement.setInt(8,getAge());
 	    statement.setString(9, getRegistrationDate());
-	    statement.setString(10, rentStatus);
     
 	// Execute the query
 	statement.executeUpdate();
@@ -223,45 +224,24 @@ public class Tenant extends javax.swing.JFrame {
 	    // Handle any SQL errors
 	    e.printStackTrace();
 	}
+	
+	// Process the payment of registration
+	Room room = new Room();
+	room.setRoomPrice(contractInt, roomId);
+	Double roomPrice = room.getRoomPrice();
+	setTenantId();
+	new Payment().setRegistrationPayment(roomPrice, getTenantId(), getRoomId(), getPin(), getContractInt(), "Registration");
+	// clearInputs();
     }
     
-    // Retrieve room price
-    public void setRoomPrice() {
-	// Query to retrieve room price
-	String sql = "SELECT room_price FROM rooms WHERE room_id=" + getRoomId();
-	try (Statement statement = conn.createStatement()) {
-	   ResultSet resultSet = statement.executeQuery(sql);
-	    if (resultSet.next()) {
-	    roomPrice = Double.parseDouble(resultSet.getString("room_price"));
-//	    System.out.println("Room price" + roomPrice);
-	    }
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	}
-	
-	// Multiply based on contract
-	setContract();
-	switch(getContract()) {
-	    case "3 months":
-		roomPrice *= 3;
-		break;
-	    case "6 months":
-		roomPrice *= 6;
-		break;
-	    case "9 months":
-		roomPrice *= 9;
-		break;
-	    case "12 months":
-		roomPrice *= 12;
-		break;
-	}
-    }
     
     // Retrieve tetnant id
     public void setTenantId() {
+	conn = ConnectXamppMySQL.conn();
+	
 	// Query to retrieve tenant id
-	String sql = "SELECT tenant_id FROM tenants WHERE tenant_first_name = ? AND tenant_last_name = ? AND tenant_middle_name = ?";
-	try (PreparedStatement statement = conn.prepareStatement(sql)) {
+	String query = "SELECT tenant_id FROM tenants WHERE tenant_first_name = ? AND tenant_last_name = ? AND tenant_middle_name = ?";
+	try (PreparedStatement statement = conn.prepareStatement(query)) {
 	    statement.setString(1, getFirstName());
 	    statement.setString(2, getLastName());
 	    statement.setString(3, getMiddleName());
@@ -279,31 +259,31 @@ public class Tenant extends javax.swing.JFrame {
 }
     
     // Register Payment
-    public void registerPayment() {
-	setRoomPrice();
-	setTenantId();
-	
-	//  SQL query to register tenant
-	String registerPaymentQuery = "INSERT INTO payment(tenant_id, room_id, payment_date, payment_status, amount, payment_type, month_contract) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-	try (PreparedStatement statement = conn.prepareStatement(registerPaymentQuery)) {
-	    statement.setInt(1, getTenantId());
-	    statement.setInt(2, getRoomId());
-	    statement.setString(3, new Main().getDateTime());
-	    statement.setString(4, "Confirmed");
-	    statement.setDouble(5, getRoomPrice());
-	    statement.setString(6, pin);
-	    statement.setInt(7, getContractInt());
-	    
-    
-	// Execute the query
-	statement.executeUpdate();
-	JOptionPane.showMessageDialog(null, "Payment registration Success!");
-	} catch (SQLException e) {
-	    // Handle any SQL errors
-	    e.printStackTrace();
-	}
-    }
+//    public void registerPayment() {
+//	setRoomPrice();
+//	setTenantId();
+//	
+//	//  SQL query to register tenant
+//	String registerPaymentQuery = "INSERT INTO payment(tenant_id, room_id, payment_date, payment_status, amount, payment_type, month_contract) VALUES (?, ?, ?, ?, ?, ?, ?)";
+//
+//	try (PreparedStatement statement = conn.prepareStatement(registerPaymentQuery)) {
+//	    statement.setInt(1, getTenantId());
+//	    statement.setInt(2, getRoomId());
+//	    statement.setString(3, new Main().getDateTime());
+//	    statement.setString(4, "Confirmed");
+//	    statement.setDouble(5, getRoomPrice());
+//	    statement.setString(6, pin);
+//	    statement.setInt(7, getContractInt());
+//	    
+//    
+//	// Execute the query
+//	statement.executeUpdate();
+//	JOptionPane.showMessageDialog(null, "Payment registration Success!");
+//	} catch (SQLException e) {
+//	    // Handle any SQL errors
+//	    e.printStackTrace();
+//	}
+//    }
     
     // Technically does not remove tenant from the database (for data information purposes)
     public void removeTenant() {
@@ -316,7 +296,8 @@ public class Tenant extends javax.swing.JFrame {
 	    JOptionPane.showMessageDialog(null, "Tenant ID: " + tenant_id + " succesfully removed!");
 	}   
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -348,8 +329,8 @@ public class Tenant extends javax.swing.JFrame {
         maleRadio = new javax.swing.JRadioButton();
         pinInput = new javax.swing.JPasswordField();
         registerTenantLabel = new javax.swing.JLabel();
-        addExpenseGoBackButton = new javax.swing.JButton();
-        addExpenseButton = new javax.swing.JButton();
+        registerTenantGoBackButton = new javax.swing.JButton();
+        registerTenantButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -445,23 +426,23 @@ public class Tenant extends javax.swing.JFrame {
         registerTenantLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 28)); // NOI18N
         registerTenantLabel.setText("Register Tenant");
 
-        addExpenseGoBackButton.setBackground(new java.awt.Color(254, 254, 254));
-        addExpenseGoBackButton.setText("Back");
-        addExpenseGoBackButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addExpenseGoBackButton.setFocusable(false);
-        addExpenseGoBackButton.addActionListener(new java.awt.event.ActionListener() {
+        registerTenantGoBackButton.setBackground(new java.awt.Color(254, 254, 254));
+        registerTenantGoBackButton.setText("Back");
+        registerTenantGoBackButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerTenantGoBackButton.setFocusable(false);
+        registerTenantGoBackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addExpenseGoBackButtonActionPerformed(evt);
+                registerTenantGoBackButtonActionPerformed(evt);
             }
         });
 
-        addExpenseButton.setBackground(new java.awt.Color(254, 254, 254));
-        addExpenseButton.setText("Register Tenant");
-        addExpenseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addExpenseButton.setFocusable(false);
-        addExpenseButton.addActionListener(new java.awt.event.ActionListener() {
+        registerTenantButton.setBackground(new java.awt.Color(254, 254, 254));
+        registerTenantButton.setText("Register Tenant");
+        registerTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registerTenantButton.setFocusable(false);
+        registerTenantButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addExpenseButtonActionPerformed(evt);
+                registerTenantButtonActionPerformed(evt);
             }
         });
 
@@ -474,9 +455,9 @@ public class Tenant extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(addExpenseGoBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(registerTenantGoBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(addExpenseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(registerTenantButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(expenseInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(registerTenantLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(38, Short.MAX_VALUE))
@@ -490,25 +471,23 @@ public class Tenant extends javax.swing.JFrame {
                 .addComponent(expenseInputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addExpenseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addExpenseGoBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(registerTenantButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(registerTenantGoBackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addExpenseGoBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseGoBackButtonActionPerformed
+    private void registerTenantGoBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTenantGoBackButtonActionPerformed
         // TODO add your handling code here:
 	dispose();
-    }//GEN-LAST:event_addExpenseGoBackButtonActionPerformed
+    }//GEN-LAST:event_registerTenantGoBackButtonActionPerformed
 
-    private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
+    private void registerTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTenantButtonActionPerformed
         // TODO add your handling code here:
 	registerTenant();
-	registerPayment();
-	clearInputs();
-    }//GEN-LAST:event_addExpenseButtonActionPerformed
+    }//GEN-LAST:event_registerTenantButtonActionPerformed
 
     private void maleRadioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maleRadioMouseClicked
         // TODO add your handling code here:
@@ -548,8 +527,6 @@ public class Tenant extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addExpenseButton;
-    private javax.swing.JButton addExpenseGoBackButton;
     private javax.swing.JLabel ageLabel;
     private javax.swing.JSpinner ageSpinner;
     private javax.swing.JTextField contactNumberInput;
@@ -569,6 +546,8 @@ public class Tenant extends javax.swing.JFrame {
     private javax.swing.JLabel middleNameLabel;
     private javax.swing.JPasswordField pinInput;
     private javax.swing.JLabel pinLabel;
+    private javax.swing.JButton registerTenantButton;
+    private javax.swing.JButton registerTenantGoBackButton;
     private javax.swing.JLabel registerTenantLabel;
     private javax.swing.JTextField roomIdInput;
     private javax.swing.JLabel roomIdLabel;

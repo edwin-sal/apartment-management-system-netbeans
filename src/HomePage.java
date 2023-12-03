@@ -56,6 +56,7 @@ public class HomePage extends javax.swing.JFrame {
 	addTime();
 	setTenantsCardCountLabel();
 	setAvailableRoomsCardLabel();
+	setOccupiedRoomsCardLabel();
 //	setVisible(false);
     }
     
@@ -194,7 +195,7 @@ public class HomePage extends javax.swing.JFrame {
 	int availableRoomsCount = 0;
 	
 	// Query to retrieve tenant id
-	String sql = "SELECT COUNT(room_id) FROM rooms WHERE room_status <> 'Available101'";
+	String sql = "SELECT COUNT(room_id) FROM rooms WHERE room_status = 'Available'";
 	conn = ConnectXamppMySQL.conn();
 	
 	try (Statement statement = conn.createStatement()) {
@@ -211,7 +212,26 @@ public class HomePage extends javax.swing.JFrame {
 	availableRoomsLabel.setText(String.valueOf(availableRoomsCount));
     }
     
-    
+    // Create method to set text for the occupied rooms card
+    public void setOccupiedRoomsCardLabel() {
+	int occupiedRoomsCount = 0;
+	
+	// Query to retrieve tenant id
+	String sql = "SELECT COUNT(room_id) FROM rooms WHERE room_status = 'Occupied'";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    occupiedRoomsCount = resultSet.getInt(1);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	
+	occupiedRoomsLabel.setText(String.valueOf(occupiedRoomsCount));
+    }
 	
     
     /**
@@ -246,7 +266,7 @@ public class HomePage extends javax.swing.JFrame {
         roomSubLabel = new javax.swing.JLabel();
         occupiedRooms = new javax.swing.JPanel();
         occupiedRoomsSubLabel = new javax.swing.JLabel();
-        occupiedRoomsCountLabel = new javax.swing.JLabel();
+        occupiedRoomsLabel = new javax.swing.JLabel();
         occupiedRoomsIcon = new javax.swing.JLabel();
         earningsCard = new javax.swing.JPanel();
         earningsSubLabel = new javax.swing.JLabel();
@@ -530,10 +550,10 @@ public class HomePage extends javax.swing.JFrame {
         occupiedRoomsSubLabel.setText("<html>Occupied<br>Rooms</html>");
         occupiedRooms.add(occupiedRoomsSubLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 60));
 
-        occupiedRoomsCountLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
-        occupiedRoomsCountLabel.setForeground(new java.awt.Color(255, 255, 255));
-        occupiedRoomsCountLabel.setText("999");
-        occupiedRooms.add(occupiedRoomsCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        occupiedRoomsLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
+        occupiedRoomsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        occupiedRoomsLabel.setText("999");
+        occupiedRooms.add(occupiedRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
 
         occupiedRoomsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/occupied_rooms_icon.png"))); // NOI18N
         occupiedRooms.add(occupiedRoomsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
@@ -1368,8 +1388,8 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel netIncomeLabel;
     private javax.swing.JLabel netIncomeSubLabel;
     private javax.swing.JPanel occupiedRooms;
-    private javax.swing.JLabel occupiedRoomsCountLabel;
     private javax.swing.JLabel occupiedRoomsIcon;
+    private javax.swing.JLabel occupiedRoomsLabel;
     private javax.swing.JLabel occupiedRoomsSubLabel;
     private javax.swing.JComboBox<String> orderByBox;
     private javax.swing.JComboBox<String> orderByBox1;
