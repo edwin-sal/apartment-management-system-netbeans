@@ -17,6 +17,7 @@ public class LoginPage extends javax.swing.JFrame {
 	setLocationRelativeTo(null);
     }
     
+    // FOR TESTING
     // Run SQL queries here
     public void runSqlQuery(String query, String message) {
 	conn = ConnectXamppMySQL.conn();
@@ -30,6 +31,7 @@ public class LoginPage extends javax.swing.JFrame {
 		}
 	    }
     
+    //FOR TESTING
     // Run SQL queries to retrieve data
     public void getSystemConfig(String query) {
 	conn = ConnectXamppMySQL.conn();
@@ -40,7 +42,7 @@ public class LoginPage extends javax.swing.JFrame {
             
             while (rs.next()) {
                 // Retrieve data from the result set
-                int system_id = rs.getInt("system_id");
+                String system_id = String.valueOf(rs.getInt("system_id"));
                 String system_pin = rs.getString("system_pin");
                 // Retrieve other columns as needed
 		    
@@ -58,12 +60,49 @@ public class LoginPage extends javax.swing.JFrame {
         }
     }
     
-    // Function when login button is clicked
-    public String login() {
-	String userID = userIdInput.getText();
+    // This method checks if the login credentials is for admin access
+    public boolean isAdminLogin() {
+	conn = ConnectXamppMySQL.conn();
+	boolean isAdmin = false;
+	
+	// Get the values of the system id and system pin
+	String systemId = "";
+	String systemPin = "";
+	try {
+            PreparedStatement pst = conn.prepareStatement("SELECT system_id, system_pin FROM system_configuration");
+            ResultSet rs = pst.executeQuery();
+            
+            while (rs.next()) {
+                // Retrieve data from the result set
+                systemId = String.valueOf(rs.getInt("system_id"));
+                systemPin = rs.getString("system_pin");
+                // Retrieve other columns as needed
+            }
+            JOptionPane.showMessageDialog(null, "Retrieve Data succesfully!");
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+	
+	// Get the values of the credentials from the input fields of the login page
+	String userId = userIdInput.getText();
 	String userPin = userPinInput.getText();
 	
-	return userID + "," + userPin;
+	// Checks if user credentials is match with admin credentials
+	if(userId.equals(systemId) && userPin.equals(systemPin)) {
+	    isAdmin = true;
+	}
+	
+	return isAdmin;
+    }
+    
+    // Function when login button is clicked
+    public void login() {
+	if(isAdminLogin()) {
+	    
+	}
     }
 
     /**
@@ -142,7 +181,7 @@ public class LoginPage extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         login();
 //	runSqlQuery("UPDATE users SET name='sal' WHERE id=2", "Update user's name");
-	getSystemConfig("SELECT system_id, system_pin FROM system_configuration");
+//	getSystemConfig("SELECT system_id, system_pin FROM system_configuration");
 
     }//GEN-LAST:event_loginButtonActionPerformed
 
