@@ -12,14 +12,72 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author edwin
  */
 public class AddExpensePage extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AddExpensePage
-     */
+    private double electricBill;
+    private double waterBill;
+    private double internetBill;
+    private double maintenanceBill;
+    private double totalBill;
+    
     public AddExpensePage() {
 	initComponents();
 	setLocationRelativeTo(null);
 	setVisible(true);
+    }
+    
+    // Set the value of electric bill
+    public void setElectricBill() {
+	electricBill = (double) ((int) electricBillInput.getValue());
+    }
+    
+    // Set the value of electric bill
+    public void setWaterBill() {
+	waterBill = (double) ((int) waterBillInput.getValue());
+    }
+    
+    // Set the value of electric bill
+    public void setInternetBill() {
+	internetBill = (double) ((int) internetBillInput.getValue());
+    }
+    
+    // Set the value of maintenance bill
+    public void setMaintenanceBill() {
+	maintenanceBill = (double) ((int) maintenanceBillInput.getValue());
+    }
+    
+    // Set the value of total bill
+    public void setTotalBill() {
+	totalBill = electricBill + waterBill + internetBill + maintenanceBill;
+    }
+    
+    // Return value of electric bill
+    public double getElectricBill() {
+	return electricBill;
+    }
+    
+    // Return value of water bill
+    public double getWaterBill() {
+	return waterBill;
+    }
+    
+    // Return value of internet bill
+    public double getInternetBill() {
+	return internetBill;
+    }
+    
+    // Return value of maintenancec bill
+    public double getMaintenanceBill() {
+	return maintenanceBill;
+    }
+    
+    // Return value of maintenancec bill
+    public double getTotalBill() {
+	return totalBill;
+    }
+    
+    // Method for adding expenses
+    public void addExpenses() {
+	
+	System.out.println("Electric bill: " + electricBill);
     }
 
     /**
@@ -139,6 +197,8 @@ public class AddExpensePage extends javax.swing.JFrame {
 
     private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
         // TODO add your handling code here:
+	addExpenses();
+	
     }//GEN-LAST:event_addExpenseButtonActionPerformed
 
     /**

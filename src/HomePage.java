@@ -52,7 +52,7 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(viewTenantButton, "view_tenants_icon.png", "view_tenants_icon_white.png");
 	sidebarHoverEffect(viewRoomButton, "view_rooms_icon.png", "view_rooms_icon_white.png");
 	sidebarHoverEffect(incomeReportButton, "money_icon.png", "money_icon_white.png");
-	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
+	sidebarHoverEffect(settingsButton, "settings_icon.png", "settings_icon_white.png");
 	addDate();
 	addTime();
 	setAvailableRoomsCardLabel();
@@ -101,7 +101,7 @@ public class HomePage extends javax.swing.JFrame {
 	viewRegisteredTenantsPanel.setVisible(false);
 	viewAddedRoomsPanel.setVisible(false);
 	incomeReportPanel.setVisible(false);
-	pendingPaymentPanel.setVisible(false);
+	settingsPanel.setVisible(false);
     }
     
     // Add date in the title bar
@@ -412,7 +412,15 @@ public class HomePage extends javax.swing.JFrame {
 	} catch (SQLException e) {
             e.printStackTrace();
         }
+	
     }
+    
+//    // Function for changing system ID
+//    public void changeSystemID() {
+//	String query = "";
+//	
+//	new Main().runSqlQuery(query);
+//    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -428,7 +436,7 @@ public class HomePage extends javax.swing.JFrame {
         viewTenantButton = new javax.swing.JButton();
         viewRoomButton = new javax.swing.JButton();
         incomeReportButton = new javax.swing.JButton();
-        pendingPaymentButton = new javax.swing.JButton();
+        settingsButton = new javax.swing.JButton();
         titlebarPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
@@ -512,12 +520,15 @@ public class HomePage extends javax.swing.JFrame {
         clearExpensesButton = new javax.swing.JButton();
         addExpensesButton = new javax.swing.JButton();
         rentEzIcon = new javax.swing.JLabel();
-        pendingPaymentPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        settingsPanel = new javax.swing.JPanel();
+        settingsLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        changeSystemPinButton = new javax.swing.JButton();
+        resetDatabaseButton = new javax.swing.JButton();
+        changeSystemIdButton = new javax.swing.JButton();
+        resetDatabaseLabel = new javax.swing.JLabel();
+        changeSystemIdLabel = new javax.swing.JLabel();
+        changeSystemPinLabel = new javax.swing.JLabel();
         bkup = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -603,19 +614,19 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
-        pendingPaymentButton.setBackground(new java.awt.Color(52, 68, 77));
-        pendingPaymentButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
-        pendingPaymentButton.setForeground(new java.awt.Color(175, 190, 203));
-        pendingPaymentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/pending_payment_icon.png"))); // NOI18N
-        pendingPaymentButton.setText("Pending Payment");
-        pendingPaymentButton.setBorderPainted(false);
-        pendingPaymentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pendingPaymentButton.setFocusable(false);
-        pendingPaymentButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        pendingPaymentButton.setIconTextGap(10);
-        pendingPaymentButton.addActionListener(new java.awt.event.ActionListener() {
+        settingsButton.setBackground(new java.awt.Color(52, 68, 77));
+        settingsButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        settingsButton.setForeground(new java.awt.Color(175, 190, 203));
+        settingsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/settings_icon.png"))); // NOI18N
+        settingsButton.setText("Settings");
+        settingsButton.setBorderPainted(false);
+        settingsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        settingsButton.setFocusable(false);
+        settingsButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        settingsButton.setIconTextGap(10);
+        settingsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pendingPaymentButtonActionPerformed(evt);
+                settingsButtonActionPerformed(evt);
             }
         });
 
@@ -629,7 +640,7 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(viewTenantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                     .addComponent(viewRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(incomeReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pendingPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
@@ -647,7 +658,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(incomeReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(pendingPaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
@@ -1276,73 +1287,88 @@ public class HomePage extends javax.swing.JFrame {
 
         contentPanel.add(incomeReportPanel, "card6");
 
-        jLabel4.setBackground(new java.awt.Color(51, 51, 51));
-        jLabel4.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
-        jLabel4.setText("Pending Payment");
-
-        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        settingsLabel.setBackground(new java.awt.Color(51, 51, 51));
+        settingsLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 24)); // NOI18N
+        settingsLabel.setText("Settings");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new java.awt.GridLayout(10, 1));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(224, 228, 231));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        changeSystemPinButton.setBackground(new java.awt.Color(255, 255, 254));
+        changeSystemPinButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        changeSystemPinButton.setText("System PIN");
+        changeSystemPinButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changeSystemPinButton.setFocusable(false);
+        changeSystemPinButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeSystemPinButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(changeSystemPinButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 390, 80));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 929, Short.MAX_VALUE)
+        resetDatabaseButton.setBackground(new java.awt.Color(204, 0, 0));
+        resetDatabaseButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        resetDatabaseButton.setForeground(new java.awt.Color(255, 255, 255));
+        resetDatabaseButton.setText("RESET DATABASE");
+        resetDatabaseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        resetDatabaseButton.setFocusable(false);
+        jPanel1.add(resetDatabaseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 390, 80));
+
+        changeSystemIdButton.setBackground(new java.awt.Color(255, 255, 254));
+        changeSystemIdButton.setFont(new java.awt.Font("Yu Gothic UI", 1, 18)); // NOI18N
+        changeSystemIdButton.setText("System ID");
+        changeSystemIdButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        changeSystemIdButton.setFocusable(false);
+        changeSystemIdButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeSystemIdButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(changeSystemIdButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 390, 80));
+
+        resetDatabaseLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        resetDatabaseLabel.setForeground(new java.awt.Color(51, 51, 51));
+        resetDatabaseLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        resetDatabaseLabel.setText("Reset database");
+        jPanel1.add(resetDatabaseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 390, 50));
+
+        changeSystemIdLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        changeSystemIdLabel.setForeground(new java.awt.Color(51, 51, 51));
+        changeSystemIdLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        changeSystemIdLabel.setText("Change System Id");
+        jPanel1.add(changeSystemIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 390, 50));
+
+        changeSystemPinLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        changeSystemPinLabel.setForeground(new java.awt.Color(51, 51, 51));
+        changeSystemPinLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        changeSystemPinLabel.setText("Change System PIN");
+        jPanel1.add(changeSystemPinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 80, 390, 50));
+
+        javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
+        settingsPanel.setLayout(settingsPanelLayout);
+        settingsPanelLayout.setHorizontalGroup(
+            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsPanelLayout.createSequentialGroup()
+                .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(settingsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel2);
-
-        jPanel3.setBackground(new java.awt.Color(224, 228, 231));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 929, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 108, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel3);
-
-        jScrollPane3.setViewportView(jPanel1);
-
-        javax.swing.GroupLayout pendingPaymentPanelLayout = new javax.swing.GroupLayout(pendingPaymentPanel);
-        pendingPaymentPanel.setLayout(pendingPaymentPanelLayout);
-        pendingPaymentPanelLayout.setHorizontalGroup(
-            pendingPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingPaymentPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pendingPaymentPanelLayout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 933, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
-        );
-        pendingPaymentPanelLayout.setVerticalGroup(
-            pendingPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pendingPaymentPanelLayout.createSequentialGroup()
+        settingsPanelLayout.setVerticalGroup(
+            settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(settingsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        contentPanel.add(pendingPaymentPanel, "card4");
+        contentPanel.add(settingsPanel, "card4");
 
         bkup.setBackground(new java.awt.Color(190, 201, 203));
         bkup.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1400,12 +1426,12 @@ public class HomePage extends javax.swing.JFrame {
 	refreshFrame();
     }//GEN-LAST:event_incomeReportButtonActionPerformed
 
-    private void pendingPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendingPaymentButtonActionPerformed
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
-	pendingPaymentPanel.setVisible(true);
+	settingsPanel.setVisible(true);
 	refreshFrame();
-    }//GEN-LAST:event_pendingPaymentButtonActionPerformed
+    }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void dashboardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseEntered
         // TODO add your handling code here:
@@ -1468,6 +1494,28 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dashboardButtonMouseClicked
 
+    private void changeSystemIdButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSystemIdButtonActionPerformed
+        // TODO add your handling code here:
+	String newSystemId = JOptionPane.showInputDialog(null, "Please enter the new System ID");
+	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to change the System ID?");
+	if(confirmation == JOptionPane.YES_OPTION) {
+	    String query = "UPDATE system_configuration SET system_id = '" + newSystemId + "' WHERE config_id = 1";
+	    new Main().runSqlQuery(query);
+	    JOptionPane.showMessageDialog(null, "System ID changed succesfully!");
+	}
+    }//GEN-LAST:event_changeSystemIdButtonActionPerformed
+
+    private void changeSystemPinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSystemPinButtonActionPerformed
+        // TODO add your handling code here:
+	String newSystemPin = JOptionPane.showInputDialog(null, "Please enter the new System PIN");
+	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to change the System PIN?");
+	if(confirmation == JOptionPane.YES_OPTION) {
+	    String query = "UPDATE system_configuration SET system_pin = '" + newSystemPin + "' WHERE config_id = 1";
+	    new Main().runSqlQuery(query);
+	    JOptionPane.showMessageDialog(null, "System PIN changed succesfully!");
+	}
+    }//GEN-LAST:event_changeSystemPinButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1493,6 +1541,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel availableRoomsLabel;
     private javax.swing.JPanel bkup;
     private javax.swing.JPanel cardsPanel;
+    private javax.swing.JButton changeSystemIdButton;
+    private javax.swing.JLabel changeSystemIdLabel;
+    private javax.swing.JButton changeSystemPinButton;
+    private javax.swing.JLabel changeSystemPinLabel;
     private javax.swing.JButton clearExpensesButton;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton dashboardButton;
@@ -1516,14 +1568,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel incomeReportLabel;
     private javax.swing.JPanel incomeReportPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
@@ -1540,8 +1588,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> orderByBox1;
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JLabel orderByLabel1;
-    private javax.swing.JButton pendingPaymentButton;
-    private javax.swing.JPanel pendingPaymentPanel;
     private javax.swing.JButton registerTenantButton;
     private javax.swing.JLabel registeredTenantsLabel;
     private javax.swing.JLabel registeredTenantsLabel2;
@@ -1551,6 +1597,8 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel rentedRoomsCountLabel;
     private javax.swing.JLabel rentedRoomsIcon;
     private javax.swing.JLabel rentedRoomsLabel;
+    private javax.swing.JButton resetDatabaseButton;
+    private javax.swing.JLabel resetDatabaseLabel;
     private javax.swing.JComboBox<String> roomCapacityBox;
     private javax.swing.JLabel roomCapacityLabel;
     private javax.swing.JLabel roomIcon;
@@ -1562,6 +1610,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> roomTypeBox;
     private javax.swing.JLabel roomTypeLabel;
     private javax.swing.JPanel roomsCard;
+    private javax.swing.JButton settingsButton;
+    private javax.swing.JLabel settingsLabel;
+    private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JComboBox<String> sortByBox;
     private javax.swing.JComboBox<String> sortByBox1;
