@@ -40,7 +40,8 @@ public class HomePage extends javax.swing.JFrame {
     static Connection conn;
     static PreparedStatement pst;
     
-//    privat 
+    private double grossIncome, expenses, netIncome;
+    
 
     /**
      * Creates new form HomePage
@@ -64,6 +65,61 @@ public class HomePage extends javax.swing.JFrame {
 	popoulateAddedRoomsTable();
 	populateTransactionHistoryTable();
 //	setVisible(false);
+    }
+    
+    // Set value of grossIncome
+    public void setGrossIncomeCountCard() {
+	
+	// Query to retrieve monthly earnings
+	String sql = "SELECT SUM(amount) AS total_amount FROM payment WHERE MONTH(payment_date) = MONTH(CURRENT_DATE) AND YEAR(payment_date) = YEAR(CURRENT_DATE)";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    grossIncome = resultSet.getDouble(1);
+	   System.out.println("Gross Income count: " + grossIncome);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	NumberFormat numberFormat = NumberFormat.getNumberInstance();
+	numberFormat.setMaximumFractionDigits(2); // Set maximum decimal places to 2
+	String formattedEarnings = numberFormat.format(grossIncome);
+	grossIncomeLabel.setText(formattedEarnings);
+    }
+    
+    
+    // Set value of expenses
+    public void setExpensesCountCard() {
+	// Query to retrieve expenses
+	String sql = "SELECT expenses FROM system_configuration";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    expenses = resultSet.getDouble(1);
+	   System.out.println("Expenses: " + expenses);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	NumberFormat numberFormat = NumberFormat.getNumberInstance();
+	numberFormat.setMaximumFractionDigits(2); // Set maximum decimal places to 2
+	String formattedEarnings = numberFormat.format(expenses);
+	expensesLabel.setText(formattedEarnings);
+    }
+    
+    // Set value of net income
+    public void setNetIncomeCountCard() {
+	netIncome = grossIncome - expenses;
+	NumberFormat numberFormat = NumberFormat.getNumberInstance();
+	numberFormat.setMaximumFractionDigits(2); // Set maximum decimal places to 2
+	String formattedEarnings = numberFormat.format(netIncome);
+	netIncomeLabel.setText(formattedEarnings);
     }
     
     // Method for running basic SQL queries
@@ -1235,7 +1291,7 @@ public class HomePage extends javax.swing.JFrame {
         grossIncomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         grossIncomeLabel.setText("999");
         grossIncomeLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        grossIncomeCard.add(grossIncomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 210, 50));
+        grossIncomeCard.add(grossIncomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, 50));
 
         grossIncomeSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 20)); // NOI18N
         grossIncomeSubLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1270,7 +1326,7 @@ public class HomePage extends javax.swing.JFrame {
         netIncomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         netIncomeLabel.setText("999");
         netIncomeLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        netIncomeCard.add(netIncomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 210, 50));
+        netIncomeCard.add(netIncomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 280, 50));
 
         netIncomeSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 20)); // NOI18N
         netIncomeSubLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -1624,6 +1680,9 @@ public class HomePage extends javax.swing.JFrame {
 	setRentedRoomsCardLabel();
 	setCountRegisteredTenantsCard();
 	setCountMonthlyEarningsCard();
+	setGrossIncomeCountCard();
+	setExpensesCountCard();
+	setNetIncomeCountCard();
 	
 	refreshFrame();
     }//GEN-LAST:event_jButton1ActionPerformed
