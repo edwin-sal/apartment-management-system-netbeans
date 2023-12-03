@@ -37,7 +37,7 @@ public class Tenant extends javax.swing.JFrame {
     
     // Set value of the first name
     public void setFirstName() {
-	firstName = fistNameInput.getText();
+	firstName = firstNameInput.getText();
     }
     
     // Set value of the last name
@@ -140,6 +140,19 @@ public class Tenant extends javax.swing.JFrame {
 	return registrationDate;
     }
     
+    // Clear text for the registration inputs 
+    public void clearInputs() {
+	lastNameInput.setText("");
+	firstNameInput.setText("");
+	middleNameInput.setText("");
+	ageSpinner.setValue(1);
+	contactNumberInput.setText("");
+	pinInput.setText("");
+	roomIdInput.setText("");
+	contractBox.setSelectedItem("1 month");
+	genderGroup.clearSelection();
+    }
+    
     // Add tenants to the database
     public void registerTenant() {
 	setFirstName();
@@ -209,7 +222,7 @@ public class Tenant extends javax.swing.JFrame {
         contactNumberInput = new javax.swing.JTextField();
         lastNameInput = new javax.swing.JTextField();
         lastNameLabel = new javax.swing.JLabel();
-        fistNameInput = new javax.swing.JTextField();
+        firstNameInput = new javax.swing.JTextField();
         ageSpinner = new javax.swing.JSpinner();
         middleNameLabel = new javax.swing.JLabel();
         middleNameInput = new javax.swing.JTextField();
@@ -252,7 +265,7 @@ public class Tenant extends javax.swing.JFrame {
         lastNameLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
         lastNameLabel.setText("Last Name");
         expenseInputPanel.add(lastNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 120, 30));
-        expenseInputPanel.add(fistNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, 40));
+        expenseInputPanel.add(firstNameInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 150, 40));
         expenseInputPanel.add(ageSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 150, 40));
 
         middleNameLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 15)); // NOI18N
@@ -380,6 +393,7 @@ public class Tenant extends javax.swing.JFrame {
     private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
         // TODO add your handling code here:
 	registerTenant();
+	clearInputs();
     }//GEN-LAST:event_addExpenseButtonActionPerformed
 
     private void maleRadioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maleRadioMouseClicked
@@ -430,8 +444,8 @@ public class Tenant extends javax.swing.JFrame {
     private javax.swing.JLabel contractLabel;
     private javax.swing.JPanel expenseInputPanel;
     private javax.swing.JRadioButton femaleRadio;
+    private javax.swing.JTextField firstNameInput;
     private javax.swing.JLabel firstNameLabel;
-    private javax.swing.JTextField fistNameInput;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JTextField lastNameInput;
