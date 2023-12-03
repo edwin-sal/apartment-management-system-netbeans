@@ -60,6 +60,7 @@ public class HomePage extends javax.swing.JFrame {
 	populateLatestTransactionTable();
 	populateLatestTenantTable();
 	populateRegisteredTenantsTable();
+	popoulateAddedRoomsTable();
 //	setVisible(false);
     }
     
@@ -338,6 +339,43 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
     
+    // Populate the added rooms table
+    public void popoulateAddedRoomsTable() {
+	
+	String query = "SELECT room_id, tenant_id, room_type, room_capacity, room_status, date_added FROM rooms ORDER BY room_id ASC";
+	try {
+            conn = ConnectXamppMySQL.conn();
+
+            // Create the statement
+            Statement statement = conn.createStatement();
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Create the DefaultTableModel with column names
+            DefaultTableModel model = (DefaultTableModel) roomInfoTable.getModel();
+
+            // Iterate through the result set and populate the model
+            while (resultSet.next()) {
+                Object[] rowData = new Object[6]; // Assuming 10 columns
+                rowData[0] = resultSet.getObject("room_id");
+                rowData[1] = resultSet.getObject("tenant_id");
+                rowData[2] = resultSet.getObject("room_type");
+		rowData[3] = resultSet.getObject("room_capacity");
+		rowData[4] = resultSet.getObject("room_status");
+		rowData[5] = resultSet.getObject("date_added");
+                model.addRow(rowData);
+            }
+            
+            // Close the result set, statement, and connection
+            resultSet.close();
+            statement.close();
+            conn.close();
+	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -398,7 +436,7 @@ public class HomePage extends javax.swing.JFrame {
         viewAddedRoomsPanel = new javax.swing.JPanel();
         tenantInfoPanel1 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tenantInfoTable1 = new javax.swing.JTable();
+        roomInfoTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         roomPriceInput = new javax.swing.JTextField();
         roomPriceLabel = new javax.swing.JLabel();
@@ -903,12 +941,9 @@ public class HomePage extends javax.swing.JFrame {
         tenantInfoPanel1.setBackground(new java.awt.Color(255, 255, 255));
         tenantInfoPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tenantInfoTable1.setModel(new javax.swing.table.DefaultTableModel(
+        roomInfoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Room ID", "Tenant ID", "Room Type", "Room Capacity", "Room Status", "Date Added"
@@ -922,15 +957,7 @@ public class HomePage extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane6.setViewportView(tenantInfoTable1);
-        if (tenantInfoTable1.getColumnModel().getColumnCount() > 0) {
-            tenantInfoTable1.getColumnModel().getColumn(0).setResizable(false);
-            tenantInfoTable1.getColumnModel().getColumn(1).setResizable(false);
-            tenantInfoTable1.getColumnModel().getColumn(2).setResizable(false);
-            tenantInfoTable1.getColumnModel().getColumn(3).setResizable(false);
-            tenantInfoTable1.getColumnModel().getColumn(4).setResizable(false);
-            tenantInfoTable1.getColumnModel().getColumn(5).setResizable(false);
-        }
+        jScrollPane6.setViewportView(roomInfoTable);
 
         tenantInfoPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 700, 510));
 
@@ -1133,25 +1160,15 @@ public class HomePage extends javax.swing.JFrame {
 
         transactionHistoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Tenant ID", "First Name", "Last Name", "Room ID", "Payment ID", "Payment Date"
+                "Payment ID", "Tenant ID", "First Name", "Last Name", "Room ID", "Payment Date"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true
+                false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -1161,9 +1178,6 @@ public class HomePage extends javax.swing.JFrame {
         if (transactionHistoryTable.getColumnModel().getColumnCount() > 0) {
             transactionHistoryTable.getColumnModel().getColumn(0).setResizable(false);
             transactionHistoryTable.getColumnModel().getColumn(1).setResizable(false);
-            transactionHistoryTable.getColumnModel().getColumn(2).setResizable(false);
-            transactionHistoryTable.getColumnModel().getColumn(3).setResizable(false);
-            transactionHistoryTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         transactionHistoryPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 770, 280));
@@ -1507,6 +1521,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel roomCapacityLabel;
     private javax.swing.JLabel roomIcon;
     private javax.swing.JTextField roomIdInput;
+    private javax.swing.JTable roomInfoTable;
     private javax.swing.JTextField roomPriceInput;
     private javax.swing.JLabel roomPriceLabel;
     private javax.swing.JLabel roomSubLabel;
@@ -1524,7 +1539,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel tenantInfoPanel;
     private javax.swing.JPanel tenantInfoPanel1;
     private javax.swing.JTable tenantInfoTable;
-    private javax.swing.JTable tenantInfoTable1;
     private javax.swing.JLabel tenantSubLabel;
     private javax.swing.JPanel tenantsCard;
     private javax.swing.JLabel timeLabel;
