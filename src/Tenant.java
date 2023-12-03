@@ -268,41 +268,16 @@ public class Tenant extends javax.swing.JFrame {
     }
 }
     
-    // Register Payment
-//    public void registerPayment() {
-//	setRoomPrice();
-//	setTenantId();
-//	
-//	//  SQL query to register tenant
-//	String registerPaymentQuery = "INSERT INTO payment(tenant_id, room_id, payment_date, payment_status, amount, payment_type, month_contract) VALUES (?, ?, ?, ?, ?, ?, ?)";
-//
-//	try (PreparedStatement statement = conn.prepareStatement(registerPaymentQuery)) {
-//	    statement.setInt(1, getTenantId());
-//	    statement.setInt(2, getRoomId());
-//	    statement.setString(3, new Main().getDateTime());
-//	    statement.setString(4, "Confirmed");
-//	    statement.setDouble(5, getRoomPrice());
-//	    statement.setString(6, pin);
-//	    statement.setInt(7, getContractInt());
-//	    
-//    
-//	// Execute the query
-//	statement.executeUpdate();
-//	JOptionPane.showMessageDialog(null, "Payment registration Success!");
-//	} catch (SQLException e) {
-//	    // Handle any SQL errors
-//	    e.printStackTrace();
-//	}
-//    }
-    
     // Technically does not remove tenant from the database (for data information purposes)
     public void removeTenant() {
 	int tenant_id = Integer.valueOf(JOptionPane.showInputDialog(null, "Enter Tenant ID to be removed"));
-	String query = "UPDATE tenants SET rent_status = 'Removed' WHERE tenant_id = " + tenant_id;
+	String updateTenantQuery = "UPDATE tenants SET rent_status = 'Removed' WHERE tenant_id = " + tenant_id;
+	String updateRoomQuery = "UPDATE rooms SET tenant_id = NULL, room_status = 'Available' WHERE tenant_id = " + tenant_id;
 
 	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this tenant??");
 	if(confirmation == JOptionPane.YES_OPTION) {
-	    new Main().runSqlQuery(query);
+	    new Main().runSqlQuery(updateTenantQuery);
+	    new Main().runSqlQuery(updateRoomQuery);
 	    JOptionPane.showMessageDialog(null, "Tenant ID: " + tenant_id + " succesfully removed!");
 	}   
     }

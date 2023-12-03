@@ -1077,17 +1077,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <Component id="registeredTenantsLabel2" min="-2" pref="310" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="sortByLabel1" min="-2" pref="65" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sortByBox1" min="-2" pref="113" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="orderByLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="orderByBox1" min="-2" pref="113" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
                           </Group>
                           <Component id="tenantInfoPanel1" alignment="0" min="-2" pref="989" max="-2" attributes="0"/>
                       </Group>
@@ -1099,15 +1092,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="orderByBox1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="orderByLabel1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="sortByBox1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              <Component id="sortByLabel1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="registeredTenantsLabel2" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="registeredTenantsLabel2" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tenantInfoPanel1" min="-2" pref="558" max="-2" attributes="0"/>
                       <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -1357,78 +1342,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="orderByBox1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Ascending"/>
-                    <StringItem index="1" value="Descending"/>
-                  </StringArray>
-                </Property>
-                <Property name="focusable" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderByBox1ActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="orderByLabel1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="14" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/Icons/other_icons/order_by_icon.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Order by"/>
-                <Property name="horizontalTextPosition" type="int" value="10"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="sortByBox1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="15" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Room ID"/>
-                    <StringItem index="1" value="Date Added"/>
-                    <StringItem index="2" value="Room Status"/>
-                    <StringItem index="3" value="Room Type"/>
-                  </StringArray>
-                </Property>
-                <Property name="focusable" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortByBox1ActionPerformed"/>
-              </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="sortByLabel1">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Arial" size="14" style="0"/>
-                </Property>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/images/Icons/other_icons/sort_icon.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Sort by"/>
-                <Property name="horizontalTextPosition" type="int" value="10"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="registeredTenantsLabel2">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
