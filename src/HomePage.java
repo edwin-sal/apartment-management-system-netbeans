@@ -56,8 +56,17 @@ public class HomePage extends javax.swing.JFrame {
 //	setVisible(false);
     }
     
-    public void forTesting() {
-	System.out.println("HomePage.forTesting()");
+    // Method for running basic SQL queries
+    public void runSqlQuery(String query, String message) {
+	conn = ConnectXamppMySQL.conn();
+
+	try {
+	    pst = conn.prepareStatement(query);
+	    pst.execute();
+	    System.out.println(message);
+	    } catch(SQLException e) {
+		JOptionPane.showMessageDialog(null, e);
+	    }
     }
     
    // Add hover effect for the sidebar buttons
@@ -146,16 +155,10 @@ public class HomePage extends javax.swing.JFrame {
 	} catch (SQLException e) {
 	    // Handle any SQL errors
 	    e.printStackTrace();
-}
-	
-//	try {
-//	    pst = conn.prepareStatement("");
-//	    pst.execute();
-//	    JOptionPane.showMessageDialog(null, message);
-//	} catch(SQLException e) {
-//	    JOptionPane.showMessageDialog(null, e);
-//	}
+	}
     }
+    
+    // Function for removing room
     
     /**
      * This method is called from within the constructor to initialize the form.
