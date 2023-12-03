@@ -21,6 +21,8 @@ public class Tenant extends javax.swing.JFrame {
     private String pin;
     private String contract;
     private String gender;
+    private String registrationDate;
+    private String rentStatus;
     private int age;	    
     private int roomId;
 
@@ -64,20 +66,6 @@ public class Tenant extends javax.swing.JFrame {
 	contract = (String) contractBox.getSelectedItem();
     }
     
-    // Set value of the gender() 
-    public void setGender() {
-	maleRadio.addActionListener(e -> {
-            if (maleRadio.isSelected()) {
-                gender = "Male";
-            }
-        });
-
-        femaleRadio.addActionListener(e -> {
-            if (femaleRadio.isSelected()) {
-                gender = "Female";
-            }
-        });
-    }
     
     // Set value of the contract
     public void setAge() {
@@ -87,6 +75,11 @@ public class Tenant extends javax.swing.JFrame {
     // Set value of the room ID
     public void setRoomId() {
 	roomId =  Integer.parseInt(roomIdInput.getText());
+    }
+    
+    // Set value of the registration date
+    public void setRegistrationDate() {
+	registrationDate = new Main().getDateTime();
     }
     
     // Get the value of the first name
@@ -119,17 +112,63 @@ public class Tenant extends javax.swing.JFrame {
 	return contract;
     }	
     
-    // Get the value of the first name
+    // Get the value of the gender
     public String getGender() {
 	return gender;	
     }
     
+    // Get the value of the age
     public int getAge() {
 	return age;
     }
     
-    public int roomId() {
+    // Get the value of the room ID
+    public int getRoomId() {
 	return roomId;
+    }
+    
+    // Get the value of the registration date
+    public String getRegistrationDate() {
+	return registrationDate;
+    }
+    
+    // Add tenants to the database
+    public void addTenant() {
+	setFirstName();
+	setLastName();
+	setMiddleName();
+	setContactNumber();
+	setPin();
+	setContract();
+	setAge();
+	setRoomId();
+	setRegistrationDate();
+	rentStatus = "Paid";	
+	
+	conn = ConnectXamppMySQL.conn();
+	
+	//  SQL query
+	String query = "INSERT INTO tenants(room_id, tenant_pin, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date, rent_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	try (PreparedStatement statement = conn.prepareStatement(query)) {
+	    statement.setInt(1, getRoomId());
+	    statement.setString(2, getPin());
+	    statement.setString(3,getFirstName());
+	    statement.setString(4,getLastName());
+	    statement.setString(5,getMiddleName());
+	    statement.setString(6,getContactNumber());
+	    statement.setString(7,getGender());
+	    statement.setInt(8,getAge());
+	    statement.setString(9, getRegistrationDate());
+	    statement.setString(10, rentStatus);
+    
+	// Execute the query
+	statement.executeUpdate();
+	JOptionPane.showMessageDialog(null, "Tenant registered Succesfully!");
+	} catch (SQLException e) {
+	    // Handle any SQL errors
+	    e.printStackTrace();
+	}
     }
 
     /**
@@ -226,6 +265,11 @@ public class Tenant extends javax.swing.JFrame {
         femaleRadio.setText("Female");
         femaleRadio.setContentAreaFilled(false);
         femaleRadio.setFocusPainted(false);
+        femaleRadio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                femaleRadioMouseClicked(evt);
+            }
+        });
         expenseInputPanel.add(femaleRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 80, -1));
 
         maleRadio.setBackground(new java.awt.Color(255, 255, 255));
@@ -234,6 +278,11 @@ public class Tenant extends javax.swing.JFrame {
         maleRadio.setText("Male");
         maleRadio.setContentAreaFilled(false);
         maleRadio.setFocusPainted(false);
+        maleRadio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maleRadioMouseClicked(evt);
+            }
+        });
         expenseInputPanel.add(maleRadio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, -1, -1));
         expenseInputPanel.add(pinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 140, 40));
 
@@ -300,26 +349,39 @@ public class Tenant extends javax.swing.JFrame {
 
     private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
         // TODO add your handling code here:
-	setFirstName();
-	setLastName();
-	setMiddleName();
-	setContactNumber();
-	setPin();
-	setContract();
-	setGender();
-	setAge();
-	setRoomId();
-	
-	System.out.println("First name: " + firstName);
-	System.out.println("Last Name: " + lastName);
-	System.out.println("Middle Name: " + middleName);
-	System.out.println("Contact number: " + contactNumber);
-	System.out.println("PIN: " + pin);
-	System.out.println("Contract: " + contract);
-	System.out.println("Gender: " + gender);
-	System.out.println("Age: " + age);
-	System.out.println("Room ID: " + roomId);
+	addTenant();
+//	setFirstName();
+//	setLastName();
+//	setMiddleName();
+//	setContactNumber();
+//	setPin();
+//	setContract();
+////	setGender();
+//	setAge();
+//	setRoomId();
+//	setRegistrationDate();
+//	
+//	System.out.println("First name: " + getFirstName());
+//	System.out.println("Last Name: " + getLastName());
+//	System.out.println("Middle Name: " + getMiddleName());
+//	System.out.println("Contact number: " + getContactNumber());
+//	System.out.println("PIN: " + getPin());
+//	System.out.println("Contract: " + getContract());
+//	System.out.println("Gender: " + getGender());
+//	System.out.println("Age: " + getAge());
+//	System.out.println("Room ID: " + getRoomId());
+//	System.out.println("Registration date: " + getRegistrationDate());
     }//GEN-LAST:event_addExpenseButtonActionPerformed
+
+    private void maleRadioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maleRadioMouseClicked
+        // TODO add your handling code here:
+	gender = "Male";
+    }//GEN-LAST:event_maleRadioMouseClicked
+
+    private void femaleRadioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_femaleRadioMouseClicked
+        // TODO add your handling code here:
+	gender = "Female";
+    }//GEN-LAST:event_femaleRadioMouseClicked
 
     /**
      * @param args the command line arguments

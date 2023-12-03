@@ -3,10 +3,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     static Connection conn;
     static PreparedStatement pst;
+    
+    // A method that returns the current date and time
+    public String getDateTime() {
+	LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+	System.out.println(formattedDateTime);
+        return formattedDateTime;
+    }
     
     public static void main(String[] args) {
 	conn = ConnectXamppMySQL.conn();
