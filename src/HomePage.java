@@ -61,6 +61,7 @@ public class HomePage extends javax.swing.JFrame {
 	populateLatestTenantTable();
 	populateRegisteredTenantsTable();
 	popoulateAddedRoomsTable();
+	populateTransactionHistoryTable();
 //	setVisible(false);
     }
     
@@ -364,6 +365,43 @@ public class HomePage extends javax.swing.JFrame {
 		rowData[3] = resultSet.getObject("room_capacity");
 		rowData[4] = resultSet.getObject("room_status");
 		rowData[5] = resultSet.getObject("date_added");
+                model.addRow(rowData);
+            }
+            
+            // Close the result set, statement, and connection
+            resultSet.close();
+            statement.close();
+            conn.close();
+	} catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Populate the transaction history table
+    public void populateTransactionHistoryTable() {
+	
+	String query = "SELECT payment_id, tenant_id, room_id, payment_type, month_contract, payment_date FROM payment ORDER BY payment_id ASC";
+	try {
+            conn = ConnectXamppMySQL.conn();
+
+            // Create the statement
+            Statement statement = conn.createStatement();
+
+            // Execute the query and obtain the result set
+            ResultSet resultSet = statement.executeQuery(query);
+
+            // Create the DefaultTableModel with column names
+            DefaultTableModel model = (DefaultTableModel) transactionHistoryTable.getModel();
+
+            // Iterate through the result set and populate the model
+            while (resultSet.next()) {
+                Object[] rowData = new Object[6]; // Assuming 10 columns
+                rowData[0] = resultSet.getObject("payment_id");
+                rowData[1] = resultSet.getObject("tenant_id");
+                rowData[2] = resultSet.getObject("room_id");
+		rowData[3] = resultSet.getObject("payment_type");
+		rowData[4] = resultSet.getObject("month_contract");
+		rowData[5] = resultSet.getObject("payment_date");
                 model.addRow(rowData);
             }
             
@@ -1163,11 +1201,11 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Payment ID", "Tenant ID", "First Name", "Last Name", "Room ID", "Payment Date"
+                "Payment ID", "Tenant ID", "Room ID", "Payment Type", "Month Contract", "Payment Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1175,10 +1213,6 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(transactionHistoryTable);
-        if (transactionHistoryTable.getColumnModel().getColumnCount() > 0) {
-            transactionHistoryTable.getColumnModel().getColumn(0).setResizable(false);
-            transactionHistoryTable.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         transactionHistoryPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 770, 280));
 
