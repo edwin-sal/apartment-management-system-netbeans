@@ -232,8 +232,16 @@ public class Tenant extends javax.swing.JFrame {
 	setTenantId();
 	new Payment().setRegistrationPayment(roomPrice, getTenantId(), getRoomId(), getPin(), getContractInt(), "Registration");
 	room.setRoomStatus("Rented", roomId);
+	setTenantIdOfRoom();
 	
 	clearInputs();
+    }
+    
+    // Public void set tenant id of the room of the tenant
+    public void setTenantIdOfRoom() {
+	String query = "UPDATE rooms SET tenant_id = '" + getTenantId() + "' WHERE room_id = " + getRoomId();
+	
+	new Main().runSqlQuery(query);
     }
     
     

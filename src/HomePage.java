@@ -415,12 +415,31 @@ public class HomePage extends javax.swing.JFrame {
 	
     }
     
-//    // Function for changing system ID
-//    public void changeSystemID() {
-//	String query = "";
-//	
-//	new Main().runSqlQuery(query);
-//    }
+    // Confirms if user input is matched with system credentials
+    public boolean verifyInput(int userId, int userPin) {
+	String systemId, systemPin;
+	int configId;
+	conn = ConnectXamppMySQL.conn();
+	
+	// Query to retrieve tenant id
+	String query = "SELECT config_id FROM system_configuration WHERE system_id = ? AND system_pin = ?";
+	try (PreparedStatement statement = conn.prepareStatement(query)) {
+	    statement.setInt(1, userId);
+	    statement.setInt(2, userPin);
+        
+	    ResultSet resultSet = statement.executeQuery();
+	    if (resultSet.next()) {
+		configId = resultSet.getInt("config_id");
+		JOptionPane.showMessageDialog(null, "Verification success!");
+		return true;
+	    } else {
+		JOptionPane.showMessageDialog(null, "Invalid system ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
+	    }
+	    } catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return false;
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -441,6 +460,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         dashboardPanel = new javax.swing.JPanel();
         cardsPanel = new javax.swing.JPanel();
@@ -691,6 +711,12 @@ public class HomePage extends javax.swing.JFrame {
         timeLabel.setText("0:0:0 PM/AM");
         timeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         titlebarPanel.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, 150, 30));
+
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/refresh_icon.png"))); // NOI18N
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.setFocusable(false);
+        titlebarPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 13, 90, 50));
 
         contentPanel.setBackground(new java.awt.Color(184, 208, 201));
         contentPanel.setLayout(new java.awt.CardLayout());
@@ -1317,6 +1343,11 @@ public class HomePage extends javax.swing.JFrame {
         resetDatabaseButton.setText("RESET DATABASE");
         resetDatabaseButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         resetDatabaseButton.setFocusable(false);
+        resetDatabaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetDatabaseButtonActionPerformed(evt);
+            }
+        });
         jPanel1.add(resetDatabaseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 390, 80));
 
         changeSystemIdButton.setBackground(new java.awt.Color(255, 255, 254));
@@ -1512,9 +1543,9 @@ public class HomePage extends javax.swing.JFrame {
 
     private void changeSystemPinButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeSystemPinButtonActionPerformed
         // TODO add your handling code here:
-	String newSystemPin = JOptionPane.showInputDialog(null, "Please enter the new System PIN");
 	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to change the System PIN?");
 	if(confirmation == JOptionPane.YES_OPTION) {
+	    String newSystemPin = JOptionPane.showInputDialog(null, "Please enter the new System PIN");
 	    String query = "UPDATE system_configuration SET system_pin = '" + newSystemPin + "' WHERE config_id = 1";
 	    new Main().runSqlQuery(query);
 	    JOptionPane.showMessageDialog(null, "System PIN changed succesfully!");
@@ -1527,6 +1558,21 @@ public class HomePage extends javax.swing.JFrame {
 	new Main().runSqlQuery(query);
 	JOptionPane.showMessageDialog(null, "Expenses succesfully cleared!");
     }//GEN-LAST:event_clearExpensesButtonActionPerformed
+
+    private void resetDatabaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetDatabaseButtonActionPerformed
+        // TODO add your handling code here:
+	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to RESET THE DATABASE?");
+	if(confirmation == JOptionPane.YES_OPTION) {
+	    int userId = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the System ID"));
+	    int userPin = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the System PIN"));
+	    if(verifyInput(userId, userPin)) {
+		JOptionPane.showMessageDialog(null, "System database will now reset!");
+//		new Main().runSqlQuery("TRUNCATE TABLE tenants");
+//		new Main().runSqlQuery("TRUNCATE TABLE rooms");
+//		new Main().runSqlQuery("TRUNCATE TABLE payment");
+	    }
+	}
+    }//GEN-LAST:event_resetDatabaseButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1579,6 +1625,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel incomeReportCardsPanel;
     private javax.swing.JLabel incomeReportLabel;
     private javax.swing.JPanel incomeReportPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
