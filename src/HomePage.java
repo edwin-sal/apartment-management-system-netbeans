@@ -46,7 +46,11 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(pendingPaymentButton, "pending_payment_icon.png", "pending_payment_icon_white.png");
 	addDate();
 	addTime();
-	setVisible(true);
+//	setVisible(false);
+    }
+    
+    public void forTesting() {
+	System.out.println("HomePage.forTesting()");
     }
     
    // Add hover effect for the sidebar buttons

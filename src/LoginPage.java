@@ -4,66 +4,72 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
+interface LoginPageCallback {
+    void onLoginPageDisposed();
+}
+
 public class LoginPage extends javax.swing.JFrame {
     static Connection conn;
     static PreparedStatement pst;
-
+    
+    boolean adminLogin = false;
+    private LoginPageCallback callback;
+    
     /**
      * Creates new form LoginPage
      */
     public LoginPage() {
 	initComponents();
-	setVisible(true);
+//	setVisible(true);
 	setLocationRelativeTo(null);
     }
     
     // FOR TESTING
     // Run SQL queries here
-    public void runSqlQuery(String query, String message) {
-	conn = ConnectXamppMySQL.conn();
-
-	try {
-	    pst = conn.prepareStatement(query);
-	    pst.execute();
-	    JOptionPane.showMessageDialog(null, message);
-	    } catch(SQLException e) {
-		    JOptionPane.showMessageDialog(null, e);
-		}
-	    }
+//    public void runSqlQuery(String query, String message) {
+//	conn = ConnectXamppMySQL.conn();
+//
+//	try {
+//	    pst = conn.prepareStatement(query);
+//	    pst.execute();
+//	    JOptionPane.showMessageDialog(null, message);
+//	    } catch(SQLException e) {
+//		    JOptionPane.showMessageDialog(null, e);
+//		}
+//	    }
     
     //FOR TESTING
     // Run SQL queries to retrieve data
-    public void getSystemConfig(String query) {
-	conn = ConnectXamppMySQL.conn();
-	
-	try {
-            PreparedStatement pst = conn.prepareStatement(query);
-            ResultSet rs = pst.executeQuery();
-            
-            while (rs.next()) {
-                // Retrieve data from the result set
-                String system_id = String.valueOf(rs.getInt("system_id"));
-                String system_pin = rs.getString("system_pin");
-                // Retrieve other columns as needed
-		    
-                // Process the retrieved data
-                System.out.println("System id: " + system_id);
-                System.out.println("System pin: " + system_pin);
-                // Process other columns as needed
-            }
-            JOptionPane.showMessageDialog(null, "Retrieve Data succesfully!");
-            rs.close();
-            pst.close();
-            conn.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
+//    public void getSystemConfig(String query) {
+//	conn = ConnectXamppMySQL.conn();
+//	
+//	try {
+//            PreparedStatement pst = conn.prepareStatement(query);
+//            ResultSet rs = pst.executeQuery();
+//            
+//            while (rs.next()) {
+//                // Retrieve data from the result set
+//                String system_id = String.valueOf(rs.getInt("system_id"));
+//                String system_pin = rs.getString("system_pin");
+//                // Retrieve other columns as needed
+//		    
+//                // Process the retrieved data
+//                System.out.println("System id: " + system_id);
+//                System.out.println("System pin: " + system_pin);
+//                // Process other columns as needed
+//            }
+//            JOptionPane.showMessageDialog(null, "Retrieve Data succesfully!");
+//            rs.close();
+//            pst.close();
+//            conn.close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//    }
     
     // This method checks if the login credentials is for admin access
-    public boolean isAdminLogin() {
+    public void isAdminLogin() {
 	conn = ConnectXamppMySQL.conn();
-	boolean isAdmin = false;
 	
 	// Get the values of the system id and system pin
 	String systemId = "";
@@ -78,7 +84,7 @@ public class LoginPage extends javax.swing.JFrame {
                 systemPin = rs.getString("system_pin");
                 // Retrieve other columns as needed
             }
-            JOptionPane.showMessageDialog(null, "Retrieve Data succesfully!");
+            System.out.println("Retrieve Data succesfully: for system_configuration");
             rs.close();
             pst.close();
             conn.close();
@@ -91,17 +97,30 @@ public class LoginPage extends javax.swing.JFrame {
 	String userPin = userPinInput.getText();
 	
 	// Checks if user credentials is match with admin credentials
-	if(userId.equals(systemId) && userPin.equals(systemPin)) {
-	    isAdmin = true;
+	if(userId.equals(systemId) && userPin.equals(systemPin)) {  
+	    disposeLoginPage();
+	} else {
+		// Show error message and reset input fields if login is invalid
+		JOptionPane.showMessageDialog(null, "Invalid user ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
+		userIdInput.setText("");
+		userPinInput.setText("");
 	}
-	
-	return isAdmin;
     }
     
-    // Function when login button is clicked
-    public void login() {
-	if(isAdminLogin()) {
-	    
+    // For setting callback, used to prevent the homepage from showing unless login is verified
+    public void setLoginPageCallback(LoginPageCallback callback) {
+	this.callback = callback;
+    }
+    
+    // Dispose the login page
+    private void disposeLoginPage() {
+    // Dispose the LoginPage
+    dispose();
+  
+    // Check if the callback is set
+    if (callback != null) {
+        // Call the callback method to notify that the LoginPage has been disposed
+        callback.onLoginPageDisposed();
 	}
     }
 
@@ -179,10 +198,7 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        login();
-//	runSqlQuery("UPDATE users SET name='sal' WHERE id=2", "Update user's name");
-//	getSystemConfig("SELECT system_id, system_pin FROM system_configuration");
-
+        isAdminLogin();
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**

@@ -10,18 +10,21 @@ public class Main {
     
     public static void main(String[] args) {
 	conn = ConnectXamppMySQL.conn();
+	LoginPage login;
+	HomePage home = new HomePage();
 	
-//	String query = "INSERT INTO system_configuration (config_id, system_id, system_pin) VALUES (1, 1010, 0000)";
-//	
-//	try {
-//	    pst = conn.prepareStatement(query);
-//	    pst.execute();
-//	    JOptionPane.showMessageDialog(null, "Query success!!!");
-//	} catch(SQLException e) {
-//	    JOptionPane.showMessageDialog(null, e);
-//	}
+	
 
-	LoginPage login = new LoginPage();
+	login = new LoginPage();
+	login.setLoginPageCallback(new LoginPageCallback() {
+	@Override
+	public void onLoginPageDisposed() {
+	    home.setVisible(true);	 
+	    }
+	});
 	
+	login.setVisible(true);
+	home.forTesting();
     }
 }
+    
