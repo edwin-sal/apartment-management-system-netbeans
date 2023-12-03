@@ -49,7 +49,7 @@ public class Room {
     }
     
     // Set the room status
-    public void setRoomStatus(String status) {
-	
+    public void setRoomStatus(String status, int roomId) {
+	new Main().runSqlQuery("UPDATE rooms SET room_status = '" + status + "' WHERE room_id = " + roomId);
     }
 }

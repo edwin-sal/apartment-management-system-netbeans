@@ -174,7 +174,7 @@ public class HomePage extends javax.swing.JFrame {
 	int tenantsCount = 0;
 	
 	// Query to retrieve tenant id
-	String sql = "SELECT COUNT(tenant_id) FROM tenants WHERE rent_status <> 'REMOVED'";
+	String sql = "SELECT COUNT(tenant_id) FROM tenants WHERE rent_status <> 'Removed'";
 	conn = ConnectXamppMySQL.conn();
 	
 	try (Statement statement = conn.createStatement()) {
@@ -233,6 +233,8 @@ public class HomePage extends javax.swing.JFrame {
 	occupiedRoomsLabel.setText(String.valueOf(occupiedRoomsCount));
     }
 	
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

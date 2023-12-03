@@ -231,7 +231,9 @@ public class Tenant extends javax.swing.JFrame {
 	Double roomPrice = room.getRoomPrice();
 	setTenantId();
 	new Payment().setRegistrationPayment(roomPrice, getTenantId(), getRoomId(), getPin(), getContractInt(), "Registration");
-	// clearInputs();
+	room.setRoomStatus("Rented", roomId);
+	
+	clearInputs();
     }
     
     
