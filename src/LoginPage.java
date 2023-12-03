@@ -24,48 +24,7 @@ public class LoginPage extends javax.swing.JFrame {
 	setLocationRelativeTo(null);
     }
     
-    // FOR TESTING
-    // Run SQL queries here
-//    public void runSqlQuery(String query, String message) {
-//	conn = ConnectXamppMySQL.conn();
-//
-//	try {
-//	    pst = conn.prepareStatement(query);
-//	    pst.execute();
-//	    JOptionPane.showMessageDialog(null, message);
-//	    } catch(SQLException e) {
-//		    JOptionPane.showMessageDialog(null, e);
-//		}
-//	    }
-    
-    //FOR TESTING
-    // Run SQL queries to retrieve data
-//    public void getSystemConfig(String query) {
-//	conn = ConnectXamppMySQL.conn();
-//	
-//	try {
-//            PreparedStatement pst = conn.prepareStatement(query);
-//            ResultSet rs = pst.executeQuery();
-//            
-//            while (rs.next()) {
-//                // Retrieve data from the result set
-//                String system_id = String.valueOf(rs.getInt("system_id"));
-//                String system_pin = rs.getString("system_pin");
-//                // Retrieve other columns as needed
-//		    
-//                // Process the retrieved data
-//                System.out.println("System id: " + system_id);
-//                System.out.println("System pin: " + system_pin);
-//                // Process other columns as needed
-//            }
-//            JOptionPane.showMessageDialog(null, "Retrieve Data succesfully!");
-//            rs.close();
-//            pst.close();
-//            conn.close();
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, e);
-//        }
-//    }
+
     
     // This method checks if the login credentials is for admin access
     public void isAdminLogin() {

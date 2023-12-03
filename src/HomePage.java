@@ -1443,7 +1443,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void addExpensesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpensesButtonActionPerformed
         // TODO add your handling code here:
-	AddExpensePage expense = new AddExpensePage();
+	new AddExpensePage().setVisible(true);
     }//GEN-LAST:event_addExpensesButtonActionPerformed
 
     private void removeTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTenantButtonActionPerformed

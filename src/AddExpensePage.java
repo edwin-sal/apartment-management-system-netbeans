@@ -1,4 +1,5 @@
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -21,7 +22,7 @@ public class AddExpensePage extends javax.swing.JFrame {
     public AddExpensePage() {
 	initComponents();
 	setLocationRelativeTo(null);
-	setVisible(true);
+	setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
     
     // Set the value of electric bill
@@ -76,8 +77,20 @@ public class AddExpensePage extends javax.swing.JFrame {
     
     // Method for adding expenses
     public void addExpenses() {
+	setElectricBill();
+	setWaterBill();
+	setInternetBill();
+	setMaintenanceBill();
+	setTotalBill();
 	
-	System.out.println("Electric bill: " + electricBill);
+	String query = "UPDATE system_configuration SET expenses=" + getTotalBill()+ " WHERE config_id = 1";
+	new Main().runSqlQuery(query);
+	JOptionPane.showMessageDialog(null, "Expenses succesfully added!");
+	
+	electricBillInput.setValue(0);
+	waterBillInput.setValue(0);
+	internetBillInput.setValue(0);
+	maintenanceBillInput.setValue(0);
     }
 
     /**
