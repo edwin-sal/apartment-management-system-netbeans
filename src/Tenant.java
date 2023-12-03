@@ -25,6 +25,9 @@ public class Tenant extends javax.swing.JFrame {
     private String rentStatus;
     private int age;	    
     private int roomId;
+    private int tenantId;
+    private int contractInt;
+    private double roomPrice;
 
     /**
      * Creates new form AddExpensePage
@@ -63,6 +66,21 @@ public class Tenant extends javax.swing.JFrame {
     // Set value of the contract
     public void setContract() {
 	contract = (String) contractBox.getSelectedItem();
+	
+	switch(contract) {
+	    case "3 months":
+		contractInt = 3;
+		break;
+	    case "6 months":
+		contractInt = 6;
+		break;
+	    case "9 months":
+		contractInt = 9;
+		break;
+	    case "12 months":
+		contractInt = 12;
+		break;
+	}
     }
     
     // Set value of the gender
@@ -140,6 +158,21 @@ public class Tenant extends javax.swing.JFrame {
 	return registrationDate;
     }
     
+    // Get the value of the room price
+    public Double getRoomPrice() {
+	return roomPrice;
+    }
+    
+    // Get the value of the tenant id
+    public int getTenantId() {
+	return tenantId;
+    }
+    
+    // Get the value of the contract int
+    public int getContractInt() {
+	return contractInt;
+    }
+    
     // Clear text for the registration inputs 
     public void clearInputs() {
 	lastNameInput.setText("");
@@ -168,10 +201,10 @@ public class Tenant extends javax.swing.JFrame {
 	
 	conn = ConnectXamppMySQL.conn();
 	
-	//  SQL query
-	String query = "INSERT INTO tenants(room_id, tenant_pin, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date, rent_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	//  SQL query to register tenant
+	String registerTenantQuery = "INSERT INTO tenants(room_id, tenant_pin, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date, rent_status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	try (PreparedStatement statement = conn.prepareStatement(query)) {
+	try (PreparedStatement statement = conn.prepareStatement(registerTenantQuery)) {
 	    statement.setInt(1, getRoomId());
 	    statement.setString(2, getPin());
 	    statement.setString(3,getFirstName());
@@ -186,6 +219,86 @@ public class Tenant extends javax.swing.JFrame {
 	// Execute the query
 	statement.executeUpdate();
 	JOptionPane.showMessageDialog(null, "Tenant registered Succesfully!");
+	} catch (SQLException e) {
+	    // Handle any SQL errors
+	    e.printStackTrace();
+	}
+    }
+    
+    // Retrieve room price
+    public void setRoomPrice() {
+	// Query to retrieve room price
+	String sql = "SELECT room_price FROM rooms WHERE room_id=" + getRoomId();
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    roomPrice = Double.parseDouble(resultSet.getString("room_price"));
+//	    System.out.println("Room price" + roomPrice);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	// Multiply based on contract
+	setContract();
+	switch(getContract()) {
+	    case "3 months":
+		roomPrice *= 3;
+		break;
+	    case "6 months":
+		roomPrice *= 6;
+		break;
+	    case "9 months":
+		roomPrice *= 9;
+		break;
+	    case "12 months":
+		roomPrice *= 12;
+		break;
+	}
+    }
+    
+    // Retrieve tetnant id
+    public void setTenantId() {
+	// Query to retrieve tenant id
+	String sql = "SELECT tenant_id FROM tenants WHERE tenant_first_name = ? AND tenant_last_name = ? AND tenant_middle_name = ?";
+	try (PreparedStatement statement = conn.prepareStatement(sql)) {
+	    statement.setString(1, getFirstName());
+	    statement.setString(2, getLastName());
+	    statement.setString(3, getMiddleName());
+        
+	    ResultSet resultSet = statement.executeQuery();
+	    if (resultSet.next()) {
+		tenantId = resultSet.getInt("tenant_id");
+		System.out.println("Tenant ID: " + tenantId);
+	    } else {
+		System.out.println("Tenant not found.");
+	    }
+	} catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+    
+    // Register Payment
+    public void registerPayment() {
+	setRoomPrice();
+	setTenantId();
+	
+	//  SQL query to register tenant
+	String registerPaymentQuery = "INSERT INTO payment(tenant_id, room_id, payment_date, payment_status, amount, payment_type, month_contract) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+	try (PreparedStatement statement = conn.prepareStatement(registerPaymentQuery)) {
+	    statement.setInt(1, getTenantId());
+	    statement.setInt(2, getRoomId());
+	    statement.setString(3, new Main().getDateTime());
+	    statement.setString(4, "Confirmed");
+	    statement.setDouble(5, getRoomPrice());
+	    statement.setString(6, pin);
+	    statement.setInt(7, getContractInt());
+	    
+    
+	// Execute the query
+	statement.executeUpdate();
+	JOptionPane.showMessageDialog(null, "Payment registration Success!");
 	} catch (SQLException e) {
 	    // Handle any SQL errors
 	    e.printStackTrace();
@@ -393,6 +506,7 @@ public class Tenant extends javax.swing.JFrame {
     private void addExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addExpenseButtonActionPerformed
         // TODO add your handling code here:
 	registerTenant();
+	registerPayment();
 	clearInputs();
     }//GEN-LAST:event_addExpenseButtonActionPerformed
 
