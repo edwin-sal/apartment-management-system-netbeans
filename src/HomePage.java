@@ -55,8 +55,6 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(settingsButton, "settings_icon.png", "settings_icon_white.png");
 	addDate();
 	addTime();
-	setAvailableRoomsCardLabel();
-	setRentedRoomsCardLabel();
 	populateLatestTransactionTable();
 	populateLatestTenantTable();
 	populateRegisteredTenantsTable();
@@ -216,6 +214,28 @@ public class HomePage extends javax.swing.JFrame {
 	
 	
 	rentedRoomsLabel.setText(String.valueOf(rentedRoomsCount));
+    }
+    
+    // Set the count of the registered tenants card
+    public void setCountRegisteredTenantsCard() {
+	int registeredTenants = 0;
+	
+	// Query to retrieve tenant id
+	String sql = "SELECT COUNT(tenant_id) FROM tenants WHERE rent_status = 'Renting'";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    registeredTenants = resultSet.getInt(1);
+	   System.out.println("Registered tenants count: " + registeredTenants);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	
+	tenantCountLabel.setText(String.valueOf(registeredTenants));
     }
 	
     
@@ -716,6 +736,11 @@ public class HomePage extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/refresh_icon.png"))); // NOI18N
         jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.setFocusable(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         titlebarPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 13, 90, 50));
 
         contentPanel.setBackground(new java.awt.Color(184, 208, 201));
@@ -1437,7 +1462,6 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
 	hideContentPanels();
 	dashboardPanel.setVisible(true);
-	refreshFrame();
 	
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
@@ -1445,28 +1469,24 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
 	hideContentPanels();
 	viewRegisteredTenantsPanel.setVisible(true);
-	refreshFrame();
     }//GEN-LAST:event_viewTenantButtonActionPerformed
 
     private void viewRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRoomButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
 	viewAddedRoomsPanel.setVisible(true);
-	refreshFrame();
     }//GEN-LAST:event_viewRoomButtonActionPerformed
 
     private void incomeReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incomeReportButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
 	incomeReportPanel.setVisible(true);
-	refreshFrame();
     }//GEN-LAST:event_incomeReportButtonActionPerformed
 
     private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
         // TODO add your handling code here:
 	hideContentPanels();
 	settingsPanel.setVisible(true);
-	refreshFrame();
     }//GEN-LAST:event_settingsButtonActionPerformed
 
     private void dashboardButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseEntered
@@ -1490,8 +1510,6 @@ public class HomePage extends javax.swing.JFrame {
     private void registerTenantButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerTenantButtonActionPerformed
         // TODO add your handling code here:
 	new Tenant().setVisible(true);
-	setRentedRoomsCardLabel();
-	setAvailableRoomsCardLabel();
     }//GEN-LAST:event_registerTenantButtonActionPerformed
 
     private void orderByBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBoxActionPerformed
@@ -1507,8 +1525,6 @@ public class HomePage extends javax.swing.JFrame {
     private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomButtonActionPerformed
         // TODO add your handling code here:
 	addRoom();
-	setAvailableRoomsCardLabel();
-	setRentedRoomsCardLabel();
     }//GEN-LAST:event_addRoomButtonActionPerformed
 
     private void orderByBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBox1ActionPerformed
@@ -1522,8 +1538,6 @@ public class HomePage extends javax.swing.JFrame {
     private void removeRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRoomButtonActionPerformed
         // TODO add your handling code here:
 	removeRoom();
-	setAvailableRoomsCardLabel();
-	setRentedRoomsCardLabel();
     }//GEN-LAST:event_removeRoomButtonActionPerformed
 
     private void dashboardButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardButtonMouseClicked
@@ -1573,6 +1587,15 @@ public class HomePage extends javax.swing.JFrame {
 	    }
 	}
     }//GEN-LAST:event_resetDatabaseButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+	setAvailableRoomsCardLabel();
+	setRentedRoomsCardLabel();
+	setCountRegisteredTenantsCard();
+	
+	refreshFrame();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
