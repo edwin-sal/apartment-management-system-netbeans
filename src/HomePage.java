@@ -7,6 +7,8 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -109,11 +111,24 @@ public class HomePage extends javax.swing.JFrame {
         t.start(); // Start the timer
     }
     
+    // A method that returns the current date and time
+    public String getDateTime() {
+	LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        return formattedDateTime;
+    }
+    
     // Add rooms to the database
     public void addRoom() {
 	conn = ConnectXamppMySQL.conn();
 	
 	// Values to be inserted
+	int roomId; 
+	String roomType;
+	int roomCapacity;
+	String roomStatus;
+	String dateTime;    
 	
 
 	try {

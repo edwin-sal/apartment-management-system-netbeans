@@ -1,9 +1,13 @@
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TestClass {
    public static void main(String[] args) {
-       System.out.println("Hello World");
-   }
-   
-   public void createData() {
-       
+	LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        System.out.println("Current Date and Time: " + formattedDateTime);
+
    }
 }
