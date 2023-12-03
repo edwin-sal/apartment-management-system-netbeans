@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -38,6 +39,8 @@ import javax.swing.table.TableColumnModel;
 public class HomePage extends javax.swing.JFrame {
     static Connection conn;
     static PreparedStatement pst;
+    
+//    privat 
 
     /**
      * Creates new form HomePage
@@ -236,6 +239,33 @@ public class HomePage extends javax.swing.JFrame {
 	
 	
 	tenantCountLabel.setText(String.valueOf(registeredTenants));
+    }
+    
+    // Set the count of the monthly earnings card
+    public void setCountMonthlyEarningsCard() {
+	double monthlyEarnings = 0;
+	
+	// Query to retrieve tenant id
+	String sql = "SELECT SUM(amount) AS total_amount FROM payment WHERE MONTH(payment_date) = MONTH(CURRENT_DATE) AND YEAR(payment_date) = YEAR(CURRENT_DATE)";
+	conn = ConnectXamppMySQL.conn();
+	
+	try (Statement statement = conn.createStatement()) {
+	   ResultSet resultSet = statement.executeQuery(sql);
+	    if (resultSet.next()) {
+	    monthlyEarnings = resultSet.getDouble(1);
+	   System.out.println("Monthly earnings count: " + monthlyEarnings);
+	    }
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	}
+	
+	NumberFormat numberFormat = NumberFormat.getNumberInstance();
+	numberFormat.setMaximumFractionDigits(2); // Set maximum decimal places to 2
+	String formattedEarnings = numberFormat.format(monthlyEarnings);
+	earningsCount.setText(formattedEarnings);
+
+	
+//	earningsCount.setText(String.valueOf(monthlyEarnings));
     }
 	
     
@@ -757,7 +787,7 @@ public class HomePage extends javax.swing.JFrame {
         tenantCountLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         tenantCountLabel.setForeground(new java.awt.Color(255, 255, 255));
         tenantCountLabel.setText("999");
-        tenantsCard.add(tenantCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        tenantsCard.add(tenantCountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 50));
 
         tenantSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
         tenantSubLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -775,7 +805,7 @@ public class HomePage extends javax.swing.JFrame {
         availableRoomsLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         availableRoomsLabel.setForeground(new java.awt.Color(255, 255, 255));
         availableRoomsLabel.setText("999");
-        roomsCard.add(availableRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        roomsCard.add(availableRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 50));
 
         roomSubLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
         roomSubLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -795,7 +825,7 @@ public class HomePage extends javax.swing.JFrame {
         rentedRoomsLabel.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         rentedRoomsLabel.setForeground(new java.awt.Color(255, 255, 255));
         rentedRoomsLabel.setText("999");
-        occupiedRooms.add(rentedRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        occupiedRooms.add(rentedRoomsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 220, 50));
 
         rentedRoomsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/occupied_rooms_icon.png"))); // NOI18N
         occupiedRooms.add(rentedRoomsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 130, 140));
@@ -813,10 +843,10 @@ public class HomePage extends javax.swing.JFrame {
         earningsCount.setFont(new java.awt.Font("Poppins Black", 0, 42)); // NOI18N
         earningsCount.setForeground(new java.awt.Color(255, 255, 255));
         earningsCount.setText("999");
-        earningsCard.add(earningsCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 50));
+        earningsCard.add(earningsCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 50));
 
         earningsIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/cards_icons/monthly_earnings_icon.png"))); // NOI18N
-        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 120, 100));
+        earningsCard.add(earningsIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 120, 100));
 
         cardsPanel.add(earningsCard);
 
@@ -1593,6 +1623,7 @@ public class HomePage extends javax.swing.JFrame {
 	setAvailableRoomsCardLabel();
 	setRentedRoomsCardLabel();
 	setCountRegisteredTenantsCard();
+	setCountMonthlyEarningsCard();
 	
 	refreshFrame();
     }//GEN-LAST:event_jButton1ActionPerformed
