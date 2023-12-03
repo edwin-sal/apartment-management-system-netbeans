@@ -88,6 +88,49 @@ public class Tenant extends javax.swing.JFrame {
     public void setRoomId() {
 	roomId =  Integer.parseInt(roomIdInput.getText());
     }
+    
+    // Get the value of the first name
+    public String getFirstName() {
+	return firstName;
+    }
+    
+    // Get the value of the last name
+    public String getLastName() {
+	return lastName;
+    }
+    
+    // Get the value of the middle name
+    public String getMiddleName() {
+	return middleName;   
+    }
+    
+    // Get the value of the contact number
+    public String getContactNumber() {
+	return contactNumber;
+    }	
+    
+    // Get the value of the pin
+    public String getPin() {
+	return pin;
+    }
+    
+    // Get the value of the contract
+    public String getContract() {
+	return contract;
+    }	
+    
+    // Get the value of the first name
+    public String getGender() {
+	return gender;	
+    }
+    
+    public int getAge() {
+	return age;
+    }
+    
+    public int roomId() {
+	return roomId;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
