@@ -150,7 +150,7 @@ public class AddExpensePage extends javax.swing.JFrame {
         expenseInputPanel.add(maintenanceBillInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 340, 40));
 
         expenseInputLabel.setFont(new java.awt.Font("Archivo SemiBold", 0, 28)); // NOI18N
-        expenseInputLabel.setText("Add Expense");
+        expenseInputLabel.setText("Add Expenses");
 
         addExpenseGoBackButton.setBackground(new java.awt.Color(254, 254, 254));
         addExpenseGoBackButton.setText("Back");

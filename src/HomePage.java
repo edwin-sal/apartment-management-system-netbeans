@@ -1564,6 +1564,7 @@ public class HomePage extends javax.swing.JFrame {
     private void addRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addRoomButtonActionPerformed
         // TODO add your handling code here:
 	addRoom();
+	
     }//GEN-LAST:event_addRoomButtonActionPerformed
 
     private void removeRoomButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeRoomButtonActionPerformed
@@ -1611,10 +1612,10 @@ public class HomePage extends javax.swing.JFrame {
 	    int userId = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the System ID"));
 	    int userPin = Integer.parseInt(JOptionPane.showInputDialog(null, "Please enter the System PIN"));
 	    if(verifyInput(userId, userPin)) {
-		JOptionPane.showMessageDialog(null, "System database will now reset!");
-//		new Main().runSqlQuery("TRUNCATE TABLE tenants");
-//		new Main().runSqlQuery("TRUNCATE TABLE rooms");
-//		new Main().runSqlQuery("TRUNCATE TABLE payment");
+		JOptionPane.showMessageDialog(null, "Database has been succesfuly reset!");
+		new Main().runSqlQuery("TRUNCATE TABLE tenants");
+		new Main().runSqlQuery("TRUNCATE TABLE rooms");
+		new Main().runSqlQuery("TRUNCATE TABLE payment");
 	    }
 	}
     }//GEN-LAST:event_resetDatabaseButtonActionPerformed
