@@ -4,17 +4,17 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.*;
 
-interface LoginPageCallback {
-    void onLoginPageDisposed();
-    void onLoginPageHidden();
-}
+//interface LoginPageCallback {
+//    void onLoginPageDisposed();
+//    void onLoginPageHidden();
+//}
 
 public class LoginPage extends javax.swing.JFrame {
     static Connection conn;
     static PreparedStatement pst;
     
     boolean adminLogin = false;
-    private LoginPageCallback callback;
+//    private LoginPageCallback callback;
     
     /**
      * Creates new form LoginPage
@@ -58,7 +58,8 @@ public class LoginPage extends javax.swing.JFrame {
 	
 	// Checks if user credentials is match with admin credentials
 	if(userId.equals(systemId) && userPin.equals(systemPin)) {  
-	    disposeLoginPage();
+	    dispose();
+	    new HomePage().setVisible(true);
 	} else {
 		// Show error message and reset input fields if login is invalid
 		JOptionPane.showMessageDialog(null, "Invalid user ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
@@ -86,7 +87,8 @@ public class LoginPage extends javax.swing.JFrame {
 	    if (resultSet.next()) {
 		tenantId = resultSet.getInt("tenant_id");
 //		System.out.println("Tenant ID: " + tenantId);
-		hideLoginPage();
+//		hideLoginPage();
+		new Payment().setVisible(true);
 	    } else {
 		JOptionPane.showMessageDialog(null, "Invalid user ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
 		userIdInput.setText("");
@@ -99,29 +101,29 @@ public class LoginPage extends javax.swing.JFrame {
 	
     
     // For setting callback, used to prevent the homepage from showing unless login is verified
-    public void setLoginPageCallback(LoginPageCallback callback) {
-	this.callback = callback;
-    }
-    
-    // Dispose the login page
-    private void disposeLoginPage() {
-    // Dispose the LoginPage
-    dispose();
-  
-    // Check if the callback is set
-    if (callback != null) {
-        // Call the callback method to notify that the LoginPage has been disposed
-        callback.onLoginPageDisposed();
-	}
-    }
-    
-    private void hideLoginPage() {
-    setVisible(false);
-  
-    if (callback != null) {
-        callback.onLoginPageHidden();
-    }
-}
+//    public void setLoginPageCallback(LoginPageCallback callback) {
+//	this.callback = callback;
+//    }
+//    
+//    // Dispose the login page
+//    private void disposeLoginPage() {
+//    // Dispose the LoginPage
+//    dispose();
+//  
+//    // Check if the callback is set
+//    if (callback != null) {
+//        // Call the callback method to notify that the LoginPage has been disposed
+//        callback.onLoginPageDisposed();
+//	}
+//    }
+//    
+//    private void hideLoginPage() {
+//    setVisible(false);
+//  
+//    if (callback != null) {
+//        callback.onLoginPageHidden();
+//    }
+//}
 
 
     /**
@@ -157,6 +159,8 @@ public class LoginPage extends javax.swing.JFrame {
         loginLabel.setForeground(new java.awt.Color(51, 51, 51));
         loginLabel.setText("Login to your account");
         loginInputPanel.add(loginLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 290, 50));
+
+        userIdInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         loginInputPanel.add(userIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 420, 50));
 
         userIdLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
@@ -178,6 +182,8 @@ public class LoginPage extends javax.swing.JFrame {
             }
         });
         loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
+
+        userPinInput.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         loginInputPanel.add(userPinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 420, 50));
 
         adminCheckBox.setBackground(new java.awt.Color(255, 255, 255));

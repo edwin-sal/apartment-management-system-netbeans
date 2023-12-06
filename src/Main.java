@@ -38,17 +38,20 @@ public class Main {
 	Payment payment = new Payment();
 
 	login = new LoginPage();
-	login.setLoginPageCallback(new LoginPageCallback() {
-	@Override
-	public void onLoginPageDisposed() {
-	    home.setVisible(true);	 
-	    }
-	public void onLoginPageHidden() {
-	    payment.setVisible(true);	 
-	    }
-	});
-	
 	login.setVisible(true);
+	
+//	login = new LoginPage();
+//	login.setLoginPageCallback(new LoginPageCallback() {
+//	@Override
+//	public void onLoginPageDisposed() {
+//	    home.setVisible(true);	 
+//	    }
+//	public void onLoginPageHidden() {
+//	    payment.setVisible(true);	 
+//	    }
+//	});
+//	
+//	login.setVisible(true);
     }
 }
     
