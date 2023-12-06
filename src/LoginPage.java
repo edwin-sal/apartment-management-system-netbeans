@@ -181,7 +181,7 @@ public class LoginPage extends javax.swing.JFrame {
         loginInputPanel.add(userPinInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 420, 50));
 
         adminCheckBox.setBackground(new java.awt.Color(255, 255, 255));
-        adminCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        adminCheckBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         adminCheckBox.setText("Admin");
         adminCheckBox.setFocusPainted(false);
         adminCheckBox.setFocusable(false);
@@ -192,7 +192,7 @@ public class LoginPage extends javax.swing.JFrame {
                 adminCheckBoxActionPerformed(evt);
             }
         });
-        loginInputPanel.add(adminCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 300, 90, 30));
+        loginInputPanel.add(adminCheckBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 110, 40));
 
         bgPanel.add(loginInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, 460, 420));
 

@@ -450,8 +450,9 @@ public class HomePage extends javax.swing.JFrame {
     
     // Populate the added rooms table
     public void popoulateAddedRoomsTable() {
-	
-	String query = "SELECT room_id, tenant_id, room_type, room_capacity, room_status, date_added, room_price FROM rooms ORDER BY room_id ASC";
+	String sortBy = (String) sortByBoxRooms.getSelectedItem();
+	String orderBy = (String) orderByBoxRooms.getSelectedItem();
+	String query = "SELECT room_id, tenant_id, room_type, room_capacity, room_status, date_added, room_price FROM rooms ORDER BY " + sortBy + " " + orderBy;
 	try {
             conn = ConnectXamppMySQL.conn();
 
