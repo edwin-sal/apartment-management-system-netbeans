@@ -269,15 +269,16 @@ public class Tenant extends javax.swing.JFrame {
 }
     
     // Technically does not remove tenant from the database (for data information purposes)
+    // EDIT - This will not actually remove tenant info from that database
     public void removeTenant() {
 	int tenant_id = Integer.valueOf(JOptionPane.showInputDialog(null, "Enter Tenant ID to be removed"));
-	String updateTenantQuery = "UPDATE tenants SET rent_status = 'Removed' WHERE tenant_id = " + tenant_id;
 	String updateRoomQuery = "UPDATE rooms SET tenant_id = NULL, room_status = 'Available' WHERE tenant_id = " + tenant_id;
+	String updateTenantQuery = "DELETE FROM tenants WHERE tenant_id = " + tenant_id;
 
 	int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to remove this tenant??");
 	if(confirmation == JOptionPane.YES_OPTION) {
-	    new Main().runSqlQuery(updateTenantQuery);
 	    new Main().runSqlQuery(updateRoomQuery);
+	    new Main().runSqlQuery(updateTenantQuery);
 	    JOptionPane.showMessageDialog(null, "Tenant ID: " + tenant_id + " succesfully removed!");
 	}   
     }
@@ -412,6 +413,8 @@ public class Tenant extends javax.swing.JFrame {
         registerTenantLabel.setText("Register Tenant");
 
         registerTenantGoBackButton.setBackground(new java.awt.Color(254, 254, 254));
+        registerTenantGoBackButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        registerTenantGoBackButton.setForeground(new java.awt.Color(204, 0, 0));
         registerTenantGoBackButton.setText("Back");
         registerTenantGoBackButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerTenantGoBackButton.setFocusable(false);
@@ -422,6 +425,8 @@ public class Tenant extends javax.swing.JFrame {
         });
 
         registerTenantButton.setBackground(new java.awt.Color(254, 254, 254));
+        registerTenantButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        registerTenantButton.setForeground(new java.awt.Color(0, 153, 0));
         registerTenantButton.setText("Register Tenant");
         registerTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerTenantButton.setFocusable(false);
