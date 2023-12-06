@@ -490,7 +490,7 @@ public class HomePage extends javax.swing.JFrame {
     public void populateTransactionHistoryTable() {
 	
 	
-	String query = "SELECT payment_id, tenant_id, room_id, payment_type, month_contract, payment_date FROM payment ORDER BY payment_id ASC";
+	String query = "SELECT payment_id, tenant_id, room_id, payment_type, month_contract, payment_date, amount FROM payment ORDER BY payment_id ASC";
 	try {
             conn = ConnectXamppMySQL.conn();
 
@@ -505,13 +505,14 @@ public class HomePage extends javax.swing.JFrame {
 	    
             // Iterate through the result set and populate the model
             while (resultSet.next()) {
-                Object[] rowData = new Object[6]; // Assuming 10 columns
+                Object[] rowData = new Object[7]; // Assuming 7 columns
                 rowData[0] = resultSet.getObject("payment_id");
                 rowData[1] = resultSet.getObject("tenant_id");
                 rowData[2] = resultSet.getObject("room_id");
 		rowData[3] = resultSet.getObject("payment_type");
 		rowData[4] = resultSet.getObject("month_contract");
 		rowData[5] = resultSet.getObject("payment_date");
+		rowData[6] = resultSet.getObject("amount");
                 model.addRow(rowData);
             }
             
@@ -1355,11 +1356,11 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Payment ID", "Tenant ID", "Room ID", "Payment Type", "Month Contract", "Payment Date"
+                "Payment ID", "Tenant ID", "Room ID", "Payment Type", "Month Contract", "Payment Date", "Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
