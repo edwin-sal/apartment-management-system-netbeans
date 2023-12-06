@@ -489,9 +489,9 @@ public class HomePage extends javax.swing.JFrame {
     
     // Populate the transaction history table
     public void populateTransactionHistoryTable() {
-	
-	
-	String query = "SELECT payment_id, tenant_id, room_id, payment_type, month_contract, payment_date, amount FROM payment ORDER BY payment_id ASC";
+	String sortBy = (String) sortByBoxTransactions.getSelectedItem();
+	String orderBy = (String) orderByBoxTransactions.getSelectedItem();
+	String query = "SELECT payment_id, tenant_id, room_id, payment_type, month_contract, payment_date, amount FROM payment ORDER BY " + sortBy + " " + orderBy;
 	try {
             conn = ConnectXamppMySQL.conn();
 
@@ -630,6 +630,10 @@ public class HomePage extends javax.swing.JFrame {
         orderByLabel1 = new javax.swing.JLabel();
         sortByLabel1 = new javax.swing.JLabel();
         incomeReportPanel = new javax.swing.JPanel();
+        orderByBoxTransactions = new javax.swing.JComboBox<>();
+        orderByLabel2 = new javax.swing.JLabel();
+        sortByBoxTransactions = new javax.swing.JComboBox<>();
+        sortByLabel2 = new javax.swing.JLabel();
         transactionHistoryLabel = new javax.swing.JLabel();
         incomeReportCardsPanel = new javax.swing.JPanel();
         grossIncomeCard = new javax.swing.JPanel();
@@ -1269,10 +1273,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(registeredTenantsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(orderByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(orderByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(orderByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(sortByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sortByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1282,6 +1285,36 @@ public class HomePage extends javax.swing.JFrame {
         );
 
         contentPanel.add(viewAddedRoomsPanel, "card2");
+
+        orderByBoxTransactions.setBackground(new java.awt.Color(255, 255, 254));
+        orderByBoxTransactions.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        orderByBoxTransactions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASC", "DESC" }));
+        orderByBoxTransactions.setFocusable(false);
+        orderByBoxTransactions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderByBoxTransactionsActionPerformed(evt);
+            }
+        });
+
+        orderByLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        orderByLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/order_by_icon.png"))); // NOI18N
+        orderByLabel2.setText("Order by");
+        orderByLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        sortByBoxTransactions.setBackground(new java.awt.Color(255, 255, 254));
+        sortByBoxTransactions.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        sortByBoxTransactions.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "payment_id", "tenant_id", "room_id", "payment_type", "month_contract", "payment_date", "amount" }));
+        sortByBoxTransactions.setFocusable(false);
+        sortByBoxTransactions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortByBoxTransactionsActionPerformed(evt);
+            }
+        });
+
+        sortByLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        sortByLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/sort_icon.png"))); // NOI18N
+        sortByLabel2.setText("Sort by");
+        sortByLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
 
         transactionHistoryLabel.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         transactionHistoryLabel.setText("Transaction History");
@@ -1403,15 +1436,25 @@ public class HomePage extends javax.swing.JFrame {
                     .addComponent(incomeReportLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(incomeReportCardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 996, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(incomeReportPanelLayout.createSequentialGroup()
-                        .addComponent(transactionHistoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(incomeReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(transactionHistoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, incomeReportPanelLayout.createSequentialGroup()
+                                .addComponent(transactionHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sortByLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sortByBoxTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(orderByLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(orderByBoxTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(incomeReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(incomeReportPanelLayout.createSequentialGroup()
                                 .addComponent(rentEzIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(clearExpensesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addExpensesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(transactionHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addExpensesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(17, 17, 17))
         );
         incomeReportPanelLayout.setVerticalGroup(
@@ -1421,9 +1464,16 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(incomeReportLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(incomeReportCardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(transactionHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(incomeReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(transactionHistoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(incomeReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(orderByBoxTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderByLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(incomeReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sortByBoxTransactions, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sortByLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(incomeReportPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(incomeReportPanelLayout.createSequentialGroup()
                         .addComponent(rentEzIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1720,6 +1770,14 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_orderByBoxRoomsActionPerformed
 
+    private void orderByBoxTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBoxTransactionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderByBoxTransactionsActionPerformed
+
+    private void sortByBoxTransactionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByBoxTransactionsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortByBoxTransactionsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1791,8 +1849,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel occupiedRooms;
     private javax.swing.JComboBox<String> orderByBox;
     private javax.swing.JComboBox<String> orderByBoxRooms;
+    private javax.swing.JComboBox<String> orderByBoxTransactions;
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JLabel orderByLabel1;
+    private javax.swing.JLabel orderByLabel2;
     private javax.swing.JButton registerTenantButton;
     private javax.swing.JLabel registeredTenantsLabel;
     private javax.swing.JLabel registeredTenantsLabel2;
@@ -1821,8 +1881,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JComboBox<String> sortByBoxRooms;
     private javax.swing.JComboBox<String> sortByBoxTenants;
+    private javax.swing.JComboBox<String> sortByBoxTransactions;
     private javax.swing.JLabel sortByLabel;
     private javax.swing.JLabel sortByLabel1;
+    private javax.swing.JLabel sortByLabel2;
     private javax.swing.JPanel tablesPanel;
     private javax.swing.JLabel tenantCountLabel;
     private javax.swing.JLabel tenantIcon;
