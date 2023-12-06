@@ -98,7 +98,6 @@ public class LoginPage extends javax.swing.JFrame {
 		e.printStackTrace();
 	}
     }
-	
     
     // For setting callback, used to prevent the homepage from showing unless login is verified
 //    public void setLoginPageCallback(LoginPageCallback callback) {
@@ -220,8 +219,10 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(adminLogin) {
+	    dispose();
 	    isAdminLogin();
 	} else {
+	    dispose();
 	    isTenantLogin();
 	}
     }//GEN-LAST:event_loginButtonActionPerformed

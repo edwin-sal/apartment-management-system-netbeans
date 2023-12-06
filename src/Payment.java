@@ -106,13 +106,14 @@ public class Payment extends javax.swing.JFrame {
         loginLabel = new javax.swing.JLabel();
         userIdLabel = new javax.swing.JLabel();
         userPinLabel = new javax.swing.JLabel();
-        loginButton = new javax.swing.JButton();
+        logoutPaymentButton = new javax.swing.JButton();
         userIdLabel1 = new javax.swing.JLabel();
         roomIdLabel = new javax.swing.JLabel();
         contractBox = new javax.swing.JComboBox<>();
         roomIdInput = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
         tenantIdInput = new javax.swing.JTextField();
+        submitPaymentButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -132,40 +133,52 @@ public class Payment extends javax.swing.JFrame {
 
         userIdLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         userIdLabel.setText("User ID");
-        loginInputPanel.add(userIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 120, 30));
+        loginInputPanel.add(userIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 120, 30));
 
         userPinLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         userPinLabel.setText("Contract");
-        loginInputPanel.add(userPinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 120, 30));
+        loginInputPanel.add(userPinLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 120, 30));
 
-        loginButton.setBackground(new java.awt.Color(239, 134, 128));
-        loginButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
-        loginButton.setForeground(new java.awt.Color(255, 255, 255));
-        loginButton.setText("Submit Payment");
-        loginButton.setFocusable(false);
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
+        logoutPaymentButton.setBackground(new java.awt.Color(255, 255, 254));
+        logoutPaymentButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        logoutPaymentButton.setForeground(new java.awt.Color(204, 0, 0));
+        logoutPaymentButton.setText("Logout");
+        logoutPaymentButton.setFocusable(false);
+        logoutPaymentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
+                logoutPaymentButtonActionPerformed(evt);
             }
         });
-        loginInputPanel.add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 420, 60));
+        loginInputPanel.add(logoutPaymentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 420, 60));
 
         userIdLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         userIdLabel1.setText("Pin");
-        loginInputPanel.add(userIdLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 120, 30));
+        loginInputPanel.add(userIdLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 120, 30));
 
         roomIdLabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         roomIdLabel.setText("Room ID");
-        loginInputPanel.add(roomIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 120, 30));
+        loginInputPanel.add(roomIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 120, 30));
 
         contractBox.setBackground(new java.awt.Color(255, 255, 254));
         contractBox.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         contractBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "9 months", "12 months" }));
         contractBox.setFocusable(false);
-        loginInputPanel.add(contractBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 200, 50));
-        loginInputPanel.add(roomIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 200, 50));
-        loginInputPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 200, 50));
-        loginInputPanel.add(tenantIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 200, 50));
+        loginInputPanel.add(contractBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, 50));
+        loginInputPanel.add(roomIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 200, 50));
+        loginInputPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 200, 50));
+        loginInputPanel.add(tenantIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 200, 50));
+
+        submitPaymentButton.setBackground(new java.awt.Color(255, 255, 254));
+        submitPaymentButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
+        submitPaymentButton.setForeground(new java.awt.Color(0, 153, 51));
+        submitPaymentButton.setText("Submit Payment");
+        submitPaymentButton.setFocusable(false);
+        submitPaymentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                submitPaymentButtonActionPerformed(evt);
+            }
+        });
+        loginInputPanel.add(submitPaymentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 420, 60));
 
         bgPanel.add(loginInputPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 210, 460, 420));
 
@@ -188,10 +201,17 @@ public class Payment extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+    private void logoutPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutPaymentButtonActionPerformed
+        // TODO add your handling code here:
+	dispose();
+	new LoginPage().setVisible(true);
+	
+    }//GEN-LAST:event_logoutPaymentButtonActionPerformed
+
+    private void submitPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPaymentButtonActionPerformed
         // TODO add your handling code here:
 	setRenewalPayment();
-    }//GEN-LAST:event_loginButtonActionPerformed
+    }//GEN-LAST:event_submitPaymentButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,11 +255,12 @@ public class Payment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginInputPanel;
     private javax.swing.JLabel loginLabel;
+    private javax.swing.JButton logoutPaymentButton;
     private javax.swing.JTextField roomIdInput;
     private javax.swing.JLabel roomIdLabel;
+    private javax.swing.JButton submitPaymentButton;
     private javax.swing.JTextField tenantIdInput;
     private javax.swing.JLabel userIdLabel;
     private javax.swing.JLabel userIdLabel1;
