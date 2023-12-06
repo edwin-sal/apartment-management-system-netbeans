@@ -153,6 +153,8 @@ public class AddExpensePage extends javax.swing.JFrame {
         expenseInputLabel.setText("Add Expenses");
 
         addExpenseGoBackButton.setBackground(new java.awt.Color(254, 254, 254));
+        addExpenseGoBackButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        addExpenseGoBackButton.setForeground(new java.awt.Color(204, 0, 0));
         addExpenseGoBackButton.setText("Back");
         addExpenseGoBackButton.setFocusable(false);
         addExpenseGoBackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +164,8 @@ public class AddExpensePage extends javax.swing.JFrame {
         });
 
         addExpenseButton.setBackground(new java.awt.Color(254, 254, 254));
+        addExpenseButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        addExpenseButton.setForeground(new java.awt.Color(0, 153, 0));
         addExpenseButton.setText("Add");
         addExpenseButton.setFocusable(false);
         addExpenseButton.addActionListener(new java.awt.event.ActionListener() {

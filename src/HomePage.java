@@ -1057,6 +1057,8 @@ public class HomePage extends javax.swing.JFrame {
         tenantInfoPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 930, 420));
 
         removeTenantButton.setBackground(new java.awt.Color(255, 255, 254));
+        removeTenantButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        removeTenantButton.setForeground(new java.awt.Color(204, 0, 0));
         removeTenantButton.setText("Remove Tenant");
         removeTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         removeTenantButton.setFocusable(false);
@@ -1067,6 +1069,8 @@ public class HomePage extends javax.swing.JFrame {
         });
 
         registerTenantButton.setBackground(new java.awt.Color(255, 255, 254));
+        registerTenantButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        registerTenantButton.setForeground(new java.awt.Color(0, 153, 0));
         registerTenantButton.setText("Register Tenant");
         registerTenantButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerTenantButton.setFocusable(false);
@@ -1195,6 +1199,8 @@ public class HomePage extends javax.swing.JFrame {
         tenantInfoPanel1.add(roomCapacityLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 120, 30));
 
         addRoomButton.setBackground(new java.awt.Color(255, 255, 254));
+        addRoomButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        addRoomButton.setForeground(new java.awt.Color(0, 153, 0));
         addRoomButton.setText("Add Room");
         addRoomButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addRoomButton.setFocusable(false);
@@ -1206,6 +1212,8 @@ public class HomePage extends javax.swing.JFrame {
         tenantInfoPanel1.add(addRoomButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 420, 220, 50));
 
         removeRoomButton.setBackground(new java.awt.Color(255, 255, 254));
+        removeRoomButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        removeRoomButton.setForeground(new java.awt.Color(204, 0, 0));
         removeRoomButton.setText("Remove Room");
         removeRoomButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         removeRoomButton.setFocusable(false);
@@ -1427,6 +1435,8 @@ public class HomePage extends javax.swing.JFrame {
         transactionHistoryPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 770, 280));
 
         clearExpensesButton.setBackground(new java.awt.Color(255, 255, 254));
+        clearExpensesButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        clearExpensesButton.setForeground(new java.awt.Color(204, 0, 0));
         clearExpensesButton.setText("Clear Expenses");
         clearExpensesButton.setFocusable(false);
         clearExpensesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -1436,6 +1446,8 @@ public class HomePage extends javax.swing.JFrame {
         });
 
         addExpensesButton.setBackground(new java.awt.Color(255, 255, 254));
+        addExpensesButton.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        addExpensesButton.setForeground(new java.awt.Color(0, 153, 0));
         addExpensesButton.setText("Add Expenses");
         addExpensesButton.setFocusable(false);
         addExpensesButton.addActionListener(new java.awt.event.ActionListener() {

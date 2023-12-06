@@ -161,12 +161,18 @@ public class Payment extends javax.swing.JFrame {
         loginInputPanel.add(roomIdLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 120, 30));
 
         contractBox.setBackground(new java.awt.Color(255, 255, 254));
-        contractBox.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        contractBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         contractBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 month", "3 months", "6 months", "9 months", "12 months" }));
         contractBox.setFocusable(false);
         loginInputPanel.add(contractBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, 50));
+
+        roomIdInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         loginInputPanel.add(roomIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 200, 50));
+
+        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         loginInputPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 200, 50));
+
+        tenantIdInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         loginInputPanel.add(tenantIdInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 200, 50));
 
         submitPaymentButton.setBackground(new java.awt.Color(255, 255, 254));
