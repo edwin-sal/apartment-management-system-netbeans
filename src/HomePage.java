@@ -451,7 +451,7 @@ public class HomePage extends javax.swing.JFrame {
     // Populate the added rooms table
     public void popoulateAddedRoomsTable() {
 	
-	String query = "SELECT room_id, tenant_id, room_type, room_capacity, room_status, date_added FROM rooms ORDER BY room_id ASC";
+	String query = "SELECT room_id, tenant_id, room_type, room_capacity, room_status, date_added, room_price FROM rooms ORDER BY room_id ASC";
 	try {
             conn = ConnectXamppMySQL.conn();
 
@@ -466,13 +466,14 @@ public class HomePage extends javax.swing.JFrame {
 
             // Iterate through the result set and populate the model
             while (resultSet.next()) {
-                Object[] rowData = new Object[6]; // Assuming 10 columns
+                Object[] rowData = new Object[7]; // Assuming 7 columns
                 rowData[0] = resultSet.getObject("room_id");
                 rowData[1] = resultSet.getObject("tenant_id");
                 rowData[2] = resultSet.getObject("room_type");
 		rowData[3] = resultSet.getObject("room_capacity");
 		rowData[4] = resultSet.getObject("room_status");
 		rowData[5] = resultSet.getObject("date_added");
+		rowData[6] = resultSet.getObject("room_price");
                 model.addRow(rowData);
             }
             
@@ -622,6 +623,10 @@ public class HomePage extends javax.swing.JFrame {
         roomCapacityBox = new javax.swing.JComboBox<>();
         roomIdInput = new javax.swing.JTextField();
         registeredTenantsLabel2 = new javax.swing.JLabel();
+        sortByBoxRooms = new javax.swing.JComboBox<>();
+        orderByBoxRooms = new javax.swing.JComboBox<>();
+        orderByLabel1 = new javax.swing.JLabel();
+        sortByLabel1 = new javax.swing.JLabel();
         incomeReportPanel = new javax.swing.JPanel();
         transactionHistoryLabel = new javax.swing.JLabel();
         incomeReportCardsPanel = new javax.swing.JPanel();
@@ -1103,14 +1108,15 @@ public class HomePage extends javax.swing.JFrame {
             viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewRegisteredTenantsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(registeredTenantsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(sortByBoxTenants, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(sortByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(orderByBox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(orderByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(orderByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(viewRegisteredTenantsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sortByBoxTenants, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sortByLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tenantInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1130,11 +1136,11 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Room ID", "Tenant ID", "Room Type", "Room Capacity", "Room Status", "Date Added"
+                "Room ID", "Tenant ID", "Room Type", "Room Capacity", "Room Status", "Date Added", "Room Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1205,14 +1211,53 @@ public class HomePage extends javax.swing.JFrame {
         registeredTenantsLabel2.setForeground(new java.awt.Color(51, 51, 51));
         registeredTenantsLabel2.setText("View Added Rooms");
 
+        sortByBoxRooms.setBackground(new java.awt.Color(255, 255, 254));
+        sortByBoxRooms.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        sortByBoxRooms.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "room_id", "tenant_id", "room_type", "room_capacity", "room_status", "room_price", "date_added" }));
+        sortByBoxRooms.setFocusable(false);
+        sortByBoxRooms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortByBoxRoomsActionPerformed(evt);
+            }
+        });
+
+        orderByBoxRooms.setBackground(new java.awt.Color(255, 255, 254));
+        orderByBoxRooms.setFont(new java.awt.Font("Arial", 0, 15)); // NOI18N
+        orderByBoxRooms.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ASC", "DESC" }));
+        orderByBoxRooms.setFocusable(false);
+        orderByBoxRooms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderByBoxRoomsActionPerformed(evt);
+            }
+        });
+
+        orderByLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        orderByLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/order_by_icon.png"))); // NOI18N
+        orderByLabel1.setText("Order by");
+        orderByLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
+        sortByLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        sortByLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/sort_icon.png"))); // NOI18N
+        sortByLabel1.setText("Sort by");
+        sortByLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+
         javax.swing.GroupLayout viewAddedRoomsPanelLayout = new javax.swing.GroupLayout(viewAddedRoomsPanel);
         viewAddedRoomsPanel.setLayout(viewAddedRoomsPanelLayout);
         viewAddedRoomsPanelLayout.setHorizontalGroup(
             viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewAddedRoomsPanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(registeredTenantsLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewAddedRoomsPanelLayout.createSequentialGroup()
+                        .addComponent(registeredTenantsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(sortByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sortByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(orderByLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(orderByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tenantInfoPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 989, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -1220,7 +1265,15 @@ public class HomePage extends javax.swing.JFrame {
             viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewAddedRoomsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(registeredTenantsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(registeredTenantsLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(orderByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(orderByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(viewAddedRoomsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sortByBoxRooms, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sortByLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tenantInfoPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -1657,6 +1710,14 @@ public class HomePage extends javax.swing.JFrame {
 	refreshFrame();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void sortByBoxRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByBoxRoomsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortByBoxRoomsActionPerformed
+
+    private void orderByBoxRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByBoxRoomsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderByBoxRoomsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1727,7 +1788,9 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel netIncomeSubLabel;
     private javax.swing.JPanel occupiedRooms;
     private javax.swing.JComboBox<String> orderByBox;
+    private javax.swing.JComboBox<String> orderByBoxRooms;
     private javax.swing.JLabel orderByLabel;
+    private javax.swing.JLabel orderByLabel1;
     private javax.swing.JButton registerTenantButton;
     private javax.swing.JLabel registeredTenantsLabel;
     private javax.swing.JLabel registeredTenantsLabel2;
@@ -1754,8 +1817,10 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel settingsLabel;
     private javax.swing.JPanel settingsPanel;
     private javax.swing.JPanel sidebarPanel;
+    private javax.swing.JComboBox<String> sortByBoxRooms;
     private javax.swing.JComboBox<String> sortByBoxTenants;
     private javax.swing.JLabel sortByLabel;
+    private javax.swing.JLabel sortByLabel1;
     private javax.swing.JPanel tablesPanel;
     private javax.swing.JLabel tenantCountLabel;
     private javax.swing.JLabel tenantIcon;
