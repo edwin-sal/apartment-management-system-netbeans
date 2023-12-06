@@ -57,6 +57,7 @@ public class HomePage extends javax.swing.JFrame {
 	sidebarHoverEffect(viewRoomButton, "view_rooms_icon.png", "view_rooms_icon_white.png");
 	sidebarHoverEffect(incomeReportButton, "money_icon.png", "money_icon_white.png");
 	sidebarHoverEffect(settingsButton, "settings_icon.png", "settings_icon_white.png");
+	sidebarHoverEffect(logoutButton, "logout_icon.png", "logout_icon_white.png");
 	addDate();
 	addTime();
 	populateLatestTransactionTable();
@@ -567,6 +568,7 @@ public class HomePage extends javax.swing.JFrame {
         viewRoomButton = new javax.swing.JButton();
         incomeReportButton = new javax.swing.JButton();
         settingsButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
         titlebarPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
@@ -765,17 +767,34 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
 
+        logoutButton.setBackground(new java.awt.Color(52, 68, 77));
+        logoutButton.setFont(new java.awt.Font("Archivo SemiBold", 0, 18)); // NOI18N
+        logoutButton.setForeground(new java.awt.Color(175, 190, 203));
+        logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/sidebar_icons/logout_icon.png"))); // NOI18N
+        logoutButton.setText("Log out");
+        logoutButton.setBorderPainted(false);
+        logoutButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logoutButton.setFocusable(false);
+        logoutButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        logoutButton.setIconTextGap(10);
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidebarPanelLayout = new javax.swing.GroupLayout(sidebarPanel);
         sidebarPanel.setLayout(sidebarPanelLayout);
         sidebarPanelLayout.setHorizontalGroup(
             sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(viewTenantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(viewRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(incomeReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(settingsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(sidebarPanelLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
-                .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewTenantButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(viewRoomButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(incomeReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(settingsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
@@ -794,7 +813,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(incomeReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
             .addGroup(sidebarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(sidebarPanelLayout.createSequentialGroup()
                     .addGap(0, 0, 0)
@@ -1778,6 +1799,10 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sortByBoxTransactionsActionPerformed
 
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1842,6 +1867,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JTable latestTenantTable;
     private javax.swing.JLabel latestTransacationLabel;
     private javax.swing.JTable latestTransactionTable;
+    private javax.swing.JButton logoutButton;
     private javax.swing.JPanel netIncomeCard;
     private javax.swing.JLabel netIncomeIcon;
     private javax.swing.JLabel netIncomeLabel;
