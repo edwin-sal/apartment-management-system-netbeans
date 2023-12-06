@@ -65,6 +65,8 @@ public class HomePage extends javax.swing.JFrame {
 	populateRegisteredTenantsTable();
 	popoulateAddedRoomsTable();
 	populateTransactionHistoryTable();
+	
+	refreshLayout();
 //	setVisible(false);
     }
     
@@ -281,7 +283,7 @@ public class HomePage extends javax.swing.JFrame {
 	int registeredTenants = 0;
 	
 	// Query to retrieve tenant id
-	String sql = "SELECT COUNT(tenant_id) FROM tenants WHERE rent_status = 'Renting'";
+	String sql = "SELECT COUNT(tenant_id) FROM tenants";
 	conn = ConnectXamppMySQL.conn();
 	
 	try (Statement statement = conn.createStatement()) {
@@ -410,7 +412,7 @@ public class HomePage extends javax.swing.JFrame {
     public void populateRegisteredTenantsTable() {
 	String sortBy = (String) sortByBoxTenants.getSelectedItem();
 	String orderBy = (String) orderByBox.getSelectedItem();
-	String query = "SELECT tenant_id, room_id, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date, rent_status FROM tenants ORDER BY " + sortBy + " " + orderBy;
+	String query = "SELECT tenant_id, room_id, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date FROM tenants ORDER BY " + sortBy + " " + orderBy;
 	System.out.print(query);
 	try {
             conn = ConnectXamppMySQL.conn();
@@ -426,7 +428,7 @@ public class HomePage extends javax.swing.JFrame {
 
             // Iterate through the result set and populate the model
             while (resultSet.next()) {
-                Object[] rowData = new Object[10]; // Assuming 10 columns
+                Object[] rowData = new Object[9]; // Assuming 9 columns
                 rowData[0] = resultSet.getObject("tenant_id");
                 rowData[1] = resultSet.getObject("room_id");
                 rowData[2] = resultSet.getObject("tenant_first_name");
@@ -436,7 +438,6 @@ public class HomePage extends javax.swing.JFrame {
 		rowData[6] = resultSet.getObject("gender");
 		rowData[7] = resultSet.getObject("age");
 		rowData[8] = resultSet.getObject("registration_date");
-		rowData[9] = resultSet.getObject("rent_status");
                 model.addRow(rowData);
             }
             
@@ -553,6 +554,39 @@ public class HomePage extends javax.swing.JFrame {
 	return false;
     }
     
+    // 
+    public void refreshLayout() {
+	setAvailableRoomsCardLabel();
+	setRentedRoomsCardLabel();
+	setCountRegisteredTenantsCard();
+	setCountMonthlyEarningsCard();
+	setGrossIncomeCountCard();
+	setExpensesCountCard();
+	setNetIncomeCountCard();
+	
+	DefaultTableModel tenantModel = (DefaultTableModel)latestTenantTable.getModel();
+	tenantModel.setRowCount(0);
+	populateLatestTenantTable();
+	
+	DefaultTableModel transactionModel = (DefaultTableModel)latestTransactionTable.getModel();
+	transactionModel.setRowCount(0);
+	populateLatestTransactionTable();
+	
+	DefaultTableModel tenantInfoModel = (DefaultTableModel)tenantInfoTable.getModel();
+	tenantInfoModel.setRowCount(0);
+	populateRegisteredTenantsTable();
+	
+	DefaultTableModel roomsModel = (DefaultTableModel)roomInfoTable.getModel();
+	roomsModel.setRowCount(0);
+	popoulateAddedRoomsTable();
+	
+	DefaultTableModel incomeModel = (DefaultTableModel)transactionHistoryTable.getModel();
+	incomeModel.setRowCount(0);
+	populateTransactionHistoryTable();
+	
+	refreshFrame();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -573,7 +607,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        refreshLayoutButton = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         dashboardPanel = new javax.swing.JPanel();
         cardsPanel = new javax.swing.JPanel();
@@ -848,16 +882,16 @@ public class HomePage extends javax.swing.JFrame {
         timeLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         titlebarPanel.add(timeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, 150, 30));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/refresh_icon.png"))); // NOI18N
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        refreshLayoutButton.setBackground(new java.awt.Color(204, 204, 204));
+        refreshLayoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Icons/other_icons/refresh_icon.png"))); // NOI18N
+        refreshLayoutButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        refreshLayoutButton.setFocusable(false);
+        refreshLayoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                refreshLayoutButtonActionPerformed(evt);
             }
         });
-        titlebarPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 13, 90, 50));
+        titlebarPanel.add(refreshLayoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 13, 90, 50));
 
         contentPanel.setBackground(new java.awt.Color(184, 208, 201));
         contentPanel.setLayout(new java.awt.CardLayout());
@@ -1049,7 +1083,7 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tenant ID", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date", "Status"
+                "Tenant ID", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date"
             }
         ));
         jScrollPane5.setViewportView(tenantInfoTable);
@@ -1762,38 +1796,10 @@ public class HomePage extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_resetDatabaseButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void refreshLayoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshLayoutButtonActionPerformed
         // TODO add your handling code here:
-	setAvailableRoomsCardLabel();
-	setRentedRoomsCardLabel();
-	setCountRegisteredTenantsCard();
-	setCountMonthlyEarningsCard();
-	setGrossIncomeCountCard();
-	setExpensesCountCard();
-	setNetIncomeCountCard();
-	
-	DefaultTableModel tenantModel = (DefaultTableModel)latestTenantTable.getModel();
-	tenantModel.setRowCount(0);
-	populateLatestTenantTable();
-	
-	DefaultTableModel transactionModel = (DefaultTableModel)latestTransactionTable.getModel();
-	transactionModel.setRowCount(0);
-	populateLatestTransactionTable();
-	
-	DefaultTableModel tenantInfoModel = (DefaultTableModel)tenantInfoTable.getModel();
-	tenantInfoModel.setRowCount(0);
-	populateRegisteredTenantsTable();
-	
-	DefaultTableModel roomsModel = (DefaultTableModel)roomInfoTable.getModel();
-	roomsModel.setRowCount(0);
-	popoulateAddedRoomsTable();
-	
-	DefaultTableModel incomeModel = (DefaultTableModel)transactionHistoryTable.getModel();
-	incomeModel.setRowCount(0);
-	populateTransactionHistoryTable();
-	
-	refreshFrame();
-    }//GEN-LAST:event_jButton1ActionPerformed
+	refreshLayout();
+    }//GEN-LAST:event_refreshLayoutButtonActionPerformed
 
     private void sortByBoxRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByBoxRoomsActionPerformed
         // TODO add your handling code here:
@@ -1871,7 +1877,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel incomeReportCardsPanel;
     private javax.swing.JLabel incomeReportLabel;
     private javax.swing.JPanel incomeReportPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -1896,6 +1901,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JLabel orderByLabel1;
     private javax.swing.JLabel orderByLabel2;
+    private javax.swing.JButton refreshLayoutButton;
     private javax.swing.JButton registerTenantButton;
     private javax.swing.JLabel registeredTenantsLabel;
     private javax.swing.JLabel registeredTenantsLabel2;
