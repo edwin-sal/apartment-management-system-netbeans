@@ -143,6 +143,7 @@ public class Payment extends javax.swing.JFrame {
         logoutPaymentButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         logoutPaymentButton.setForeground(new java.awt.Color(204, 0, 0));
         logoutPaymentButton.setText("Logout");
+        logoutPaymentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutPaymentButton.setFocusable(false);
         logoutPaymentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +173,7 @@ public class Payment extends javax.swing.JFrame {
         submitPaymentButton.setFont(new java.awt.Font("Poppins", 1, 18)); // NOI18N
         submitPaymentButton.setForeground(new java.awt.Color(0, 153, 51));
         submitPaymentButton.setText("Submit Payment");
+        submitPaymentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submitPaymentButton.setFocusable(false);
         submitPaymentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,9 +205,11 @@ public class Payment extends javax.swing.JFrame {
 
     private void logoutPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutPaymentButtonActionPerformed
         // TODO add your handling code here:
-	dispose();
-	new LoginPage().setVisible(true);
-	
+	int logoutConfirmation = JOptionPane.showConfirmDialog(null, "Do you want to logout?");
+	if(logoutConfirmation == JOptionPane.YES_OPTION) {
+	    dispose();
+	    new LoginPage().setVisible(true);
+	}
     }//GEN-LAST:event_logoutPaymentButtonActionPerformed
 
     private void submitPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitPaymentButtonActionPerformed

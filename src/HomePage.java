@@ -1801,8 +1801,11 @@ public class HomePage extends javax.swing.JFrame {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
-	dispose();
-	new LoginPage().setVisible(true);
+	int logoutConfirmation = JOptionPane.showConfirmDialog(null, "Do you want to logout?");
+	if(logoutConfirmation == JOptionPane.YES_OPTION) {
+	    dispose();
+	    new LoginPage().setVisible(true);
+	}
     }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
