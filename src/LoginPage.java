@@ -65,6 +65,7 @@ public class LoginPage extends javax.swing.JFrame {
 		JOptionPane.showMessageDialog(null, "Invalid user ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
 		userIdInput.setText("");
 		userPinInput.setText("");
+		new LoginPage().setVisible(true);
 	}
     }
     
@@ -93,6 +94,7 @@ public class LoginPage extends javax.swing.JFrame {
 		JOptionPane.showMessageDialog(null, "Invalid user ID or PIN","Account not Found", JOptionPane.WARNING_MESSAGE);
 		userIdInput.setText("");
 		userPinInput.setText("");
+		new LoginPage().setVisible(true);
 	    }
 	    } catch (SQLException e) {
 		e.printStackTrace();
