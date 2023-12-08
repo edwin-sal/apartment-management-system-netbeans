@@ -1800,9 +1800,11 @@ public class HomePage extends javax.swing.JFrame {
 		new Main().runSqlQuery("TRUNCATE TABLE tenants");
 		new Main().runSqlQuery("TRUNCATE TABLE rooms");
 		new Main().runSqlQuery("TRUNCATE TABLE payment");
+                new Main().runSqlQuery("UPDATE system_configuration SET system_id = '1010', system_pin = 0000 WHERE config_id = 1");
+                new Main().runSqlQuery("UPDATE system_configuration SET expenses = 0 WHERE config_id = 1");
+                refreshLayout();
 	    }
 	}
-        refreshLayout();
     }//GEN-LAST:event_resetDatabaseButtonActionPerformed
 
     private void refreshLayoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshLayoutButtonActionPerformed
