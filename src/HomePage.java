@@ -1793,6 +1793,7 @@ public class HomePage extends javax.swing.JFrame {
 		new Main().runSqlQuery("TRUNCATE TABLE payment");
 	    }
 	}
+        refreshLayout();
     }//GEN-LAST:event_resetDatabaseButtonActionPerformed
 
     private void refreshLayoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshLayoutButtonActionPerformed
