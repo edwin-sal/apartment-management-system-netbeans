@@ -414,7 +414,7 @@ public class HomePage extends javax.swing.JFrame {
     public void populateRegisteredTenantsTable() {
 	String sortBy = (String) sortByBoxTenants.getSelectedItem();
 	String orderBy = (String) orderByBox.getSelectedItem();
-	String query = "SELECT tenant_id, room_id, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date FROM tenants ORDER BY " + sortBy + " " + orderBy;
+	String query = "SELECT tenant_id, tenant_pin, tenant_id, room_id, tenant_first_name, tenant_last_name, tenant_middle_name, contact_number, gender, age, registration_date FROM tenants ORDER BY " + sortBy + " " + orderBy;
 	System.out.print(query);
 	try {
             conn = ConnectXamppMySQL.conn();
@@ -430,16 +430,17 @@ public class HomePage extends javax.swing.JFrame {
 
             // Iterate through the result set and populate the model
             while (resultSet.next()) {
-                Object[] rowData = new Object[9]; // Assuming 9 columns
+                Object[] rowData = new Object[10]; // Assuming 10 columns
                 rowData[0] = resultSet.getObject("tenant_id");
-                rowData[1] = resultSet.getObject("room_id");
-                rowData[2] = resultSet.getObject("tenant_first_name");
-		rowData[3] = resultSet.getObject("tenant_last_name");
-		rowData[4] = resultSet.getObject("tenant_middle_name");
-		rowData[5] = resultSet.getObject("contact_number");
-		rowData[6] = resultSet.getObject("gender");
-		rowData[7] = resultSet.getObject("age");
-		rowData[8] = resultSet.getObject("registration_date");
+                rowData[1] = resultSet.getObject("tenant_pin");
+                rowData[2] = resultSet.getObject("room_id");
+                rowData[3] = resultSet.getObject("tenant_first_name");
+		rowData[4] = resultSet.getObject("tenant_last_name");
+		rowData[5] = resultSet.getObject("tenant_middle_name");
+		rowData[6] = resultSet.getObject("contact_number");
+		rowData[7] = resultSet.getObject("gender");
+		rowData[8] = resultSet.getObject("age");
+		rowData[9] = resultSet.getObject("registration_date");
                 model.addRow(rowData);
             }
             
@@ -1081,9 +1082,17 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tenant ID", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date"
+                "Tenant ID", "Tenant PIN", "Room ID", "First Name", "Last Name", "Middle Name", "Contact Number", "Gender", "Age", "Registration Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane5.setViewportView(tenantInfoTable);
 
         tenantInfoPanel.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 27, 930, 420));
